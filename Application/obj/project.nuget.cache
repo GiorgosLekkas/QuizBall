@@ -1,12 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "SJPMH3yP89M7QLyjhNqutXNw62nM88YbpBQDYgfK0UUYSdJki1sEeuD7I98RFq8WSeNXL1f3wAi81AcBF//OBg==",
+  "dgSpecHash": "wWB2dOFxqEY0tDJANXfuvip9kun0EnDWeO+xrPy4viZZbCEIULw+LDf2nhMN6MFEtF1YfFxGFDvZLo6IZGU8HQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\giorg\\Projects\\QuizBall\\Application\\Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\giorg\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.1\\microsoft.aspnetcore.cryptography.keyderivation.5.0.1.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.1\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.1.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.0\\microsoft.data.sqlite.core.7.0.0.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.0\\microsoft.entityframeworkcore.7.0.0.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.0\\microsoft.entityframeworkcore.abstractions.7.0.0.nupkg.sha512",

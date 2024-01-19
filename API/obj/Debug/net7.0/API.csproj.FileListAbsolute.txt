@@ -73,3 +73,7 @@ C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\runtimes\win-arm\native\e_
 C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\MediatR.dll
+C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\MediatR.Contracts.dll
+C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\giorg\Projects\QuizBall\API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
