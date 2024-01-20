@@ -5,6 +5,7 @@ import HistoryQuestionForm from "../../features/historyquestions/from/HistoryQue
 import AppUserFrom from "../../features/appusers/form/AppUserFrom";
 import AppUserDashBoard from "../../features/appusers/dashboard/AppUserDashBoard";
 import HistoryQuestionDashBoard from "../../features/historyquestions/dashboard/HistoryQuestionDashBoard";
+import SignUpForm from "../../features/account/SignUpForm";
 
 
 export const routes: RouteObject[] = [
@@ -17,7 +18,8 @@ export const routes: RouteObject[] = [
             {path: 'createQuestion', element: <HistoryQuestionForm />},
             {path: 'createAppUser', element: <AppUserFrom />},
             {path: 'appusers', element: <AppUserDashBoard />},
-            {path: 'historyquestions', element: <HistoryQuestionDashBoard />}
+            {path: 'historyquestions', element: <HistoryQuestionDashBoard />},
+            {path: 'signup', element: <SignUpForm />}
         ],
     }
 ]

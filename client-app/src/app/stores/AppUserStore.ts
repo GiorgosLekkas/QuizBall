@@ -105,4 +105,12 @@ export default class AppUserStore {
             })
         }
     }
+
+    register = async (creds: any) => {
+        try {
+            console.log();
+        } catch (error) {
+            throw (error);
+        }
+    }
 }

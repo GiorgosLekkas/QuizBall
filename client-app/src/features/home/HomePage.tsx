@@ -11,6 +11,7 @@ export default function HomePage() {
                 </Header>
                 <Header as = 'h2' inverted content = 'Welcome to QuizBall' />
                 <Button as = {Link} to = '/historyquestions' size = 'huge' >Go to QuizBall</Button>
+                <Button as = {Link} to = '/signup' size = 'huge' >Sign Up</Button>
             </Container>
         </Segment>
     )

@@ -14,9 +14,6 @@ export default (function NavBar() {
                 <Menu.Item>
                     <Button as = {Link} to = '/createQuestion' positive content = 'Create a history question' className = 'createq' />
                 </Menu.Item>
-                <Menu.Item>
-                    <Button as = {Link} to = '/createAppUser' positive content = 'Create AppUser' className = 'createq' />
-                </Menu.Item>
                 <Menu.Item position = 'right'>
                     <Image src = {'/assets/user.png'} avatar spaced = 'right' />
                     <Dropdown pointing = 'top left' text = "Username" >
