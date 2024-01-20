@@ -1,11 +1,15 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta } from "semantic-ui-react";
-import { AppUser } from "../../../app/models/AppUser";
+import { useStore } from "../../../app/stores/store";
+import { observer } from "mobx-react-lite";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
-interface Props{
-    appUsers: AppUser
-}
+export default observer(function AppUserDetails() {
 
-export default function AppUserDetails({appUsers}: Props) {
+    const {appUserStore} = useStore();
+    const {selectedAppUser: appUsers, openForm, cancelSelectedAppUser} = appUserStore;
+
+    if(!appUsers) return <LoadingComponent/>;
+
     return (
         <Card>
             <CardContent>
@@ -22,8 +26,9 @@ export default function AppUserDetails({appUsers}: Props) {
                 </CardDescription>
             </CardContent>
             <CardContent extra>
-                <Button floated = "right" content = 'view' color = "teal" />
+            <Button onClick = { () => openForm(appUsers.id) } basic color = 'blue' content = 'Edit' />
+                    <Button onClick = {cancelSelectedAppUser} basic color = 'grey' content = 'Cancel' />
             </CardContent>
         </Card>
     )
-}
+})

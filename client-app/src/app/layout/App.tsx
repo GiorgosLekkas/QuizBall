@@ -19,6 +19,14 @@ function App() {
 
   if(historyQuestionStore.loadingInitial) return <LoadingComponent content='Loading app' />
 
+  const {appUserStore} = useStore();
+
+  useEffect(() => {
+    appUserStore.loadAppUser();
+  },[appUserStore])
+
+if(historyQuestionStore.loadingInitial) return <LoadingComponent content='Loading app' />
+
   return (
     <>
       {location.pathname === '/' ? <HomePage/> : (

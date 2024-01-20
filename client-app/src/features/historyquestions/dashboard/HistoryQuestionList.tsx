@@ -26,7 +26,7 @@ export default observer(function HistoryQuestionList() {
                                 <Item.Description>
                                     <div>{hquestion.answer1}</div>
                                     <div>{hquestion.answer2}</div>
-                                    <div>{hquestion.level}</div>
+                                    <div>{hquestion.correctAnser}</div>
                                 </Item.Description>
                                 <Item.Extra>
                                     <Button 

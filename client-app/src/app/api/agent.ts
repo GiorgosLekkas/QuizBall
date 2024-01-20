@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { HistoryQuestion } from '../models/HistoryQuestion';
+import { AppUser } from '../models/AppUser';
 
 const sleep = (delay: number) => {
     return new Promise ((resolve) => {
@@ -36,8 +37,17 @@ const HistoryQuestions = {
     delete: (id: string) => axios.delete<void>(`/HistoryQuestion/${id}`)
 }
 
+const AppUsers = {
+    list: () => requests.get<AppUser[]>('/AppUser'),
+    details: (id: string) => requests.get<AppUser>(`/AppUser/${id}`),
+    create: (appuser: AppUser) => axios.post<void>('/AppUser', appuser),
+    update: (appuser: AppUser) => axios.put<void>(`/AppUser/${appuser.id}`, appuser),
+    delete: (id: string) => axios.delete<void>(`/AppUser/${id}`)
+}
+
 const agent = {
-    HistoryQuestions
+    HistoryQuestions,
+    AppUsers
 }
 
 export default agent;

@@ -75,7 +75,7 @@ export default class HistoryQuestionStore {
         this.loading = true;
         h_question.id = uuid();
         try {
-            await agent.HistoryQuestions.create(h_question);
+            await agent.HistoryQuestions.update(h_question);
             runInAction(() => {
                 this.historyQuestionRegistry.set(h_question.id, h_question);
                 this.selectedHistoryQuestion = h_question;
@@ -106,5 +106,4 @@ export default class HistoryQuestionStore {
             })
         }
     }
-
 }
