@@ -4,11 +4,20 @@ import { useStore } from "../../../app/stores/store";
 import HistoryQuestionDetails from "../details/HistoryQuestionDetails";
 import HistoryQuestionForm from "../from/HistoryQuestionForm";
 import { observer } from 'mobx-react-lite';
+import { useEffect } from "react";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 export default observer(function HistoryQuestionDashBoard(){
 
     const {historyQuestionStore} = useStore();
-    const {selectedHistoryQuestion, editMode} = historyQuestionStore;
+    const {selectedHistoryQuestion, editMode, historyQuestionRegistry, loadHistoryQuestion} = historyQuestionStore;
+
+    useEffect(() => {
+        if(historyQuestionRegistry.size <= 1) 
+            loadHistoryQuestion();
+    }, [loadHistoryQuestion, historyQuestionRegistry.size])
+
+    if (historyQuestionStore.loadingInitial) return <LoadingComponent content = 'Loading Activities...' />
 
     return (
         <Grid>

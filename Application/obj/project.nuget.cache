@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "wWB2dOFxqEY0tDJANXfuvip9kun0EnDWeO+xrPy4viZZbCEIULw+LDf2nhMN6MFEtF1YfFxGFDvZLo6IZGU8HQ==",
+  "dgSpecHash": "TgIgqWgN1QqiirvNxi1lXUI8t8Joby2hLVYqKCbHTJMF88v6/2XF91193Ey+my97xfYSxSqeTpOmZTakujVwvw==",
   "success": true,
   "projectFilePath": "C:\\Users\\giorg\\Projects\\QuizBall\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\giorg\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "C:\\Users\\giorg\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\mediatr\\12.1.1\\mediatr.12.1.1.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",

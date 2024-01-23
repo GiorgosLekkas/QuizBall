@@ -32,10 +32,15 @@ export default observer(function HistoryQuestionForm() {
     return (
         <Segment clearing>
             <Form onSubmit = {handleSubmit} autoComplete = 'off'>
+                <label>Question</label>
                 <Form.TextArea placeholder = 'Question' value = {historyQuestion.question} name = 'question' onChange = {handleInputChange} />
+                <label>Answer 1</label>
                 <Form.Input placeholder = 'Answer1' value = {historyQuestion.answer1}  name = 'answer1' onChange = {handleInputChange} />
+                <label>Answer 2</label>
                 <Form.Input placeholder = 'Answer2' value = {historyQuestion.answer2} name = 'answer2' onChange = {handleInputChange} />
+                <label>Correct answer</label>
                 <Form.Input placeholder = 'CorrectAnswer' value = {historyQuestion.correctAnser}  name = 'correctAnser' onChange = {handleInputChange} />
+                <label>Level</label>
                 <Form.Input placeholder = 'Level' value = {historyQuestion.level}  name = 'level' onChange = {handleInputChange} />
                 <Button loading = {loading} floated = 'right' positive type = 'submit' content = 'Submit'/>
                 <Button onClick = {closeForm} floated = 'right' type = 'submit' content = 'Cancel'/>

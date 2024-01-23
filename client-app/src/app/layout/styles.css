@@ -44,3 +44,7 @@ body{
 .createq {
   background-color: #ef476f!important;
 }
+
+.react-datepicker__time-list-item--disabled{
+  display: none;
+}

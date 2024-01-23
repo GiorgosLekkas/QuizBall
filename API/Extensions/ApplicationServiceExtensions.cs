@@ -1,8 +1,9 @@
 using Application.Questions.HistoryQuestions;
-using Application.AppUsers;
 using Application.Core;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace API.Extensions {
     public static class ApplicationServiceExtensions {
@@ -22,8 +23,12 @@ namespace API.Extensions {
             });
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ListUser.Handler).Assembly));
+
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+            services.AddFluentValidationAutoValidation();
+
+            services.AddValidatorsFromAssemblyContaining<Create>();
 
             return services;
         }

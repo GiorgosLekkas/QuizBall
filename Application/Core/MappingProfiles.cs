@@ -4,8 +4,6 @@ using Domain;
 namespace Application.Core {
     public class MappingProfiles : Profile {
         public MappingProfiles(){
-            CreateMap<AppUser, AppUser>();
-
             CreateMap<HistoryQuestion, HistoryQuestion>();
         }
     }

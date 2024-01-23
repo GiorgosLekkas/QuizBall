@@ -1,11 +1,14 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../layout/App";
 import HomePage from "../../features/home/HomePage";
 import HistoryQuestionForm from "../../features/historyquestions/from/HistoryQuestionForm";
-import AppUserFrom from "../../features/appusers/form/AppUserFrom";
-import AppUserDashBoard from "../../features/appusers/dashboard/AppUserDashBoard";
 import HistoryQuestionDashBoard from "../../features/historyquestions/dashboard/HistoryQuestionDashBoard";
-import SignUpForm from "../../features/account/SignUpForm";
+import SignUpForm from "../../features/account/form/SignUpForm";
+import LoginForm from "../../features/account/form/LoginForm";
+import TestErrors from "../../features/errors/TestErrors";
+import NotFound from "../../features/errors/NotFound";
+import ServerError from "../../features/errors/ServerError";
+import UsersDashBoard from "../../features/account/dashboard/UsersDashBoard";
 
 
 export const routes: RouteObject[] = [
@@ -16,10 +19,14 @@ export const routes: RouteObject[] = [
             {path: '', element: <HomePage />},
             {path: 'homepage', element: <HomePage />},
             {path: 'createQuestion', element: <HistoryQuestionForm />},
-            {path: 'createAppUser', element: <AppUserFrom />},
-            {path: 'appusers', element: <AppUserDashBoard />},
             {path: 'historyquestions', element: <HistoryQuestionDashBoard />},
-            {path: 'signup', element: <SignUpForm />}
+            {path: 'signup', element: <SignUpForm />},
+            {path: 'login', element: <LoginForm key='manage'/>},
+            {path: 'users', element: <UsersDashBoard/>},
+            {path: 'errors', element: <TestErrors />},
+            {path: 'not-found', element: <NotFound />},
+            {path: 'server-error', element: <ServerError />},
+            {path: '*', element: <Navigate replace to='/not-found' />},
         ],
     }
 ]

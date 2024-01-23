@@ -1,40 +1,33 @@
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence {
     public class Seed {
-        public static async Task SeedData(DataContext context) {
-            if (context.Users.Any()) return;
-            
-            var appusers = new List<AppUser> {
-                new AppUser {
-                    FirstName = "Giorgos",
-                    LastName = "Lekkas",
-                    UserName = "glekkas4",
-                    Email = "glekkas4@test.com",
-                    Password = "1234N",
-                    Gender = "Male",
-                    BirthDate = DateOnly.MinValue,
-                    Role = "Admin"
-                },
-                new AppUser {
-                    FirstName = "Maria",
-                    LastName = "Strergiou",
-                    UserName = "mstergiou29",
-                    Email = "mstergiou29@test.com",
-                    Password = "1234N",
-                    Gender = "Female",
-                    Role = "User"
-                },
-                new AppUser {
-                    FirstName = "Maria1",
-                    LastName = "Strergiou1",
-                    UserName = "mstergiou291",
-                    Email = "mstergiou291@test.com",
-                    Password = "1234N1",
-                    Gender = "Female",
-                    Role = "User"
+        public static async Task SeedData(DataContext context, UserManager<Account> userManager) {
+
+            /*if (!userManager.Users.Any()){
+                var users = new List<Account> {
+                    new () {
+                        UserName = "glekkas",
+                        FirstName = "Giorgos",
+                        LastName = "Lekkas",
+                        Email = "gl4@gmail.com",
+                        Gender = "Male",
+                        Role = "Admin"
+                    }, new() {
+                        UserName = "dools",
+                        FirstName = "Maria",
+                        LastName = "Stergiou",
+                        Email = "dools@gmail.com",
+                        Gender = "Female",
+                        Role = "Admin"
+                    }
+                };
+
+                foreach (var user in users) {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
                 }
-            };
+            }*/
 
             if (context.History_Question.Any()) return;
             
@@ -52,10 +45,15 @@ namespace Persistence {
                     Answer2 = "3",
                     CorrectAnser = "3",
                     Level = "Medium",
+                },new HistoryQuestion {
+                    Question = "How many superleague titles Aris has won?",
+                    Answer1 = "4",
+                    Answer2 = "3",
+                    CorrectAnser = "3",
+                    Level = "Medium",
                 }
             };
 
-            await context.Users.AddRangeAsync(appusers);
             await context.History_Question.AddRangeAsync(hquestions);
             await context.SaveChangesAsync();
         }

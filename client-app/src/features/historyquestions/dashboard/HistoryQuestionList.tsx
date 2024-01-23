@@ -1,4 +1,4 @@
-import { Button, Header, Item, Segment } from "semantic-ui-react";
+import { Button, Grid, GridColumn, GridRow, Header, Item, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { SyntheticEvent, useState } from "react";
 import { observer } from "mobx-react-lite";
@@ -22,11 +22,28 @@ export default observer(function HistoryQuestionList() {
                     <Item key = {hquestion.id} >
                         <Item.Content>
                             <Item.Header as = 'a'>{hquestion.question}</Item.Header>
-                            <Item.Description>
-                                <div>{hquestion.answer1}</div>
-                                <div>{hquestion.answer2}</div>
-                                <div>{hquestion.correctAnser}</div>
-                            </Item.Description>
+                            <Grid relaxed columns='2'>
+                                <GridRow>
+                                    <GridColumn><div></div></GridColumn>
+                                    <GridColumn><div></div></GridColumn>
+                                </GridRow>
+                                <GridRow>
+                                    <GridColumn><div>Level:</div> </GridColumn>
+                                    <GridColumn><div>{hquestion.level}</div> </GridColumn>
+                                </GridRow>
+                                <GridRow>
+                                    <GridColumn><div>Answer 1:</div></GridColumn>
+                                    <GridColumn><div>{hquestion.answer1}</div></GridColumn>
+                                </GridRow>
+                                <GridRow>
+                                    <GridColumn><div>Answer 2:</div></GridColumn>
+                                    <GridColumn><div>{hquestion.answer2}</div></GridColumn>
+                                </GridRow>
+                                <GridRow>
+                                    <GridColumn><div>Correct Answer:</div> </GridColumn>
+                                    <GridColumn><div>{hquestion.correctAnser}</div> </GridColumn>
+                                </GridRow>
+                            </Grid>
                             <Item.Extra>
                                 <Button 
                                     onClick = { () => historyQuestionStore.selectHistoryQuestion(hquestion.id)} 

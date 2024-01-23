@@ -1,18 +1,21 @@
 import { createContext, useContext } from "react";
 import HistoryQuestionStore from "./HistoryQuestionStore";
-import AppUserStore from "./AppUserStore";
 import ModalStore from "./ModalStores";
+import AccountStore from "./AccountStore";
+import CommonStore from "./CommonStores";
 
 interface Store {
     historyQuestionStore: HistoryQuestionStore
-    appUserStore: AppUserStore
+    accountStore: AccountStore
     modalStore: ModalStore;
+    commonStore: CommonStore;
 }
 
 export const store: Store = {
     historyQuestionStore: new HistoryQuestionStore(),
-    appUserStore: new AppUserStore(),
-    modalStore: new ModalStore()
+    accountStore: new AccountStore(),
+    modalStore: new ModalStore(),
+    commonStore: new CommonStore()
 }
 
 export const StoreContext = createContext(store);

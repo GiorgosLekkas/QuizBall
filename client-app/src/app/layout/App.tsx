@@ -11,21 +11,17 @@ import LoadingComponent from './LoadingComponent';
 function App() {
 
   const location = useLocation();
-  const {historyQuestionStore} = useStore();
+  const {commonStore, accountStore} = useStore();
 
   useEffect(() => {
-      historyQuestionStore.loadHistoryQuestion();
-  },[historyQuestionStore])
+    if(commonStore.token){
+      accountStore.getUser().finally(() => commonStore.setAppLoaded())
+    } else {
+      commonStore.setAppLoaded()
+    }
+  },[commonStore, accountStore])
 
-  if(historyQuestionStore.loadingInitial) return <LoadingComponent content='Loading app' />
-
-  const {appUserStore} = useStore();
-
-  useEffect(() => {
-    appUserStore.loadAppUser();
-  },[appUserStore])
-
-if(historyQuestionStore.loadingInitial) return <LoadingComponent content='Loading app' />
+  //if(!commonStore.appLoaded) return <LoadingComponent content = 'Loading App..'/>
 
   return (
     <>

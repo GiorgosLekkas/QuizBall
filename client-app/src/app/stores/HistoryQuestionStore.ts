@@ -21,13 +21,17 @@ export default class HistoryQuestionStore {
     loadHistoryQuestion = async ()  => {
         try {
             const historyQuestions = await agent.HistoryQuestions.list()
+            runInAction(() => {
                 historyQuestions.forEach(question => {
-                this.historyQuestionRegistry.set(question.id, question);
+                    this.historyQuestionRegistry.set(question.id, question);
+                })
             })
             this.setLoadingInitial(false);
         } catch (error) {
             console.log(error);  
-            this.setLoadingInitial(false);
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
         }
     }
 
