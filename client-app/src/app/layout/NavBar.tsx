@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import { Button, Container, Menu, Image, Dropdown } from "semantic-ui-react";
+import { Button, Container, Menu, Dropdown, Icon } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 
 export default observer(function NavBar() {
@@ -25,7 +25,7 @@ export default observer(function NavBar() {
                     <Button as = {Link} to = '/createQuestion' positive content = 'Create a history question' className = 'createq' />
                 </Menu.Item>
                 <Menu.Item position = 'right'>
-                    <Image src = {'/assets/user.png'} avatar spaced = 'right' />
+                    <Icon name='user' />
                     <Dropdown pointing = 'top left' text = {user?.userName} >
                         <Dropdown.Menu>
                             <Dropdown.Item as={Link} to = {`/account/${user?.userName}`} text = 'My Profile' icon = 'user' />

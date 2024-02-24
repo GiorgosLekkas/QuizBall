@@ -6,12 +6,17 @@ import { Outlet, useLocation } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import { useEffect } from 'react';
 import { useStore } from '../stores/store';
-import LoadingComponent from './LoadingComponent';
+//import LoadingComponent from './LoadingComponent';
 
 function App() {
 
   const location = useLocation();
   const {commonStore, accountStore} = useStore();
+
+    useEffect(() => {
+        accountStore.loadAccounts();
+    },[accountStore])
+
 
   useEffect(() => {
     if(commonStore.token){

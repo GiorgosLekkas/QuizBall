@@ -8,6 +8,7 @@ export default class UserStore {
     user: Account | null = null;
     accounts: Account[] = [];
     selectedUsers: Account | undefined = undefined;
+    accountRegistry = new Map<string, Account>();
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -26,14 +27,18 @@ export default class UserStore {
 
     loadAccounts = async ()  => {
         try {
-            const accounts = await agent.Account.list()
-            accounts.forEach(acc => {
-                this.accounts.push(acc);
+            const account = await agent.Account.list()
+            runInAction(() => {
+                account.forEach(acc => {
+                    this.accounts.push(acc);
+                })
             })
             this.setLoadingInitial(false);
         } catch (error) {
             console.log(error);  
-            this.setLoadingInitial(false);
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
         }
     }
 

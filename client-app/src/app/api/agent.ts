@@ -76,8 +76,9 @@ const HistoryQuestions = {
 }
 
 const Account = {
-    current: () => requests.get<Account>('account'),
-    list: () => requests.get<Account[]>('/account'),
+    //current: () => requests.get<Account>('/account'),
+    current: () => requests.get<Account>(`/account`),
+    list: () => requests.get<Account[]>('/account/all'),
     login: (user: AccountFormValues) => requests.post<Account>('/account/login', user),
     register: (user: AccountFormValues) => requests.post<Account>('/account/register', user)
     

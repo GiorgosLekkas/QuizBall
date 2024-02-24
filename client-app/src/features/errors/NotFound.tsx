@@ -9,7 +9,7 @@ export default function NotFound() {
                     Oops - we've looked everywhere but could not find what you are looking for
             </Header>
             <Segment.Inline>
-                <Button as = {Link} to = '/activities' > Return to Activities </Button>
+                <Button as = {Link} to = '/historyquestions' > Return to QuizBall </Button>
             </Segment.Inline>
         </Segment>
     )

@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using API.DTOs;
 using API.Services;
-using Application.Questions.HistoryQuestions;
+using Application.Core.Accounts;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +13,7 @@ namespace API.Controllers {
 
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController: ControllerBase {
+    public class AccountController: BaseApiController {
         private readonly UserManager<Account> userManager;
         private readonly TokenService tokenService;
         public AccountController(UserManager<Account> userManager, TokenService tokenService){
@@ -50,12 +50,12 @@ namespace API.Controllers {
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
             
             if (await userManager.Users.AnyAsync(x => x.Email == registerDto.Email)){
-                //ModelState.AddModelError("email", "Email taken");
+                ModelState.AddModelError("email", "Email taken");
                 return ValidationProblem();
             }
 
             if (await userManager.Users.AnyAsync(x => x.NormalizedUserName == userManager.NormalizeName(registerDto.Username))){
-                //ModelState.AddModelError("userName", "Username taken");
+                ModelState.AddModelError("userName", "Username taken");
                 return ValidationProblem();
             }
 
@@ -83,6 +83,12 @@ namespace API.Controllers {
         public async Task<ActionResult<UserDto>> GetCurrentUser() {
             var user = await userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
             return CreateUserObject(user);
+        }
+
+        [Authorize]
+        [HttpGet("all")]
+        public async Task<ActionResult<List<Account>>> GetAllAccounts() {
+            return await Mediator.Send(new List.Query());
         }
 
         private UserDto CreateUserObject(Account user) {

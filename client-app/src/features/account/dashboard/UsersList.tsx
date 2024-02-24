@@ -1,7 +1,8 @@
-import { Button, Grid, GridColumn, GridRow, Header, Item, Segment } from "semantic-ui-react";
+import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Header, Item, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
+import { observer } from "mobx-react-lite";
 
-export default function UsersList () {
+export default observer(function UsersList () {
 
     const {accountStore} = useStore();
     const {accounts} = accountStore;
@@ -11,48 +12,35 @@ export default function UsersList () {
             <Header as = 'h2'>Users</Header>
             <Item.Group divided>
                 {accounts.map(account => (
-                    <Item>
-                        <Item.Content>
-                            <Item.Header as = 'a'>{account.userName}</Item.Header>
-                            <Grid relaxed columns='2'>
-                                <GridRow>
-                                    <GridColumn><div></div></GridColumn>
-                                    <GridColumn><div></div></GridColumn>
-                                </GridRow>
-                                <GridRow>
-                                    <GridColumn><div>Level:</div> </GridColumn>
-
-                                </GridRow>
-                                <GridRow>
-                                    <GridColumn><div>Answer 1:</div></GridColumn>
-                                    
-                                </GridRow>
-                                <GridRow>
-                                    <GridColumn><div>Answer 2:</div></GridColumn>
-                                    
-                                </GridRow>
-                                <GridRow>
-                                    <GridColumn><div>Correct Answer:</div> </GridColumn>
-                                    
-                                </GridRow>
-                            </Grid>
-                            <Item.Extra>
-                                <Button 
-                                    //onClick = { () => historyQuestionStore.selectHistoryQuestion(hquestion.id)} 
-                                    floated = 'right' content = 'View' color = 'teal' />
-                                <Button
-                                    //name = {hquestion.id}
-                                    //loading = {loading && target === hquestion.id}
-                                    //onClick = { (e) => handleActivityDelete(e, hquestion.id)}
-                                    floated = 'right'
-                                    content = 'Delete'
-                                    color = 'red' 
-                                />
-                            </Item.Extra>
-                        </Item.Content>
-                    </Item>
+                    <Card>
+                        <CardContent>
+                            <CardHeader>{account.userName}</CardHeader>
+                            <CardMeta>
+                                <div>{account.role}</div>
+                            </CardMeta>
+                            <CardDescription>
+                                <div>{account.firstName}</div>
+                                <div>{account.lastName}</div>
+                                <div>{account.email}</div>
+                                <div>{account.gender}</div>
+                            </CardDescription>
+                        </CardContent>
+                        <CardContent extra>
+                            <Button 
+                                //onClick = { () => historyQuestionStore.selectHistoryQuestion(hquestion.id)} 
+                                floated = 'right' content = 'View' color = 'teal' />
+                            <Button
+                               // name = {hquestion.id}
+                               // loading = {loading && target === hquestion.id}
+                                //onClick = { (e) => handleActivityDelete(e, hquestion.id)}
+                                floated = 'right'
+                                content = 'Delete'
+                                color = 'red' 
+                            />
+                        </CardContent>
+                    </Card>
                 ))}
             </Item.Group>
         </Segment>
     )
-}
+})

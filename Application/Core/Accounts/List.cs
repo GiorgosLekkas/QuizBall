@@ -3,8 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Activities
-{
+namespace Application.Core.Accounts {
     public class List
     {
         public class Query : IRequest<List<Account>> { }
@@ -17,7 +16,7 @@ namespace Application.Activities
             }
 
             public async Task<List<Account>> Handle(Query request, CancellationToken token) {
-                return await context.Users.ToListAsync();
+                return await context.Accounts.ToListAsync();
             }
         }
     }

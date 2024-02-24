@@ -1,4 +1,5 @@
 export interface Account {
+  id?: string
   email: string
   userName: string
   password: string
@@ -10,6 +11,7 @@ export interface Account {
 }
 
 export interface AccountFormValues {
+  id?: string
   email: string
   userName?: string
   password: string
