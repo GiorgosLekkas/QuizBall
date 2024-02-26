@@ -21,7 +21,7 @@ export default class UserStore {
         return !!this.user;
     }
 
-    get getAccounts() {
+    /*get getAccounts() {
         return Array(this.accounts).values();
     }
 
@@ -31,6 +31,27 @@ export default class UserStore {
             runInAction(() => {
                 account.forEach(acc => {
                     this.accounts.push(acc);
+                })
+            })
+            this.setLoadingInitial(false);
+        } catch (error) {
+            console.log(error);  
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
+        }
+    }*/
+
+    get Accounts() {
+        return Array.from(this.accountRegistry.values());
+    }
+
+    loadAccounts = async () => {
+        try {
+            const accounts = await agent.Account.list()
+            runInAction(() => {
+                accounts.forEach(account => {
+                    this.accountRegistry.set(account.userName, account);
                 })
             })
             this.setLoadingInitial(false);
@@ -56,6 +77,7 @@ export default class UserStore {
 
     register = async (creds: AccountFormValues) => {
         try {
+            creds.role = 'user'
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);

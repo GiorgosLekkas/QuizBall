@@ -5,13 +5,13 @@ import { observer } from "mobx-react-lite";
 export default observer(function UsersList () {
 
     const {accountStore} = useStore();
-    const {accounts} = accountStore;
+    const {Accounts} = accountStore;
 
     return (
         <Segment>
             <Header as = 'h2'>Users</Header>
             <Item.Group divided>
-                {accounts.map(account => (
+                {Accounts.map(account => (
                     <Card>
                         <CardContent>
                             <CardHeader>{account.userName}</CardHeader>

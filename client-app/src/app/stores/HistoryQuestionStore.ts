@@ -18,6 +18,10 @@ export default class HistoryQuestionStore {
         return Array.from(this.historyQuestionRegistry.values());
     }
 
+    private getHistoryQuestion = (id: string) => {
+        return this.historyQuestionRegistry.get(id);
+    }
+
     loadHistoryQuestion = async ()  => {
         try {
             const historyQuestions = await agent.HistoryQuestions.list()
@@ -73,18 +77,22 @@ export default class HistoryQuestionStore {
                 this.setLoadingInitial(false);
             })
         }
+        this.editMode = false;
+        this.selectedHistoryQuestion = undefined;
     }
 
     updateHistoryQuestion = async (h_question: HistoryQuestion) => {
         this.loading = true;
-        h_question.id = uuid();
         try {
             await agent.HistoryQuestions.update(h_question);
             runInAction(() => {
-                this.historyQuestionRegistry.set(h_question.id, h_question);
-                this.selectedHistoryQuestion = h_question;
-                this.editMode = false;
-                this.loading = false;
+                runInAction(() => {
+                    if (h_question.id) {
+                        let updatedHistoryQuestion = {...this.getHistoryQuestion(h_question.id), ...h_question}
+                        this.historyQuestionRegistry.set(h_question.id, updatedHistoryQuestion as HistoryQuestion);
+                        this.selectedHistoryQuestion = updatedHistoryQuestion as HistoryQuestion;
+                    }
+                })
             })
         } catch (error) {
             console.log(error);
@@ -92,6 +100,9 @@ export default class HistoryQuestionStore {
                 this.setLoadingInitial(false);
             })
         }
+        this.loading = false;
+        this.selectedHistoryQuestion = undefined;
+        this.editMode = false;
     }
 
     deleteHistoryQuestion = async (id: string) => {

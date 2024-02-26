@@ -16,7 +16,7 @@ export default observer(function HistoryQuestionList() {
 
     return (
         <Segment>
-            <Header as = 'h2'>History Questions</Header>
+            <Header as = 'h2'>Questions</Header>
             <Item.Group divided>
                 {historyquestions.map(hquestion => (
                     <Item key = {hquestion.id} >

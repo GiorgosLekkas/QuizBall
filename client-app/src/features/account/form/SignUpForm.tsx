@@ -1,10 +1,11 @@
-import { Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { Button, Header } from "semantic-ui-react";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import { useStore } from "../../../app/stores/store";
 import * as Yup from 'yup';
 import MySelectInput from "../../../app/common/form/MySelectInput";
+import ValidationError from "../../errors/ValidationError";
 
 export default observer(function RegsiterForm() {
 
@@ -18,9 +19,9 @@ export default observer(function RegsiterForm() {
 
     return (
         <Formik
-            initialValues={{ email:'', userName:'', password:'', firstName:'', lastName:'', gender:'', role:'User'}}
-            onSubmit={(values) =>
-            accountStore.register(values)}
+        initialValues={{ displayName: '', username: '', email: '', password: '', error: null }}
+        onSubmit={(values, { setErrors }) =>
+            accountStore.register(values).catch(error => setErrors({error}))}
             validationSchema={Yup.object({
                 firstName: Yup.string().required('First Name is required!'),
                 lastName: Yup.string().required('Last Name is required!'),
@@ -30,7 +31,7 @@ export default observer(function RegsiterForm() {
                 gender: Yup.string().required('Gender is required!'),
             })}
         >
-            {({ handleSubmit, isSubmitting, isValid, dirty }) => (
+            {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form error' onSubmit={handleSubmit} autoComplete='off'>
                     <Header as='h2' content='Sign up to Reactivities' color="teal" textAlign="center" />
                     <MyTextInput placeholder="First Name" name='firstName' />
@@ -45,6 +46,8 @@ export default observer(function RegsiterForm() {
                         positive content='Register' 
                         type="submit"  
                     />
+                    <ErrorMessage name='error' render={() => 
+                        <ValidationError errors={errors.error as unknown as string[]} />} />
                 </Form>
             )}
         </Formik>

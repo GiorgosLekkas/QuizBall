@@ -48,3 +48,7 @@ body{
 .react-datepicker__time-list-item--disabled{
   display: none;
 }
+
+.error_mes{
+  border-width: 0!important;
+}

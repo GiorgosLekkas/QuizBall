@@ -1,5 +1,6 @@
 import { makeAutoObservable, reaction } from "mobx";
 import { ServerError } from "../models/serverError";
+import agent from "../api/agent";
 
 export  default class CommonStore{
     error: ServerError | null = null;
@@ -31,6 +32,14 @@ export  default class CommonStore{
 
     setServerError(error: ServerError){
         this.error = error;
+    }
+
+    getUser = async () => {
+        try {
+            const user = await agent.Account.current();
+        } catch (error) {
+            
+        }
     }
 
 }

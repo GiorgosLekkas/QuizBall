@@ -1,6 +1,6 @@
-import { Form, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import { Button, Header } from "semantic-ui-react";
+import { Button, Header, Label } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 
@@ -8,15 +8,18 @@ export default observer(function LoginForm() {
     const {accountStore} = useStore();
     return (
         <Formik
-            initialValues={{email: "", password: ""}}
-            onSubmit={values => accountStore.login(values)}    
+            initialValues={{email: "", password: "", error: null}}
+            onSubmit = {(values, {setErrors}) => accountStore.login(values).catch(error => setErrors({error: 'Invalid email or password'}))} 
         >
-            {({handleSubmit, isSubmitting}) => (
+            {({handleSubmit, isSubmitting, errors}) => (
                 <Form className = 'ui form' onSubmit = {handleSubmit} autoComplete = 'off'>
                     <Header as = 'h2' content = 'Login to QuizBall' color = 'teal' textAlign = 'center' />
                     <MyTextInput placeholder = "Email" name = 'email' />
                     <MyTextInput placeholder = "Password" name = 'password' type = 'password' />
                     <Button loading = {isSubmitting} positive content = 'Login' type = 'submit' />
+                    <ErrorMessage name = 'error' render = {() => 
+                        <Label className="error_mes" style = {{marginBottom: 10}} basic color = 'red' content = {errors.error} /> 
+                    }/>
                 </Form>
             )}
         </Formik>

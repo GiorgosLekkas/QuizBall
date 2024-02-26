@@ -2,10 +2,11 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Button, Container, Menu, Dropdown, Icon } from "semantic-ui-react";
 import { useStore } from "../stores/store";
+import HistoryQuestionForm from "../../features/historyquestions/from/HistoryQuestionForm";
 
 export default observer(function NavBar() {
 
-    const {accountStore: {user, logout, getRole}} = useStore();
+    const {accountStore: {user, logout, getRole}, modalStore} = useStore();
 
     return (
         <Menu inverted fixed = 'top'>
@@ -22,7 +23,7 @@ export default observer(function NavBar() {
                     </>
                 )}
                 <Menu.Item>
-                    <Button as = {Link} to = '/createQuestion' positive content = 'Create a history question' className = 'createq' />
+                    <Button onClick = {() => modalStore.openModal(<HistoryQuestionForm/>)}  positive content = 'Create a history question' className = 'createq' />
                 </Menu.Item>
                 <Menu.Item position = 'right'>
                     <Icon name='user' />
