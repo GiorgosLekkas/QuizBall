@@ -77,7 +77,7 @@ export default class UserStore {
 
     register = async (creds: AccountFormValues) => {
         try {
-            creds.role = 'user'
+            creds.role = 'User'
             const user = await agent.Account.register(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
@@ -104,8 +104,7 @@ export default class UserStore {
     }
 
     getRole = () => {
-        if(this.user?.role === 'Admin')
-            return true;
+        return this.user?.role;
     }
 
     setLoadingInitial = (state: boolean) => {

@@ -9,6 +9,7 @@ import TestErrors from "../../features/errors/TestErrors";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import UsersDashBoard from "../../features/account/dashboard/UsersDashBoard";
+import Question_GeographyForm from "../../features/questions/from/Question_GeographyForm";
 
 
 export const routes: RouteObject[] = [
@@ -19,6 +20,8 @@ export const routes: RouteObject[] = [
             {path: '', element: <HomePage />},
             {path: 'homepage', element: <HomePage />},
             {path: 'createQuestion', element: <HistoryQuestionForm />},
+            {path: 'createQuestionGeography', element: <Question_GeographyForm />},
+            {path: 'manage/:id', element: <Question_GeographyForm key = 'manage' />},
             {path: 'historyquestions', element: <HistoryQuestionDashBoard />},
             {path: 'signup', element: <SignUpForm />},
             {path: 'login', element: <LoginForm key='manage'/>},

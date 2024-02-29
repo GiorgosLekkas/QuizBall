@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Container, Menu, Dropdown, Icon } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import HistoryQuestionForm from "../../features/historyquestions/from/HistoryQuestionForm";
+//import Question_GeographyForm from "../../features/questions/from/Question_GeographyForm";
 
 export default observer(function NavBar() {
 
@@ -15,8 +16,8 @@ export default observer(function NavBar() {
                     <img src = "/assets/logo.png" alt = "logo" style = {{marginRight: '10px'}}></img>
                     QuizBall
                 </Menu.Item>
-                <Menu.Item as = {Link} to = '/historyquestions' name = 'History Questions' />
-                {(!getRole() &&
+                <Menu.Item as = {Link} to = '/historyquestions' name = 'Review Questions' />
+                {((getRole() === 'Admin' || getRole() === 'User') &&
                     <>
                         <Menu.Item as = {Link} to = '/errors' name = 'Errors' />
                         <Menu.Item as = {Link} to = '/users' name = 'Users' />
@@ -24,6 +25,9 @@ export default observer(function NavBar() {
                 )}
                 <Menu.Item>
                     <Button onClick = {() => modalStore.openModal(<HistoryQuestionForm/>)}  positive content = 'Create a history question' className = 'createq' />
+                </Menu.Item>
+                <Menu.Item>
+                    <Button as = {Link} to = '/createQuestionGeography' positive content = 'Create a question' className = 'createq' />
                 </Menu.Item>
                 <Menu.Item position = 'right'>
                     <Icon name='user' />

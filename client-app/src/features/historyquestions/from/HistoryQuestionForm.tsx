@@ -1,4 +1,4 @@
-import { Button, Form, Segment } from "semantic-ui-react";
+import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 import { ChangeEvent, useState } from "react";
@@ -37,6 +37,7 @@ export default observer(function HistoryQuestionForm() {
     return (
         <Segment clearing>
             <Form onSubmit = {handleSubmit} autoComplete = 'off'>
+            <Header as = 'h2' content = 'Geography Question' color = 'teal' textAlign = 'center' />
                 <label>Question</label>
                 <Form.TextArea placeholder = 'Question' value = {historyQuestion.question} name = 'question' onChange = {handleInputChange} />
                 <label>Answer 1</label>

@@ -4,6 +4,7 @@ import { Account, AccountFormValues } from '../models/Account';
 import { store } from '../stores/store';
 import { router } from '../router/Routes';
 import { toast } from 'react-toastify';
+import { Question_Geography } from '../models/Question_Geography';
 
 const sleep = (delay: number) => {
     return new Promise ((resolve) => {
@@ -75,6 +76,14 @@ const HistoryQuestions = {
     delete: (id: string) => requests.del<void>(`/HistoryQuestion/${id}`)
 }
 
+const QuestionGeography = {
+    list: () => requests.get<Question_Geography[]>(`/Question_Geography`),
+    details: (id: string) => requests.get<Question_Geography>(`/Question_Geography/${id}`),
+    create: (Question_Geography: Question_Geography) => requests.post<void>(`/Question_Geography`, Question_Geography),
+    update: (Question_Geography: Question_Geography) => requests.put<void>(`/Question_Geography/${Question_Geography.id}`, Question_Geography),
+    delete: (id: string) => requests.del<void>(`/Question_Geography/${id}`)
+}
+
 const Account = {
     //current: () => requests.get<Account>('/account'),
     current: () => requests.get<Account>(`/account`),
@@ -86,7 +95,8 @@ const Account = {
 
 const agent = {
     HistoryQuestions,
-    Account
+    Account,
+    QuestionGeography
 }
 
 export default agent;

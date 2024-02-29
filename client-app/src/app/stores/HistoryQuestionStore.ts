@@ -4,6 +4,7 @@ import {v4 as uuid} from 'uuid';
 import { HistoryQuestion } from "../models/HistoryQuestion";
 
 export default class HistoryQuestionStore {
+    question: HistoryQuestion | null = null;
     selectedHistoryQuestion: HistoryQuestion | undefined = undefined;
     historyQuestionRegistry = new Map<string, HistoryQuestion>();
     editMode = false;

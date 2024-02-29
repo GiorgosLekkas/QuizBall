@@ -6,5 +6,6 @@ namespace Persistence {
         public DataContext(DbContextOptions options) : base(options) { }
         public DbSet<HistoryQuestion> History_Question { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<QuestionGeography> Question_Geography { get; set; }
     }
 }

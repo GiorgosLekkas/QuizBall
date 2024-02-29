@@ -57,6 +57,22 @@ namespace Persistence.Migrations
                 {
                     table.PrimaryKey("PK_History_Question", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Question_Geography",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Question = table.Column<string>(type: "TEXT", nullable: true),
+                    Answer1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Answer2 = table.Column<string>(type: "TEXT", nullable: true),
+                    CorrectAnser = table.Column<string>(type: "TEXT", nullable: true),
+                    Level = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question_Geography", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -67,6 +83,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "History_Question");
+
+            migrationBuilder.DropTable(
+                name: "Question_Geography");
         }
     }
 }

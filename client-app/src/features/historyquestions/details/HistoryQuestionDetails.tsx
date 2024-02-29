@@ -8,7 +8,7 @@ export default observer(function AppUserDetails() {
     const {historyQuestionStore} = useStore();
     const {selectedHistoryQuestion: historyQuestion, openForm, cancelSelectedHistoryQuestion} = historyQuestionStore;
 
-    if(!historyQuestion) return <LoadingComponent/>;
+    if(!historyQuestion) return <LoadingComponent/>
 
     return (
         <Card>

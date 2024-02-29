@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240123123717_Update")]
+    [Migration("20240227134816_Update")]
     partial class Update
     {
         /// <inheritdoc />
@@ -114,6 +114,32 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("History_Question");
+                });
+
+            modelBuilder.Entity("Domain.QuestionGeography", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Answer1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Answer2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorrectAnser")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Level")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Question")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Question_Geography");
                 });
 #pragma warning restore 612, 618
         }
