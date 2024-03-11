@@ -1,4 +1,4 @@
-import { Grid, Label } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import UsersList from "./UsersList";
 import { useStore } from "../../../app/stores/store";
 import { useEffect } from "react";
@@ -17,16 +17,10 @@ export default function UsersDashBoard() {
 
     return (
         <Grid>
-            <Grid.Column width = '10'>
+            <Grid.Column width = '15'>
                 <UsersList />
             </Grid.Column>
-            <Grid.Column width = '6'>
-                {<Label>In Progress..</Label>/*selectedHistoryQuestion && !editMode &&
-                    <HistoryQuestionDetails />
-                }{editMode &&
-                    <HistoryQuestionForm />
-                */} 
-            </Grid.Column>
+            
         </Grid>
     )
 }

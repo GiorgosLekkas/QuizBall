@@ -2,8 +2,10 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Button, Container, Menu, Dropdown, Icon } from "semantic-ui-react";
 import { useStore } from "../stores/store";
-import HistoryQuestionForm from "../../features/historyquestions/from/HistoryQuestionForm";
-//import Question_GeographyForm from "../../features/questions/from/Question_GeographyForm";
+import Question_HistoryForm from "../../features/questions/history/from/Question_HistoryForm";
+import Question_GeographyForm from "../../features/questions/geography/from/Question_GeographyForm";
+import Game from "../../features/game/Game";
+import QuestionPopUp from "../../features/game/QuestionPopUp";
 
 export default observer(function NavBar() {
 
@@ -16,18 +18,28 @@ export default observer(function NavBar() {
                     <img src = "/assets/logo.png" alt = "logo" style = {{marginRight: '10px'}}></img>
                     QuizBall
                 </Menu.Item>
-                <Menu.Item as = {Link} to = '/historyquestions' name = 'Review Questions' />
-                {((getRole() === 'Admin' || getRole() === 'User') &&
+                {((getRole() === 'Admin' || getRole() === 'Moderator') &&
+                    <>  
+                        <Menu.Item as = {Link} to = '/questions' name = 'Questions' />
+                    </>
+                )}
+                {((getRole() === 'Admin') &&
                     <>
-                        <Menu.Item as = {Link} to = '/errors' name = 'Errors' />
                         <Menu.Item as = {Link} to = '/users' name = 'Users' />
                     </>
                 )}
+                <Menu.Item as = {Link} to = '/game' name = 'Game' />
                 <Menu.Item>
-                    <Button onClick = {() => modalStore.openModal(<HistoryQuestionForm/>)}  positive content = 'Create a history question' className = 'createq' />
+                    <Button as = {Link} to = '/questionpopup' positive content = 'question' />
                 </Menu.Item>
-                <Menu.Item>
-                    <Button as = {Link} to = '/createQuestionGeography' positive content = 'Create a question' className = 'createq' />
+                <Menu.Item position = 'right'>
+                    <Icon name='question' />
+                    <Dropdown pointing = 'top left' text = {"Submit Question"} >
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick = {() => modalStore.openModal(<Question_GeographyForm origin = {"create"}/>)} to = '/createQuestionGeography' positive content = 'Geography' className = 'createq' />
+                            <Dropdown.Item onClick = {() => modalStore.openModal(<Question_HistoryForm origin={"create"}/>)} to = '/createQuestionHistory' positive content = 'History' className = 'createq' />
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Menu.Item>
                 <Menu.Item position = 'right'>
                     <Icon name='user' />

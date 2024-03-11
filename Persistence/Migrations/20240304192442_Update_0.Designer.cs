@@ -11,8 +11,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240227134816_Update")]
-    partial class Update
+    [Migration("20240304192442_Update_0")]
+    partial class Update0
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,7 +102,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Answer2")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CorrectAnser")
+                    b.Property<string>("Confirmed")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorrectAnswer")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Level")
@@ -128,7 +131,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Answer2")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CorrectAnser")
+                    b.Property<string>("Confirmed")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorrectAnswer")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Level")

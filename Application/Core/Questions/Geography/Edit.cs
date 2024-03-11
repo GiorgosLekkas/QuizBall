@@ -16,8 +16,10 @@ namespace Application.Questions.Geography {
                 this.mapper = mapper;
             }
             public async Task Handle(Command request, CancellationToken cancellationToken) {
-                var activity = await context.Question_Geography.FindAsync(request.QuestionGeography.Id);
-                mapper.Map(request.QuestionGeography, activity);
+                var question = await context.Question_Geography.FindAsync(request.QuestionGeography.Id);
+                Console.WriteLine(question.Id);
+                Console.WriteLine(question.Level);
+                mapper.Map(request.QuestionGeography, question);
                 await context.SaveChangesAsync();
             }
         }

@@ -2,13 +2,19 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Question_Geography, Question_GeographyFormValues } from "../models/Question_Geography";
 import {v4 as uuid} from 'uuid';
-import { number } from "yup";
 
 export default class Question_GeographyStore {
 
     question_GeographyRegistry = new Map<string, Question_Geography>();
+    not_confirmed = new Map<string, Question_Geography>();
+    confirmed = new Map<string, Question_Geography>();
+    easy = new Map<string, Question_Geography>();
+    medium = new Map<string, Question_Geography>();
+    hard = new Map<string, Question_Geography>();
+    question_GeographyEasy: Question_Geography | undefined = undefined;
+    question_GeographyMedium: Question_Geography | undefined = undefined;
+    question_GeographyHard: Question_Geography | undefined = undefined;
     selectedQuestion_Geography: Question_Geography | undefined = undefined;
-    tmp = new Map<string, Question_Geography>();
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -27,30 +33,38 @@ export default class Question_GeographyStore {
         )
     }*/
 
-    get questions_Geography() {
-        /*let keys: string[] = new Array;
-        keys = Array.from(this.question_GeographyRegistry.keys());
+    questions_Geography() { //let n: number = Math.floor(Math.random() * keys.length);
+        this.question_GeographyRegistry.forEach((value: Question_Geography, key: string) => {
+            if(value.level === "Easy")
+                this.easy.set(value.id, value);
+            if(value.level === "Medium")
+                this.medium.set(value.id, value);
+            if(value.level === "Hard")
+                this.hard.set(value.id, value);
+        });
 
-        let nums : number[] = new Array;
-        if(keys.length>=3 && this.tmp.size<3){
-            var i = 0;
-            for (i = 0; i<3; i++){
-                let n: number = Math.floor(Math.random() * keys.length);
-                //if(!nums.includes(n)){
-                    nums[i] = n;
-                //}
-            }
-            console.log(nums);
-            let val: Question_Geography | undefined = this.question_GeographyRegistry.get(keys[nums[0]]);
-            this.tmp.set(keys[nums[0]],val!);
-            val = this.question_GeographyRegistry.get(keys[nums[1]]);
-            this.tmp.set(keys[nums[1]],val!);
-            val = this.question_GeographyRegistry.get(keys[nums[2]]);
-            this.tmp.set(keys[nums[2]],val!);
+        let ekeys: string[] = new Array;
+        ekeys = Array.from(this.easy.keys());
+        let ne: number = Math.floor(Math.random() * ekeys.length);
+        this.question_GeographyEasy = this.easy.get(ekeys[ne]);
 
-        }
-        return Array.from(this.tmp.values());*/
-        return Array.from(this.question_GeographyRegistry.values());
+        let mkeys: string[] = new Array;
+        mkeys = Array.from(this.medium.keys());
+        let nm: number = Math.floor(Math.random() * mkeys.length);
+        this.question_GeographyMedium = this.medium.get(mkeys[nm]);
+
+        let hkeys: string[] = new Array;
+        hkeys = Array.from(this.hard.keys());
+        let nh: number = Math.floor(Math.random() * hkeys.length);
+        this.question_GeographyHard = this.hard.get(hkeys[nh]);
+    }
+
+    get questions_GeographyConfirmed() {
+        return Array.from(this.confirmed.values());  
+    }
+
+    get questions_GeographyNotConfirmed() {
+        return Array.from(this.not_confirmed.values());  
     }
 
     private setQuestion_Geography = (question: Question_Geography) => {
@@ -73,8 +87,8 @@ export default class Question_GeographyStore {
         this.selectedQuestion_Geography = undefined;
     }
 
-    openForm = (id?: string) => {
-        id ? this.selectQuestion_Geography : this.cancelSelectedQuestion_Geography();
+    openForm = (id?:string) => {
+        id ? this.selectQuestion_Geography(id) : this.cancelSelectedQuestion_Geography();
         this.editMode = true;
     }
 
@@ -82,11 +96,41 @@ export default class Question_GeographyStore {
         this.editMode = false;
     }
 
+    confirmQuestion = async (id: string) => {
+        this.loading = true;
+        try {
+            let question = this.question_GeographyRegistry.get(id);
+            if(question){
+                question.confirmed = 'true';
+                await agent.QuestionGeography.update(question);
+                runInAction(() => {
+                    if (question) {
+                        this.not_confirmed.delete(question.id);
+                        this.confirmed.set(question.id,question);
+                        let updatedQuestion_Geography = {...this.getQuestion_Geography(question.id), ...question}
+                        this.question_GeographyRegistry.set(question.id, updatedQuestion_Geography as Question_Geography);
+                        this.selectedQuestion_Geography = updatedQuestion_Geography as Question_Geography;
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
+        }
+        this.loading = false;
+    }
+
     loadQuestions_Geography = async () => {
         this.setLoadingInitial
         try {
             const questions = await agent.QuestionGeography.list();
             questions.forEach(question => {
+                if(question.confirmed == 'true')
+                    this.confirmed.set(question.id, question);
+                else
+                    this.not_confirmed.set(question.id, question);
                 this.setQuestion_Geography(question);
             })
             this.setLoadingInitial(false);
@@ -94,6 +138,7 @@ export default class Question_GeographyStore {
             console.log(error);
             this.setLoadingInitial(false);
         }
+        this.questions_Geography();
     }
 
     loadQuestion_Geography = async (id: string) => {
@@ -118,16 +163,18 @@ export default class Question_GeographyStore {
 
     createQuestion_Geography = async (question: Question_GeographyFormValues) => {
         try {
+            question.confirmed = 'false'
+            question.id = uuid();
             await agent.QuestionGeography.create(question);
-            const newQeustion = new Question_Geography(question);
-            newQeustion.id = uuid();
-            this.setQuestion_Geography(newQeustion);
-            this.editMode = false;
-            this.closeForm();
-            runInAction(() => this.selectedQuestion_Geography = newQeustion);
+            runInAction(() => {
+                this.selectedQuestion_Geography = question;
+                this.not_confirmed.set(question.id,question);
+                this.setQuestion_Geography(question);
+            });
         } catch (error) {
             console.log(error);
         }
+        this.closeForm();
     }
 
     updateQuestion_Geography = async (question: Question_Geography) => {
@@ -140,6 +187,10 @@ export default class Question_GeographyStore {
                         let updatedQuestion_Geography = {...this.getQuestion_Geography(question.id), ...question}
                         this.question_GeographyRegistry.set(question.id, updatedQuestion_Geography as Question_Geography);
                         this.selectedQuestion_Geography = updatedQuestion_Geography as Question_Geography;
+                        if(updatedQuestion_Geography.confirmed == 'true')
+                            this.confirmed.set(question.id, updatedQuestion_Geography);
+                        else
+                            this.not_confirmed.set(question.id, updatedQuestion_Geography);
                     }
                 })
             })
@@ -149,6 +200,7 @@ export default class Question_GeographyStore {
                 this.setLoadingInitial(false);
             })
         }
+        this.closeForm();
     }
 
     deleteQuestion_Geography = async (id: string) => {
@@ -156,8 +208,11 @@ export default class Question_GeographyStore {
         try {
             await agent.QuestionGeography.delete(id);
             runInAction(() => {
+                if(this.confirmed.has(id))
+                    this.confirmed.delete(id);
+                else if(this.not_confirmed.has(id))
+                    this.not_confirmed.delete(id);
                 this.question_GeographyRegistry.delete(id);
-                this.tmp.delete(id);
                 this.loading = false;
             })
         } catch (error) {

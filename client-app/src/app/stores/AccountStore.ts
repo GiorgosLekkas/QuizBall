@@ -3,10 +3,10 @@ import { Account, AccountFormValues } from "../models/Account";
 import agent from "../api/agent";
 import { store } from "./store";
 import { router } from "../router/Routes";
+import {v4 as uuid} from 'uuid';
 
-export default class UserStore {
+export default class AccountStrore {
     user: Account | null = null;
-    accounts: Account[] = [];
     selectedUsers: Account | undefined = undefined;
     accountRegistry = new Map<string, Account>();
     editMode = false;
@@ -21,8 +21,8 @@ export default class UserStore {
         return !!this.user;
     }
 
-    /*get getAccounts() {
-        return Array(this.accounts).values();
+    /*private getAccount = (id: string) => {
+        return this.accountRegistry.get(id);
     }
 
     loadAccounts = async ()  => {
@@ -48,10 +48,10 @@ export default class UserStore {
 
     loadAccounts = async () => {
         try {
-            const accounts = await agent.Account.list()
+            const accounts = await agent.Accounts.list()
             runInAction(() => {
                 accounts.forEach(account => {
-                    this.accountRegistry.set(account.userName, account);
+                    this.accountRegistry.set(account.id!, account);
                 })
             })
             this.setLoadingInitial(false);
@@ -63,13 +63,23 @@ export default class UserStore {
         }
     }
 
+    openForm = () => {
+        this.editMode = true;
+    }
+
+    closeForm = () => {
+        this.editMode = false;
+    }
+
     login = async (creds: AccountFormValues) => {
         try {
-            const user = await agent.Account.login(creds);
-            store.commonStore.setToken(user.token);
-            runInAction(() => this.user = user);
-            router.navigate('/historyquestions');
-            store.modalStore.closeModal();
+            const user = await agent.Accounts.login(creds);
+            if(user.token){
+                store.commonStore.setToken(user.token);
+                runInAction(() => this.user = user);
+                router.navigate('/users');
+                store.modalStore.closeModal();
+            }
         } catch (error) {
             throw (error);
         }
@@ -78,14 +88,61 @@ export default class UserStore {
     register = async (creds: AccountFormValues) => {
         try {
             creds.role = 'User'
-            const user = await agent.Account.register(creds);
-            store.commonStore.setToken(user.token);
-            runInAction(() => this.user = user);
-            router.navigate('/historyquestions');
-            store.modalStore.closeModal();
+            creds.id = uuid().toString();
+            const user = await agent.Accounts.register(creds);
+            if(user.token){
+                store.commonStore.setToken(user.token);
+                runInAction(() => {
+                    this.user = user;
+                    this.accountRegistry.set(user.id!,user);
+                });
+                router.navigate('/users');
+                store.modalStore.closeModal();
+            }
         } catch (error) {
             throw (error);
         }
+    }
+
+    updateAccount = async (account: Account) => {
+        this.loading = true;
+        try {
+            await agent.Accounts.update(account);
+            runInAction(() => {
+                if (account.id) {
+                    //let updatedAccount = {...this.getAccount(account.id), ...account}
+                    this.accountRegistry.set(account.id, account);
+                    //this.accountRegistry.set(account.id, updatedAccount as Account);
+                    //this.selectedAccount = updatedAccount as Account;
+                }
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
+        }
+        //this.closeForm();
+        this.loading = false;
+    }
+
+    deleteAccount = async (id: string) => {
+        this.loading =  true;
+        try {
+            await agent.Accounts.delete(id);
+            if(this.user?.userName === this.accountRegistry.get(id)?.userName)
+                this.logout();
+            runInAction(() => {
+                this.accountRegistry.delete(id);
+                this.loading = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
+        this.loading = false;
     }
 
     logout = () => {
@@ -96,7 +153,7 @@ export default class UserStore {
 
     getUser = async () => {
         try {
-            const user = await agent.Account.current();
+            const user = await agent.Accounts.current();
             runInAction(() => this.user = user);
         } catch (error) {
             console.log(error)

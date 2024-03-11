@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Update : Migration
+    public partial class Update0 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,8 +50,9 @@ namespace Persistence.Migrations
                     Question = table.Column<string>(type: "TEXT", nullable: true),
                     Answer1 = table.Column<string>(type: "TEXT", nullable: true),
                     Answer2 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnser = table.Column<string>(type: "TEXT", nullable: true),
-                    Level = table.Column<string>(type: "TEXT", nullable: true)
+                    CorrectAnswer = table.Column<string>(type: "TEXT", nullable: true),
+                    Level = table.Column<string>(type: "TEXT", nullable: true),
+                    Confirmed = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,8 +67,9 @@ namespace Persistence.Migrations
                     Question = table.Column<string>(type: "TEXT", nullable: true),
                     Answer1 = table.Column<string>(type: "TEXT", nullable: true),
                     Answer2 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnser = table.Column<string>(type: "TEXT", nullable: true),
-                    Level = table.Column<string>(type: "TEXT", nullable: true)
+                    CorrectAnswer = table.Column<string>(type: "TEXT", nullable: true),
+                    Level = table.Column<string>(type: "TEXT", nullable: true),
+                    Confirmed = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

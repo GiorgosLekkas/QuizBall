@@ -1,18 +1,31 @@
 import { Button, Grid, GridColumn, GridRow, Header, Item, Segment, Image } from "semantic-ui-react";
-import { useStore } from "../../../app/stores/store";
+import { useStore } from "../../../../app/stores/store";
 import { SyntheticEvent, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import Question_GeographyForm from "../from/Question_GeographyForm";
 
-export default observer(function QuestionGeographyList() {
+export default observer(function Question_GeographyListConfirmed() { 
 
     const [target, setTarget] = useState('');
-    const {questionGeographyStore } = useStore();
-    const {questions_Geography,deleteQuestion_Geography, loading} = questionGeographyStore;
+    const [target1, setTarget1] = useState('');
+    const {questionGeographyStore, modalStore } = useStore();
+    const {questions_GeographyNotConfirmed,deleteQuestion_Geography, openForm, loading} = questionGeographyStore;
 
     function handleQuestion_GeographyDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name);
         deleteQuestion_Geography(id);
+    }
+
+    function handleConfirmQuestion_Geography(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+        setTarget1(e.currentTarget.name);
+        questionGeographyStore.confirmQuestion(id);
+    }
+
+    function handleQuestion_GeographyUpdate(id: string) {
+        questionGeographyStore.selectQuestion_Geography(id);
+        openForm(id);
+        modalStore.openModal(<Question_GeographyForm origin={"edit"} />)
     }
 
     return (
@@ -23,7 +36,7 @@ export default observer(function QuestionGeographyList() {
                 Geography Questions
             </Header>
             <Item.Group divided>
-                {questions_Geography.map(q_geography => (
+                {questions_GeographyNotConfirmed.map(q_geography => (
                     <Item key = {q_geography.id} >
                         <Item.Content>
                             <Item.Header as = 'a'>{q_geography.question}</Item.Header>
@@ -46,7 +59,7 @@ export default observer(function QuestionGeographyList() {
                                 </GridRow>
                                 <GridRow>
                                     <GridColumn><div>Correct Answer:</div> </GridColumn>
-                                    <GridColumn><div>{q_geography.correctAnser}</div> </GridColumn>
+                                    <GridColumn><div>{q_geography.correctAnswer}</div> </GridColumn>
                                 </GridRow>
                             </Grid>
                             <Item.Extra>
@@ -59,15 +72,20 @@ export default observer(function QuestionGeographyList() {
                                     icon = 'delete'
                                 />
                                 <Button
-                                    onClick = { () => questionGeographyStore.selectQuestion_Geography(q_geography.id)} 
-                                    as = {Link} to = {`/manage/${q_geography.id}`} 
-                                    floated = 'right' color = 'teal'
+                                    name = {q_geography.id}
+                                    onClick = { () => handleQuestion_GeographyUpdate(q_geography.id) } 
+                                    as = {Link} 
+                                    to = {`/questions`} 
+                                    floated = 'right' 
+                                    color = 'teal'
                                     icon = 'edit'
                                 />
                                 <Button
-                                    //onClick = { () => questionGeographyStore.selectQuestion_Geography(q_geography.id)} 
-                                    //as = {Link} to = {`/manage/${q_geography.id}`} 
-                                    floated = 'right' color = 'green' textAlign = 'center'
+                                    name = {q_geography.id}
+                                    loading = {loading && target1 === q_geography.id}
+                                    onClick = { (e) => handleConfirmQuestion_Geography(e, q_geography.id)} 
+                                    floated = 'right' 
+                                    color = 'green'
                                     icon = 'check'
                                 />
                             </Item.Extra>

@@ -1,10 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { HistoryQuestion } from '../models/HistoryQuestion';
 import { Account, AccountFormValues } from '../models/Account';
 import { store } from '../stores/store';
 import { router } from '../router/Routes';
 import { toast } from 'react-toastify';
 import { Question_Geography } from '../models/Question_Geography';
+import { Question_History } from '../models/Question_History';
 
 const sleep = (delay: number) => {
     return new Promise ((resolve) => {
@@ -68,11 +68,11 @@ const requests = {
     del: <T>(url: string) => axios.delete<T>(url).then(responseBody)
 }
 
-const HistoryQuestions = {
-    list: () => requests.get<HistoryQuestion[]>(`/HistoryQuestion`),
-    details: (id: string) => requests.get<HistoryQuestion>(`/HistoryQuestion/${id}`),
-    create: (HistoryQuestion: HistoryQuestion) => requests.post<void>(`/HistoryQuestion`, HistoryQuestion),
-    update: (HistoryQuestion: HistoryQuestion) => requests.put<void>(`/HistoryQuestion/${HistoryQuestion.id}`, HistoryQuestion),
+const QuestionHistory = {
+    list: () => requests.get<Question_History[]>(`/HistoryQuestion`),
+    details: (id: string) => requests.get<Question_History>(`/HistoryQuestions/${id}`),
+    create: (Question_History: Question_History) => requests.post<void>(`/HistoryQuestion`, Question_History),
+    update: (Question_History: Question_History) => requests.put<void>(`/HistoryQuestion/${Question_History.id}`, Question_History),
     delete: (id: string) => requests.del<void>(`/HistoryQuestion/${id}`)
 }
 
@@ -84,18 +84,18 @@ const QuestionGeography = {
     delete: (id: string) => requests.del<void>(`/Question_Geography/${id}`)
 }
 
-const Account = {
-    //current: () => requests.get<Account>('/account'),
+const Accounts = {
     current: () => requests.get<Account>(`/account`),
     list: () => requests.get<Account[]>('/account/all'),
     login: (user: AccountFormValues) => requests.post<Account>('/account/login', user),
-    register: (user: AccountFormValues) => requests.post<Account>('/account/register', user)
-    
+    register: (user: AccountFormValues) => requests.post<Account>('/account/register', user),
+    update: (user: AccountFormValues) => requests.put<void>(`/account/${user.id}`, user),
+    delete: (id: string) => requests.del<void>(`/account/${id}`)
 }
 
 const agent = {
-    HistoryQuestions,
-    Account,
+    QuestionHistory,
+    Accounts,
     QuestionGeography
 }
 

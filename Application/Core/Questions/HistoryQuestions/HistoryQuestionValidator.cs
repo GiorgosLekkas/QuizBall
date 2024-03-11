@@ -7,7 +7,7 @@ namespace Application.Questions {
             RuleFor(x => x.Question).NotEmpty();
             RuleFor(x => x.Answer1).NotEmpty();
             RuleFor(x => x.Answer2).NotEmpty();
-            RuleFor(x => x.CorrectAnser).NotEmpty();
+            RuleFor(x => x.CorrectAnswer).NotEmpty();
             RuleFor(x => x.Level).NotEmpty();
         }
     }

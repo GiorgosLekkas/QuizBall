@@ -3,7 +3,7 @@ export interface IHistoryQuestion {
     question: string
     answer1: string
     answer2: string
-    correctAnser: string
+    correctAnswer: string
     level: string
 }
 
@@ -13,7 +13,7 @@ export class HistoryQuestion implements IHistoryQuestion{
         this.question = init.question!
         this.answer1 = init.answer1!
         this.answer2 = init.answer2!
-        this.correctAnser = init.correctAnser!
+        this.correctAnswer = init.correctAnswer!
         this.level = init.level!
     }
 
@@ -21,26 +21,26 @@ export class HistoryQuestion implements IHistoryQuestion{
     question: string
     answer1: string
     answer2: string
-    correctAnser: string
+    correctAnswer: string
     level: string
 }
 
 export class HistoryQuestionFormValues {
-  id: string = '';
-  question: string = '';
-  answer1: string = '';
-  answer2: string = '';
-  correctAnser: string = '';
-  level: string = '';
+    id: string = '';
+    question: string = '';
+    answer1: string = '';
+    answer2: string = '';
+    correctAnswer: string = '';
+    level: string = '';
 
-  constructor(question?: HistoryQuestionFormValues){
-    if(question) {
-        this.id = question.id;
-        this.question = question.question;
-        this.answer1 = question.answer1;
-        this.answer2 = question.answer2;
-        this.correctAnser = question.correctAnser;
-        this.level = question.level;
+    constructor(question?: HistoryQuestionFormValues){
+        if(question) {
+            this.id = question.id;
+            this.question = question.question;
+            this.answer1 = question.answer1;
+            this.answer2 = question.answer2;
+            this.correctAnswer = question.correctAnswer;
+            this.level = question.level;
+        }
     }
-}
 }

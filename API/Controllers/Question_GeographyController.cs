@@ -26,6 +26,8 @@ namespace API.Controllers {
         [HttpPut("{id}")]
         public async Task<IActionResult> EditQuestionGeography(Guid id, QuestionGeography geo_question) {
             geo_question.Id = id;
+            Console.WriteLine(geo_question.Id);
+            Console.WriteLine(geo_question.Level);
             await Mediator.Send(new Edit.Command{QuestionGeography = geo_question});
             return Ok();
         }

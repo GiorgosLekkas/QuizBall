@@ -1,18 +1,22 @@
 import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { Button, Header, Segment } from "semantic-ui-react";
-import MyTextInput from "../../../app/common/form/MyTextInput";
-import { useStore } from "../../../app/stores/store";
+import MyTextInput from "../../../../app/common/form/MyTextInput";
+import { useStore } from "../../../../app/stores/store";
 import * as Yup from 'yup';
-import MySelectInput from "../../../app/common/form/MySelectInput";
-import MyTextArea from "../../../app/common/form/MyTextArea";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import MySelectInput from "../../../../app/common/form/MySelectInput";
+import MyTextArea from "../../../../app/common/form/MyTextArea";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Question_Geography } from "../../../app/models/Question_Geography";
-import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { Question_Geography } from "../../../../app/models/Question_Geography";
+import LoadingComponent from "../../../../app/layout/LoadingComponent";
 import {v4 as uuid} from 'uuid';
 
-export default observer(function Question_GeographyForm() {
+interface Props {
+    origin?: string
+}
+
+export default observer(function Question_GeographyForm({origin}:Props) {
 
     const levelOptions = [
         {text: 'Easy', value: 'Easy'},
@@ -20,11 +24,11 @@ export default observer(function Question_GeographyForm() {
         {text: 'Hard', value: 'Hard'},
     ]
 
-    const {questionGeographyStore} = useStore();
+    const {questionGeographyStore, modalStore} = useStore();
 
-    const {createQuestion_Geography, updateQuestion_Geography, loadQuestion_Geography, loadingInitial} = questionGeographyStore;
+    const {createQuestion_Geography, updateQuestion_Geography, loadQuestion_Geography, closeForm, loadingInitial} = questionGeographyStore;
 
-    const {id} = useParams();
+    const {closeModal} = modalStore;
 
     const navigate = useNavigate();
 
@@ -33,22 +37,28 @@ export default observer(function Question_GeographyForm() {
         question: '',
         answer1: '',
         answer2: '',
-        correctAnser: '',
+        correctAnswer: '',
         level: '',
+        confirmed: ''
     });
 
     const validationSchema = Yup.object({
         question: Yup.string().required('Question is required'),
         answer1: Yup.string().required('Answer 1 is required'),
         answer2: Yup.string().required('Answer 2 is required'), 
-        correctAnser: Yup.string().required('Correct Answer is required'),
+        correctAnswer: Yup.string().required('Correct Answer is required'),
         level: Yup.string().required('Level is required'),
     })
 
     useEffect(() => {
-        if (id)
-            loadQuestion_Geography(id).then(question_Geography => setQuestion(question_Geography!))
-    }, [id, loadQuestion_Geography]);
+        if(origin === 'edit'){
+            if (questionGeographyStore.selectedQuestion_Geography != undefined){
+                let id = questionGeographyStore.selectedQuestion_Geography!.id;
+                if(id && questionGeographyStore.editMode == true)
+                    loadQuestion_Geography(id).then(question_Geography => setQuestion(question_Geography!))
+            }
+        }
+    }, [loadQuestion_Geography]);
 
     function handleFormSubmit(question: Question_Geography) {
         if (!question_Geography.id) {
@@ -56,11 +66,17 @@ export default observer(function Question_GeographyForm() {
                 ...question,
                 id: uuid()
             };
-            createQuestion_Geography(newQuestion_Geography).then(() => navigate(`/historyquestions`));
-            
+            createQuestion_Geography(newQuestion_Geography).then(() => navigate(`/questions`));
         } else {
-            updateQuestion_Geography(question).then(() => navigate(`/historyquestions`));
+            updateQuestion_Geography(question).then(() => navigate(`/questions`));
         }
+        closeModal();
+        closeForm();
+    }
+
+    function handleFormCancel() {
+        closeForm();
+        closeModal();
     }
 
     if (loadingInitial)
@@ -68,14 +84,14 @@ export default observer(function Question_GeographyForm() {
 
     return (
         <Segment clearing>
-            <Formik validationSchema = {validationSchema} enableReinitialize initialValues = {question_Geography} onSubmit = {values => handleFormSubmit(values)} >
+            <Formik validationSchema = {validationSchema} enableReinitialize initialValues = {question_Geography} onSubmit = {values => handleFormSubmit(values)} > 
                 {({handleSubmit, isValid, isSubmitting, dirty}) => (
                     <Form className = "ui form" onSubmit = {handleSubmit} autoComplete = 'off'>
                         <Header as = 'h2' content = 'Geography Question' color = 'teal' textAlign = 'center' />
                         <MyTextArea rows = {3} placeholder = 'Question' name = 'question'/>
                         <MyTextInput name='answer1' placeholder = 'Answer 1'  />
                         <MyTextInput placeholder = 'Answer 2' name = 'answer2'/>
-                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnser'/>
+                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer'/>
                         <MySelectInput options = {levelOptions} placeholder = 'Level' name = 'level'/>
                         <Button 
                             disabled = {isSubmitting || !isValid || !dirty } 
@@ -83,7 +99,7 @@ export default observer(function Question_GeographyForm() {
                             positive type = 'submit'
                             content = 'Submit'
                         />
-                        <Button as = {Link} to = '/historyquestions' floated = 'right' type = 'submit' content = 'Cancel'/>
+                        <Button onClick = {handleFormCancel} to = '/questions' floated = 'right' type = 'submit' content = 'Cancel'/>
                     </Form>
                 )}
             </Formik>

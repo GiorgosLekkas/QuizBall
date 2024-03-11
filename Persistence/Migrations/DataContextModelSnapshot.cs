@@ -99,7 +99,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Answer2")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CorrectAnser")
+                    b.Property<string>("Confirmed")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorrectAnswer")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Level")
@@ -125,7 +128,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Answer2")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CorrectAnser")
+                    b.Property<string>("Confirmed")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorrectAnswer")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Level")

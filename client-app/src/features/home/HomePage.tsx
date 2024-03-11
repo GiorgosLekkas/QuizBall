@@ -14,12 +14,12 @@ export default observer(function HomePage() {
             <Container text >
                 <Header as = 'h1' inverted >
                     <Image size = 'massive' src = '/assets/logo.png' alt = 'logo' style = {{marginBottom: 12}} />
-                    Reactivites
+                    QuizBall
                 </Header>
                 {accountStore.isLoggedIn ? (
                     <>
                         <Header as = 'h2' inverted content = 'Welcome to QuizBall'></Header>
-                        <Button as = {Link} to = '/historyquestions' size = 'huge' inverted >Go to QuizBall</Button>
+                        <Button as = {Link} to = '/questions' size = 'huge' inverted >Go to QuizBall</Button>
                     </>
                 ) : (
                     <>

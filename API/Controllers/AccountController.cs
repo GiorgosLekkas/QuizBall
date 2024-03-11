@@ -3,7 +3,6 @@ using API.DTOs;
 using API.Services;
 using Application.Core.Accounts;
 using Domain;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +31,7 @@ namespace API.Controllers {
 
             if (result) {
                 return new UserDto { 
+                    Id = user.Id,
                     UserName = user.UserName, 
                     Token = tokenService.CreateToken(user),
                     FirstName = user.FirstName,
@@ -60,6 +60,7 @@ namespace API.Controllers {
             }
 
             var user = new Account {
+                Id = registerDto.Id,
                 UserName = registerDto.Username,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
@@ -91,9 +92,35 @@ namespace API.Controllers {
             return await Mediator.Send(new List.Query());
         }
 
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditAccount(string id, Account account) {
+            var user = await userManager.FindByIdAsync(id);
+            //user.Id = id;
+            user.Email = account.Email;
+            user.UserName = account.UserName;
+            user.Password = account.Password;
+            user.FirstName = user.FirstName;
+            user.LastName = account.LastName;
+            user.Gender = account.Gender;
+            user.Role = account.Role;
+            var result = await userManager.UpdateAsync(user);
+            if(result.Succeeded)
+                return Ok();
+            return BadRequest(result.Errors);
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAccount(string id) {
+            await Mediator.Send(new Delete.Command{Id = id});
+            return Ok();
+        }
+
         private UserDto CreateUserObject(Account user) {
             return new UserDto {
                 Token = tokenService.CreateToken(user),
+                Id = user.Id,
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -103,6 +130,5 @@ namespace API.Controllers {
                 Gender = user.Gender
             };
         }
-
     }
 }

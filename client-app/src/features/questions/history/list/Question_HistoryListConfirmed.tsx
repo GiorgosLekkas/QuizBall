@@ -1,30 +1,40 @@
 import { Button, Grid, GridColumn, GridRow, Header, Item, Segment, Image } from "semantic-ui-react";
-import { useStore } from "../../../app/stores/store";
+import { useStore } from "../../../../app/stores/store";
 import { SyntheticEvent, useState } from "react";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
+import Question_HistoryForm from "../from/Question_HistoryForm";
 
-export default observer(function HistoryQuestionList() {
+export default observer(function Question_HistoryListConfirmed() { 
 
     const [target, setTarget] = useState('');
-    const {historyQuestionStore } = useStore();
-    const {historyquestions,deleteHistoryQuestion, loading} = historyQuestionStore;
 
-    function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+    const {questionHistoryStore, modalStore } = useStore();
+    const {questions_HistoryConfirmed,deleteQuestion_History, openForm, loading} = questionHistoryStore;
+
+    function handleQuestion_HistoryDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
         setTarget(e.currentTarget.name);
-        deleteHistoryQuestion(id);
+        deleteQuestion_History(id);
+    }
+
+    function handleQuestion_HistoryUpdate(id: string) {
+        questionHistoryStore.selectQuestion_History(id);
+        openForm();
+        modalStore.openModal(<Question_HistoryForm origin={"edit"} />)
     }
 
     return (
         <Segment>
+            
             <Header as = 'h2'>
                 <Image size = 'small'><img src = "/assets/Questions_Logo/history.png" alt = "logo" style = {{marginRight: '10px',marginTop:'-5px'}}></img></Image>
                 History Questions
             </Header>
             <Item.Group divided>
-                {historyquestions.map(hquestion => (
-                    <Item key = {hquestion.id} >
+                {questions_HistoryConfirmed.map(q_history => (
+                    <Item key = {q_history.id} >
                         <Item.Content>
-                            <Item.Header as = 'a'>{hquestion.question}</Item.Header>
+                            <Item.Header as = 'a'>{q_history.question}</Item.Header>
                             <Grid relaxed columns='2'>
                                 <GridRow>
                                     <GridColumn><div></div></GridColumn>
@@ -32,38 +42,38 @@ export default observer(function HistoryQuestionList() {
                                 </GridRow>
                                 <GridRow>
                                     <GridColumn><div>Level:</div> </GridColumn>
-                                    <GridColumn><div>{hquestion.level}</div> </GridColumn>
+                                    <GridColumn><div>{q_history.level}</div> </GridColumn>
                                 </GridRow>
                                 <GridRow>
                                     <GridColumn><div>Answer 1:</div></GridColumn>
-                                    <GridColumn><div>{hquestion.answer1}</div></GridColumn>
+                                    <GridColumn><div>{q_history.answer1}</div></GridColumn>
                                 </GridRow>
                                 <GridRow>
                                     <GridColumn><div>Answer 2:</div></GridColumn>
-                                    <GridColumn><div>{hquestion.answer2}</div></GridColumn>
+                                    <GridColumn><div>{q_history.answer2}</div></GridColumn>
                                 </GridRow>
                                 <GridRow>
                                     <GridColumn><div>Correct Answer:</div> </GridColumn>
-                                    <GridColumn><div>{hquestion.correctAnser}</div> </GridColumn>
+                                    <GridColumn><div>{q_history.correctAnswer}</div> </GridColumn>
                                 </GridRow>
                             </Grid>
                             <Item.Extra>
                                 <Button
-                                    name = {hquestion.id}
-                                    loading = {loading && target === hquestion.id}
-                                    onClick = { (e) => handleActivityDelete(e, hquestion.id)}
+                                    name = {q_history.id}
+                                    loading = {loading && target === q_history.id}
+                                    onClick = { (e) => handleQuestion_HistoryDelete(e, q_history.id)}
                                     floated = 'right'
-                                    icon = 'delete'
                                     color = 'red' 
+                                    icon = 'delete'
                                 />
-                                <Button 
-                                    onClick = { () => historyQuestionStore.selectHistoryQuestion(hquestion.id)} 
-                                    floated = 'right' icon = 'edit' color = 'teal' />
                                 <Button
-                                    //onClick = { () => questionGeographyStore.selectQuestion_Geography(q_geography.id)} 
-                                    //as = {Link} to = {`/manage/${q_geography.id}`} 
-                                    floated = 'right' color = 'green' textAlign = 'center'
-                                    icon = 'check'
+                                    name = {q_history.id}
+                                    onClick = { () => handleQuestion_HistoryUpdate(q_history.id) } 
+                                    as = {Link} 
+                                    to = {`/questions`} 
+                                    floated = 'right' 
+                                    color = 'teal'
+                                    icon = 'edit'
                                 />
                             </Item.Extra>
                         </Item.Content>
