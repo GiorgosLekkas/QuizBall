@@ -1,11 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import { Button, Container, Menu, Dropdown, Icon } from "semantic-ui-react";
+import {Container, Menu, Dropdown, Icon } from "semantic-ui-react";
 import { useStore } from "../stores/store";
-import Question_HistoryForm from "../../features/questions/history/from/Question_HistoryForm";
-import Question_GeographyForm from "../../features/questions/geography/from/Question_GeographyForm";
-import Game from "../../features/game/Game";
-import QuestionPopUp from "../../features/game/QuestionPopUp";
+import QuestionForm from "../../features/questions/form/QuestionForm";
 
 export default observer(function NavBar() {
 
@@ -29,18 +26,12 @@ export default observer(function NavBar() {
                     </>
                 )}
                 <Menu.Item as = {Link} to = '/game' name = 'Game' />
-                <Menu.Item>
-                    <Button as = {Link} to = '/questionpopup' positive content = 'question' />
-                </Menu.Item>
-                <Menu.Item position = 'right'>
-                    <Icon name='question' />
-                    <Dropdown pointing = 'top left' text = {"Submit Question"} >
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick = {() => modalStore.openModal(<Question_GeographyForm origin = {"create"}/>)} to = '/createQuestionGeography' positive content = 'Geography' className = 'createq' />
-                            <Dropdown.Item onClick = {() => modalStore.openModal(<Question_HistoryForm origin={"create"}/>)} to = '/createQuestionHistory' positive content = 'History' className = 'createq' />
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Menu.Item>
+                <Menu.Item 
+                    onClick = {() => modalStore.openModal(<QuestionForm origin = {"create"}/>)}
+                    to = '/createQuestion'
+                    positive
+                    content = "Submit Question"
+                />
                 <Menu.Item position = 'right'>
                     <Icon name='user' />
                     <Dropdown pointing = 'top left' text = {user?.userName} >

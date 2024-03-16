@@ -4,6 +4,7 @@ import AccountStore from "./AccountStore";
 import CommonStore from "./CommonStores";
 import Question_GeographyStore from "./Question_GeographyStore";
 import Question_HistoryStore from "./Question_HistoryStore";
+import QuestionStore from "./QuestionStore";
 
 interface Store {
     accountStore: AccountStore
@@ -11,6 +12,7 @@ interface Store {
     commonStore: CommonStore
     questionGeographyStore: Question_GeographyStore
     questionHistoryStore: Question_HistoryStore
+    questionStore: QuestionStore
 }
 
 export const store: Store = {
@@ -18,7 +20,8 @@ export const store: Store = {
     modalStore: new ModalStore(),
     commonStore: new CommonStore(),
     questionGeographyStore: new Question_GeographyStore(),
-    questionHistoryStore: new Question_HistoryStore()
+    questionHistoryStore: new Question_HistoryStore(),
+    questionStore: new QuestionStore()
 }
 
 export const StoreContext = createContext(store);

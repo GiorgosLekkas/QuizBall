@@ -7,10 +7,12 @@ import Question_HistoryListConfirmed from "../history/list/Question_HistoryListC
 import Question_GeographyListConfirmed from "../geography/list/Question_GeographyListConfirmed";
 import Question_GeographyListNotConfirmed from "../geography/list/Question_GeographyListNotConfirmed";
 import Question_HistoryListNotConfirmed from "../history/list/Question_HistoryListNotConfirmed";
+import QuestionListConfirmed from "../list/QuestionListConfirmed";
+import QuestionListNotConfirmed from "../list/QuestionListNotConfirmed";
 
 export default observer(function QuestionsDashboard(){
 
-    const {questionHistoryStore} = useStore();
+    const {questionHistoryStore, questionStore} = useStore();
     const {question_HistoryRegistry, loadQuestions_History} = questionHistoryStore;
 
     useEffect(() => {
@@ -26,6 +28,13 @@ export default observer(function QuestionsDashboard(){
             loadQuestions_Geography();
     }, [loadQuestions_Geography, question_GeographyRegistry.size])
 
+    const {questionRegistry, loadQuestions} = questionStore;
+
+    useEffect(() => {
+        if(questionRegistry.size <= 1) 
+            loadQuestions();
+    }, [loadQuestions, questionRegistry.size])
+
 
     if ( questionGeographyStore.loadingInitial) return <LoadingComponent content = 'Loading Activities...' />
 
@@ -33,12 +42,10 @@ export default observer(function QuestionsDashboard(){
         <>
             <Grid>
                 <Grid.Column width = '8'>
-                    <Question_HistoryListConfirmed />
-                    <Question_GeographyListConfirmed />
+                    <QuestionListConfirmed />
                 </Grid.Column>
                 <Grid.Column width = '8'>
-                    <Question_HistoryListNotConfirmed />
-                    <Question_GeographyListNotConfirmed />
+                    <QuestionListNotConfirmed />
                 </Grid.Column>
             </Grid>
         </>

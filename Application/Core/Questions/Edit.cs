@@ -3,10 +3,10 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Questions.Geography {
+namespace Application.Core.Questions {
     public class Edit {
         public class Command : IRequest {
-            public QuestionGeography QuestionGeography { get; set; }
+            public Question_Field Update_Question { get; set; }
         }
         public class Handler : IRequestHandler<Command> {
             private readonly DataContext context;
@@ -16,8 +16,10 @@ namespace Application.Questions.Geography {
                 this.mapper = mapper;
             }
             public async Task Handle(Command request, CancellationToken cancellationToken) {
-                var question = await context.Question_Geography.FindAsync(request.QuestionGeography.Id);
-                mapper.Map(request.QuestionGeography, question);
+                var question = await context.Questions.FindAsync(request.Update_Question.Id);
+
+                mapper.Map(request.Update_Question, question);
+
                 await context.SaveChangesAsync();
             }
         }

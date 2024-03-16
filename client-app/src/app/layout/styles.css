@@ -63,70 +63,73 @@ body{
   margin-left: -14px !important;
   margin-right: -14px !important;
   height: 45px !important;
-  text-align: left !important;
   color: #fff !important;
+  text-align: center !important;
+  padding-top: 7px!important;
+  font-size: 20px !important;
 }
 
-.h_geography {
+.h_Geography {
   background-image: linear-gradient(120deg, #57AFCE 61.5%, #2596BE 38.5%)!important;
 }
 
-.h_history {
+.h_History {
   background-image: linear-gradient(120deg, #F3D89F 61.5%, #EBC36C 38.5%)!important;
 }
 
-.h_top5 {
-  background-image: linear-gradient(120deg, #E8CF9A 61.5%, #DCB766 38.5%)!important;
+.h_Top5 {
+  background-image: linear-gradient(120deg, #8991EB 61.5%, #6873E5 38.5%)!important;
 }
 
-.h_gossip {
+.h_Gossip {
   background-image: linear-gradient(120deg, #FD9C6D 61.5%, #FB7839 38.5%)!important;
 }
 
-.h_guess_the_score {
+.h_GuessTheScore {
   background-image: linear-gradient(120deg, #667F68 61.5%, #48654A 38.5%)!important;
 }
 
-.h_guess_the_player {
+.h_GuessThePlayer {
   background-image: linear-gradient(120deg, #A04040 61.5%, #902020 38.5%)!important;
 }
 
-.h_logo_quiz {
+.h_LogoQuiz {
   background-image: linear-gradient(120deg, #3E5269 61.5%, #263D57 38.5%)!important;
 }
 
-.h_manager_id {
+.h_Managerid {
   background-image: linear-gradient(120deg, #9D98B7 61.5%, #7C759F 38.5%)!important;
 }
 
-.h_player_id {
+.h_Playerid {
   background-image: linear-gradient(120deg, #65B5BA 61.5%, #319CA2 38.5%)!important;
 }
 
-.h_who_is_missing {
+.h_WhoIsMissing {
   background-image: linear-gradient(120deg, #54C08A 61.5%, #15A85F 38.5%)!important;
 }
 
-.h_higher_lower {
+.h_HigherLower {
   background-image: linear-gradient(120deg, #FF708E 61.5%, #FF204F 38.5%)!important;
 }
 
-.h_find_the_stadium {
+.h_FindTheStadium {
   background-image: linear-gradient(120deg, #75777A 61.5%, #3D4144 38.5%)!important;
 }
 
-.h_find_player_by_photo {
+.h_FindPlayerByPhoto {
   background-image: linear-gradient(120deg, #8667A4 61.5%, #552980 38.5%)!important;
 }
 
-.h_fans_question {
+.h_FansQuestion {
   background-image: linear-gradient(120deg, #BE8F60 61.5%, #9E5710 38.5%)!important;
 }
 
 .iconq{
-  width: 38px!important;
-  height: 38px!important;
-  margin-left: 10px!important;
+  width: 70px!important;
+  height: 70px!important;
+  margin-left: -10px!important;
+  margin-top: -370px!important;
   margin-right: 10px!important;
 }
 
@@ -139,142 +142,201 @@ body{
   border-radius: 100% !important;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6) !important;
   color: #fff !important;
+  padding-top: 21px!important;
+  padding-left: 24px!important;
+  font-size: 23px !important;
 }
 
-.b_history {
+
+
+.b_History {
   background-image: linear-gradient( 135deg, #F2D899 0%, #EECC7E 33%, #EBC36C  66%) !important;
 }
 
-.b_geography {
+.b_History:hover {
+  background-image: linear-gradient( 135deg, #F3D89F 0%, #F3D89F 33%, #F3D89F  66%) !important;
+}
+
+.b_Geography {
   background-image: linear-gradient( 120deg, #63B4D1 0%, #63B4D1 33%, #2596BE  66%) !important;
 }
 
-.b_top5 {
-  background-image: linear-gradient( 135deg, #F2D899 0%, #EECC7E 33%, #D8AF55  66%) !important;
+.b_Geography:hover {
+  background-image: linear-gradient( 120deg, #57AFCE 0%, #57AFCE 33%, #57AFCE  66%) !important;
 }
 
-.b_gossip {
+.b_Top5 {
+  background-image: linear-gradient( 135deg, #BFC3F4 0%, #7E87E9 33%, #525FE1  66%) !important;
+}
+
+.b_Top5:hover {
+  background-image: linear-gradient( 135deg, #8991EB 0%, #8991EB 33%, #8991EB  66%) !important;
+}
+
+.b_Gossip {
   background-image: linear-gradient( 135deg, #FDB28E 0%, #FC874E 33%, #FA641C  66%) !important;
 }
 
-.b_guess_the_score {
+.b_Gossip:hover {
+  background-image: linear-gradient( 135deg, #FD9C6D 0%, #FD9C6D 33%, #FD9C6D  66%) !important;
+}
+
+.b_GuessTheScore {
   background-image: linear-gradient( 135deg, #859986 0%, #607A62 33%, #3B5A3D  66%) !important;
 }
 
-.b_guess_the_player {
+.b_GuessTheScore:hover {
+  background-image: linear-gradient( 135deg, #667F68 0%, #667F68 33%, #667F68  66%) !important;
+}
+
+.b_GuessThePlayer {
   background-image: linear-gradient( 135deg, #B87070 0%, #A04040 33%, #881010  66%) !important;
 }
 
-.b_logo_quiz {
+.b_GuessThePlayer:hover {
+  background-image: linear-gradient( 135deg, #A04040 0%, #A04040 33%, #A04040  66%) !important;
+}
+
+.b_LogoQuiz {
   background-image: linear-gradient( 135deg, #647587 0%, #364B63 33%, #0E2845  66%) !important;
 }
 
-.b_manager_id {
+.b_LogoQuiz:hover {
+  background-image: linear-gradient( 135deg, #3E5269 0%, #3E5269 33%, #3E5269  66%) !important;
+}
+
+.b_Managerid {
   background-image: linear-gradient( 135deg, #DFDDE7 0%, #9E99B7 33%, #7C759F  66%) !important;
 }
 
-.b_player_id {
+.b_Managerid:hover {
+  background-image: linear-gradient( 135deg, #9D98B7 0%, #9D98B7 33%, #9D98B7  66%) !important;
+}
+
+.b_Playerid {
   background-image: linear-gradient( 135deg, #CCE7E8 0%, #7FC2C6 33%, #319CA2  66%) !important;
 }
 
-.b_who_is_missing {
+.b_Playerid:hover {
+  background-image: linear-gradient( 135deg, #65B5BA 0%, #65B5BA 33%, #65B5BA  66%) !important;
+}
+
+.b_WhoIsMissing {
   background-image: linear-gradient( 135deg, #C1E8D5 0%, #63C695 33%, #15A85F  66%) !important;
 }
 
-.b_higher_lower {
+.b_WhoIsMissing:hover {
+  background-image: linear-gradient( 135deg, #54C08A 0%, #54C08A 33%, #54C08A  66%) !important;
+}
+
+.b_HigherLower {
   background-image: linear-gradient( 135deg, #FFE0E6 0%, #FF809A 33%, #FF0035  66%) !important;
 }
 
-.b_find_the_stadium {
+.b_HigherLower:hover {
+  background-image: linear-gradient( 135deg, #FF708E 0%, #FF708E 33%, #FF708E  66%) !important;
+}
+
+.b_FindTheStadium {
   background-image: linear-gradient( 135deg, #BABCBD 0%, #75777A 33%, #3D4144  66%) !important;
 }
 
-.b_find_player_by_photo {
+.b_FindTheStadium:hover {
+  background-image: linear-gradient( 135deg, #75777A 0%, #75777A 33%, #75777A  66%) !important;
+}
+
+.b_FindPlayerByPhoto {
   background-image: linear-gradient( 135deg, #CFC2DB 0%, #8667a4 33%, #3C0A6D  66%) !important;
 }
 
-.b_fans_question {
+.b_FindPlayerByPhoto:hover {
+  background-image: linear-gradient( 135deg, #8667A4 0%, #8667A4 33%, #8667A4  66%) !important;
+}
+
+.b_FansQuestion {
   background-image: linear-gradient( 135deg, #F2E9E0 0%, #B17840 33%, #9E5710  66%) !important;
 }
 
-.labelq{
-  text-align: center !important;
+.b_FansQuestion:hover {
+  background-image: linear-gradient( 135deg, #BE8F60 0%, #BE8F60 33%, #BE8F60  66%) !important;
+  transition-duration: 14s !important;
 }
 
 .segmentq{
   border: 1px solid!important;
   width: 300px!important;
   height: 180px !important;
-  border-radius: 2px;
+  border-radius: 2px!important;
   border-width: 2px!important;
+  margin-left: 25px !important;
 }
 
-.s_history{
+.s_History{
   background-image: linear-gradient( 120deg, #F9F0D5 50%, #F6E8C0 50%)!important;
   border-color: #EBC36C!important;
 }
 
-.s_geography{
+.s_Geography{
   background-image: linear-gradient( 120deg, #C9E5EF 50%, #92CBDF 50%)!important;
   border-color: #2596BE!important;
 }
 
-.s_top5{
-  background-image: linear-gradient( 120deg, #F6EBD5 50%, #F1E1C0 50%)!important;
-  border-color: #D8AF55!important;
+.s_Top5{
+  background-image: linear-gradient( 120deg, #D4D7F8 50%, #BFC3F4 50%)!important;
+  border-color: #525FE1!important;
 }
 
-.s_gossip{
+.s_Gossip{
   background-image: linear-gradient( 120deg, #FED9C7 50%, #FDB28E 50%)!important;
   border-color: #FA641C!important;
 }
 
-.s_guess_the_score {
+.s_GuessTheScore {
   background-image: linear-gradient( 120deg, #B6C2B7 50%, #9DAD9E 50%)!important;
   border-color: #3B5A3D!important;
 }
 
-.s_guess_the_player {
+.s_GuessThePlayer {
   background-image: linear-gradient( 120deg, #D0A0A0 50%, #B87070 50%)!important;
   border-color: #881010!important;
 }
 
-.s_logo_quiz {
+.s_LogoQuiz {
   background-image: linear-gradient( 120deg, #83909F 50%, #55677B 50%)!important;
   border-color: #0E2845!important;
 }
 
-.s_manager_id {
+.s_Managerid {
   background-image: linear-gradient( 120deg, #DFDDE7 50%, #B7B3C9 50%)!important;
   border-color: #7C759F!important;
 }
 
-.s_player_id {
+.s_Playerid {
   background-image: linear-gradient( 120deg, #CCE7E8 50%, #98CED1 50%)!important;
   border-color: #319CA2!important;
 }
 
-.s_who_is_missing {
+.s_WhoIsMissing {
   background-image: linear-gradient( 120deg, #C1E8D5 50%, #A2DDC0 50%)!important;
   border-color: #05a254!important;
 }
 
-.s_higher_lower {
+.s_HigherLower {
   background-image: linear-gradient( 120deg, #FFE0E6 50%, #FFC0CD 50%)!important;
   border-color: #FF0035!important;
 }
 
-.s_find_the_stadium {
+.s_FindTheStadium {
   background-image: linear-gradient( 120deg, #D6D7D8 50%, #C8C9CA 50%)!important;
   border-color: #343A40!important;
 }
 
-.s_find_player_by_photo {
+.s_FindPlayerByPhoto {
   background-image: linear-gradient( 120deg, #CFC2DB 50%, #B7A4C9 50%)!important;
   border-color: #491A77!important;
 }
 
-.s_fans_question {
+.s_FansQuestion {
   background-image: linear-gradient( 120deg, #F2E9E0 50%, #E5D2C0 50%)!important;
   border-color: #974B00!important;
 }

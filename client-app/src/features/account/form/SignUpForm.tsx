@@ -10,9 +10,9 @@ import ValidationError from "../../errors/ValidationError";
 export default observer(function RegsiterForm() {
 
     const genderOptions = [
-        {text: 'Male', value: 'male'},
-        {text: 'Female', value: 'female'},
-        {text: 'Other', value: 'other'},
+        {text: 'Male', value: 'Male'},
+        {text: 'Female', value: 'Female'},
+        {text: 'Other', value: 'Other'},
     ]
 
     const { accountStore } = useStore();

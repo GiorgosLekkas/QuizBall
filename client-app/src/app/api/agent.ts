@@ -5,6 +5,7 @@ import { router } from '../router/Routes';
 import { toast } from 'react-toastify';
 import { Question_Geography } from '../models/Question_Geography';
 import { Question_History } from '../models/Question_History';
+import { Question } from '../models/Question';
 
 const sleep = (delay: number) => {
     return new Promise ((resolve) => {
@@ -93,10 +94,19 @@ const Accounts = {
     delete: (id: string) => requests.del<void>(`/account/${id}`)
 }
 
+const Questions = {
+    list: () => requests.get<Question[]>(`/Question`),
+    details: (id: string) => requests.get<Question>(`/Question/${id}`),
+    create: (Question: Question) => requests.post<void>(`/Question`, Question),
+    update: (Question: Question) => requests.put<void>(`/Question/${Question.id}`, Question),
+    delete: (id: string) => requests.del<void>(`/Question/${id}`)
+}
+
 const agent = {
     QuestionHistory,
     Accounts,
-    QuestionGeography
+    QuestionGeography,
+    Questions
 }
 
 export default agent;

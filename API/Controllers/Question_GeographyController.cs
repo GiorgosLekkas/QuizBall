@@ -1,10 +1,8 @@
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Application.Questions.Geography;
-using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers {
-    [AllowAnonymous]
     public class Question_GeographyController : BaseApiController {
         [HttpGet]
         public async Task<ActionResult<List<QuestionGeography>>> GetQuestionGeography() {

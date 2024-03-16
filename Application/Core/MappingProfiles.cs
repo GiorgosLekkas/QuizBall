@@ -6,6 +6,7 @@ namespace Application.Core {
         public MappingProfiles(){
             CreateMap<HistoryQuestion, HistoryQuestion>();
             CreateMap<QuestionGeography, QuestionGeography>();
+            CreateMap<Question_Field, Question_Field>();
         }
     }
 }

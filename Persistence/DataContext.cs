@@ -7,5 +7,6 @@ namespace Persistence {
         public DbSet<HistoryQuestion> History_Question { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<QuestionGeography> Question_Geography { get; set; }
+        public DbSet<Question_Field> Questions { get; set; }
     }
 }
