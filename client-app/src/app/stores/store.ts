@@ -5,6 +5,7 @@ import CommonStore from "./CommonStores";
 import Question_GeographyStore from "./Question_GeographyStore";
 import Question_HistoryStore from "./Question_HistoryStore";
 import QuestionStore from "./QuestionStore";
+import ProfileStore from "./ProfileStore";
 
 interface Store {
     accountStore: AccountStore
@@ -13,6 +14,7 @@ interface Store {
     questionGeographyStore: Question_GeographyStore
     questionHistoryStore: Question_HistoryStore
     questionStore: QuestionStore
+    profileStore: ProfileStore
 }
 
 export const store: Store = {
@@ -21,7 +23,8 @@ export const store: Store = {
     commonStore: new CommonStore(),
     questionGeographyStore: new Question_GeographyStore(),
     questionHistoryStore: new Question_HistoryStore(),
-    questionStore: new QuestionStore()
+    questionStore: new QuestionStore(),
+    profileStore: new ProfileStore()
 }
 
 export const StoreContext = createContext(store);

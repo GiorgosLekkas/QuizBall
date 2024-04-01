@@ -1,4 +1,4 @@
-/*export interface IAccount {
+export interface IAccount {
   id?: string
   email?: string
   userName?: string
@@ -66,27 +66,28 @@ export class AccountFormValues {
         this.role = user.role;
       }
   }
-}*/
+}
 
-export interface Account {
-  id?: string
-  email?: string
-  userName?: string
-  password?: string
-  firstName?: string
-  lastName?: string
-  gender?: string
-  role?: string
-  token?: string
+/*export interface Account {
+  id: string
+  email: string
+  password: string
+  userName: string
+  firstName: string
+  lastName: string
+  gender: string
+  role: string
+  token: string
 }
 
 export interface AccountFormValues {
-  id?: string
-  email?: string
-  userName?: string
-  password?: string
-  firstName?: string
-  lastName?: string
-  gender?: string
-  role?: string
-}
+  id: string
+  email: string
+  password: string
+  userName: string
+  firstName: string
+  lastName: string
+  gender: string
+  role: string
+  token: string
+}*/

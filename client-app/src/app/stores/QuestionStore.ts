@@ -1,7 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Question, QuestionFormValues } from "../models/Question";
-import {v4 as uuid} from 'uuid';
+//import {v4 as uuid} from 'uuid';
+import { Author } from "../models/Authror";
+import { store } from "./store";
 
 export default class QuestionStore {
 
@@ -93,32 +95,6 @@ export default class QuestionStore {
         this.editMode = false;
     }
 
-    confirmQuestion = async (id: string) => {
-        this.loading = true;
-        try {
-            let question = this.questionRegistry.get(id);
-            if(question){
-                question.confirmed = 'true';
-                await agent.Questions.update(question);
-                runInAction(() => {
-                    if (question) {
-                        this.not_confirmed.delete(question.id);
-                        this.confirmed.set(question.id,question);
-                        let updatedQuestion = {...this.getQuestion(question.id), ...question}
-                        this.questionRegistry.set(question.id, updatedQuestion as Question);
-                        this.selectedQuestion = updatedQuestion as Question;
-                    }
-                })
-            }
-        } catch (error) {
-            console.log(error);
-            runInAction(() => {
-                this.setLoadingInitial(false);
-            })
-        }
-        this.loading = false;
-    }
-
     loadQuestions = async () => {
         this.setLoadingInitial
         try {
@@ -129,6 +105,7 @@ export default class QuestionStore {
                 else
                     this.not_confirmed.set(question.id, question);
                 this.setQuestion(question);
+                this.setActivity(question);
             })
             this.setLoadingInitial(false);
         } catch (error) {
@@ -157,15 +134,40 @@ export default class QuestionStore {
         }
     }
 
+    private setActivity = (question: Question) => {
+        this.questionRegistry.set(question.id, question);
+        if(question.confirmed == 'true') {
+            this.confirmed.set(question.id, question);
+        }
+        else {
+            this.not_confirmed.set(question.id, question);
+        }   
+    }
+
     createQuestion = async (question: QuestionFormValues) => {
+        question.confirmed = 'false'
+        if(question.category === "Top5"){
+            question.answer1 = "-";
+            question.answer2 = "-";
+        } else {
+            question.correctAnswer2 = "-";
+            question.correctAnswer3 = "-";
+            question.correctAnswer4 = "-";
+            question.correctAnswer5 = "-";
+        }
+        store.accountStore.getUser();
+        const user = store.accountStore!.user;
         try {
-            question.confirmed = 'false'
-            question.id = uuid();
+            //question.id = uuid();
+            question.authorName = user?.userName;
             await agent.Questions.create(question);
+            const newQuestion = new Question(question);
+            newQuestion.authorName = user!.userName;
+            const profile = new Author(user!, question);
+            newQuestion.authors = [profile];
             runInAction(() => {
-                this.selectedQuestion = question;
-                this.not_confirmed.set(question.id,question);
-                this.setQuestion(question);
+                this.selectedQuestion = newQuestion;
+                this.setActivity(newQuestion);
             });
         } catch (error) {
             console.log(error);
@@ -175,19 +177,24 @@ export default class QuestionStore {
     updateQuestion = async (question: Question) => {
         this.loading = true;
         try {
+            if(question.category === "Top5"){
+                question.answer1 = "-";
+                question.answer2 = "-";
+            } else {
+                question.correctAnswer2 = "-";
+                question.correctAnswer3 = "-";
+                question.correctAnswer4 = "-";
+                question.correctAnswer5 = "-";
+            }
+            store.accountStore.getUser();
             await agent.Questions.update(question);
             runInAction(() => {
-                runInAction(() => {
-                    if (question.id) {
-                        let updatedQuestion = {...this.getQuestion(question.id), ...question}
-                        this.questionRegistry.set(question.id, updatedQuestion as Question);
-                        this.selectedQuestion = updatedQuestion as Question;
-                        if(updatedQuestion.confirmed == 'true')
-                            this.confirmed.set(question.id, updatedQuestion);
-                        else
-                            this.not_confirmed.set(question.id, updatedQuestion);
-                    }
-                })
+                if (question.id) {
+                    let updatedQuestion = {...this.getQuestion(question.id), ...question}
+                    this.questionRegistry.set(question.id, updatedQuestion as Question);
+                    this.selectedQuestion = updatedQuestion as Question;
+                    this.setActivity(updatedQuestion);
+                }
             })
         } catch (error) {
             console.log(error);
@@ -196,6 +203,33 @@ export default class QuestionStore {
             })
         }
         this.closeForm();
+    }
+
+    confirmQuestion = async (id: string) => {
+        this.loading = true;
+        try {
+            const question = this.questionRegistry.get(id);
+            if(question){
+                question.confirmed = 'true';
+                await agent.Questions.update(question);
+                runInAction(() => {
+                    if (question) {
+                        this.not_confirmed.delete(question.id);
+                        this.confirmed.set(question.id,question);
+                        let updatedQuestion = {...this.getQuestion(question.id), ...question}
+                        this.questionRegistry.set(question.id, updatedQuestion as Question);
+                        this.selectedQuestion = updatedQuestion as Question;
+                        this.setActivity(question);
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
+        }
+        this.loading = false;
     }
 
     deleteQuestion = async (id: string) => {

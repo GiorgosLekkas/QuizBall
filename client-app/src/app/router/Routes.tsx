@@ -7,11 +7,14 @@ import TestErrors from "../../features/errors/TestErrors";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import UsersDashBoard from "../../features/account/dashboard/UsersDashBoard";
-import Question_GeographyForm from "../../features/questions/geography/from/Question_GeographyForm";
 import QuestionsDashboard from "../../features/questions/dashboard/QuestionsDashboard";
-import Question_HistoryForm from "../../features/questions/history/from/Question_HistoryForm";
 import Game from "../../features/game/Game";
 import QuestionPopUp from "../../features/game/QuestionPopUp";
+import RequireAuth from "./RequireAuth";
+import RequireAdminRole from "./RequireAdminRole";
+import RequireModeratorRole from "./RequireModeratorRole";
+import AccessDenied from "../../features/errors/AccessDenied";
+import ProfilePage from "../../features/account/profile/ProfilePage";
 
 
 export const routes: RouteObject[] = [
@@ -19,21 +22,25 @@ export const routes: RouteObject[] = [
         path: '/',
         element: <App/>,
         children:[
+            {element: <RequireAdminRole />, children: [
+                {path: 'users', element: <UsersDashBoard/>},
+            ]},
+            {element: <RequireModeratorRole />, children: [
+                {path: 'questions', element: <QuestionsDashboard />},
+            ]},
+            {element: <RequireAuth />, children: [
+                {path: 'game', element: <Game />},
+                {path: 'questionpopup', element: <QuestionPopUp />},
+                {path: 'profile/:userName', element: <ProfilePage />},
+            ]},
             {path: '', element: <HomePage />},
             {path: 'homepage', element: <HomePage />},
-            {path: 'createQuestionGeography', element: <Question_GeographyForm />},
-            {path: 'createQuestionHistory', element: <Question_HistoryForm />},
-            {path: 'manage_geography/:id', element: <Question_GeographyForm key = 'manage' />},
-            {path: 'manage_history/:id', element: <Question_HistoryForm key = 'manage' />},
-            {path: 'questions', element: <QuestionsDashboard />},
-            {path: 'game', element: <Game />},
-            {path: 'questionpopup', element: <QuestionPopUp />},
             {path: 'signup', element: <SignUpForm />},
             {path: 'login', element: <LoginForm key='manage'/>},
-            {path: 'users', element: <UsersDashBoard/>},
             {path: 'errors', element: <TestErrors />},
             {path: 'not-found', element: <NotFound />},
             {path: 'server-error', element: <ServerError />},
+            {path: 'accessdenied', element: <AccessDenied />},
             {path: '*', element: <Navigate replace to='/not-found' />},
         ],
     }

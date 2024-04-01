@@ -8,13 +8,13 @@ export default observer(function LoginForm() {
     const {accountStore} = useStore();
     return (
         <Formik
-            initialValues={{email: "", password: "", error: null}}
+            initialValues={{userName: "", password: "", error: null}}
             onSubmit = {(values, {setErrors}) => accountStore.login(values).catch(error => setErrors({error: 'Invalid email or password'}))} 
         >
             {({handleSubmit, isSubmitting, errors}) => (
                 <Form className = 'ui form' onSubmit = {handleSubmit} autoComplete = 'off'>
                     <Header as = 'h2' content = 'Login to QuizBall' color = 'teal' textAlign = 'center' />
-                    <MyTextInput placeholder = "Email" name = 'email' />
+                    <MyTextInput placeholder = "User Name" name = 'userName' />
                     <MyTextInput placeholder = "Password" name = 'password' type = 'password' />
                     <Button loading = {isSubmitting} positive content = 'Login' type = 'submit' />
                     <ErrorMessage name = 'error' render = {() => 

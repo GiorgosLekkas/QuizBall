@@ -21,7 +21,7 @@ export default observer(function UsersList () {
     function handleAccountUpdate(account: Account) {
         //questionHistoryStore.selectQuestion_History(id);
         //openForm();
-        modalStore.openModal(<EditForm account={account} />);
+        modalStore.openModal(<EditForm account={account} origin="user" />);
     }
 
     return (
@@ -40,7 +40,6 @@ export default observer(function UsersList () {
                                 <div>{account.lastName}</div>
                                 <div>{account.email}</div>
                                 <div>{account.gender}</div>
-                                <div>{account.id}</div>
                             </CardDescription>
                         </CardContent>
                         <CardContent extra>

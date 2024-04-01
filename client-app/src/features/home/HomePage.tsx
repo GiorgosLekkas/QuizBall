@@ -19,7 +19,7 @@ export default observer(function HomePage() {
                 {accountStore.isLoggedIn ? (
                     <>
                         <Header as = 'h2' inverted content = 'Welcome to QuizBall'></Header>
-                        <Button as = {Link} to = '/questions' size = 'huge' inverted >Go to QuizBall</Button>
+                        <Button as = {Link} to = '/game' size = 'huge' inverted >Go to QuizBall</Button>
                     </>
                 ) : (
                     <>

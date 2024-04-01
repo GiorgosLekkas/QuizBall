@@ -77,7 +77,7 @@ export default class AccountStrore {
             if(user.token){
                 store.commonStore.setToken(user.token);
                 runInAction(() => this.user = user);
-                router.navigate('/users');
+                router.navigate('/game');
                 store.modalStore.closeModal();
             }
         } catch (error) {
@@ -96,7 +96,7 @@ export default class AccountStrore {
                     this.user = user;
                     this.accountRegistry.set(user.id!,user);
                 });
-                router.navigate('/users');
+                router.navigate('/game');
                 store.modalStore.closeModal();
             }
         } catch (error) {
@@ -110,10 +110,12 @@ export default class AccountStrore {
             await agent.Accounts.update(account);
             runInAction(() => {
                 if (account.id) {
-                    //let updatedAccount = {...this.getAccount(account.id), ...account}
                     this.accountRegistry.set(account.id, account);
+                    //let updatedAccount = {...this.getAccount(account.id), ...account}
                     //this.accountRegistry.set(account.id, updatedAccount as Account);
                     //this.selectedAccount = updatedAccount as Account;
+                    if(this.user?.id === account.id)
+                        this.user = account;
                 }
             })
         } catch (error) {

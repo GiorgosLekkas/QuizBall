@@ -2,11 +2,13 @@ using System.Security.Claims;
 using API.DTOs;
 using API.Services;
 using Application.Core.Accounts;
+using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 
 namespace API.Controllers {
 
@@ -15,33 +17,27 @@ namespace API.Controllers {
     public class AccountController: BaseApiController {
         private readonly UserManager<Account> userManager;
         private readonly TokenService tokenService;
-        public AccountController(UserManager<Account> userManager, TokenService tokenService){
+        private readonly DataContext context;
+        private readonly IUserAccessor userAccessor;
+        public AccountController(UserManager<Account> userManager, TokenService tokenService, DataContext context, IUserAccessor userAccessor){
             this.userManager = userManager;
             this.tokenService = tokenService;
+            this.context = context;
+            this.userAccessor = userAccessor;
         }
 
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto){
-            var user = await userManager.FindByEmailAsync(loginDto.Email);
+            var user = await userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
 
             if (user == null) return Unauthorized();
 
             var result = await userManager.CheckPasswordAsync(user, loginDto.Password);
 
-            if (result) {
-                return new UserDto { 
-                    Id = user.Id,
-                    UserName = user.UserName, 
-                    Token = tokenService.CreateToken(user),
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Password = user.Password,
-                    Role = user.Role,
-                    Gender = user.Gender
-                };
-            }
+            if (result) 
+                return CreateUserObject(user);
+
             return Unauthorized();
         }
 
@@ -54,18 +50,16 @@ namespace API.Controllers {
                 return ValidationProblem();
             }
 
-            if (await userManager.Users.AnyAsync(x => x.NormalizedUserName == userManager.NormalizeName(registerDto.Username))){
+            if (await userManager.Users.AnyAsync(x => x.NormalizedUserName == userManager.NormalizeName(registerDto.UserName))){
                 ModelState.AddModelError("userName", "Username taken");
                 return ValidationProblem();
             }
 
             var user = new Account {
-                Id = registerDto.Id,
-                UserName = registerDto.Username,
+                UserName = registerDto.UserName,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
-                Password = registerDto.Password,
                 Role = registerDto.Role,
                 Gender = registerDto.Gender
             };
@@ -82,7 +76,7 @@ namespace API.Controllers {
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser() {
-            var user = await userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var user = await userManager.Users.FirstOrDefaultAsync(X => X.Email == User.FindFirstValue(ClaimTypes.Email));
             return CreateUserObject(user);
         }
 
@@ -96,10 +90,8 @@ namespace API.Controllers {
         [HttpPut("{id}")]
         public async Task<IActionResult> EditAccount(string id, Account account) {
             var user = await userManager.FindByIdAsync(id);
-            //user.Id = id;
             user.Email = account.Email;
             user.UserName = account.UserName;
-            user.Password = account.Password;
             user.FirstName = user.FirstName;
             user.LastName = account.LastName;
             user.Gender = account.Gender;
@@ -119,15 +111,14 @@ namespace API.Controllers {
 
         private UserDto CreateUserObject(Account user) {
             return new UserDto {
-                Token = tokenService.CreateToken(user),
                 Id = user.Id,
                 UserName = user.UserName,
+                Role = user.Role,
+                Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Email = user.Email,
-                Password = user.Password,
-                Role = user.Role,
-                Gender = user.Gender
+                Gender = user.Gender,
+                Token = tokenService.CreateToken(user)
             };
         }
     }

@@ -28,12 +28,12 @@ export default observer(function RegsiterForm() {
                 username: Yup.string().required('Username is required!'),
                 email: Yup.string().required('Email is required!'),
                 password: Yup.string().required('Password is required!'),
-                gender: Yup.string().required('Gender is required!'),
+                gender: Yup.string().required('Gender is required!')
             })}
         >
             {({ handleSubmit, isSubmitting, errors, isValid, dirty }) => (
                 <Form className='ui form error' onSubmit={handleSubmit} autoComplete='off'>
-                    <Header as='h2' content='Sign up to Reactivities' color="teal" textAlign="center" />
+                    <Header as='h2' content='Sign up to QuizBall' color="teal" textAlign="center" />
                     <MyTextInput placeholder="First Name" name='firstName' />
                     <MyTextInput placeholder="Last Name" name='lastName' />
                     <MyTextInput placeholder="Username" name='username' />

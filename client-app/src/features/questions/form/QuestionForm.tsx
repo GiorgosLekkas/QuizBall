@@ -54,7 +54,11 @@ export default observer(function QuestionForm({origin}:Props) {
         question: '',
         answer1: '',
         answer2: '',
-        correctAnswer: '',
+        correctAnswer1: '',
+        correctAnswer2: '',
+        correctAnswer3: '',
+        correctAnswer4: '',
+        correctAnswer5: '',
         level: '',
         confirmed: '',
         category: ''
@@ -64,7 +68,7 @@ export default observer(function QuestionForm({origin}:Props) {
         question: Yup.string().required('Question is required'),
         answer1: Yup.string().required('Answer 1 is required'),
         answer2: Yup.string().required('Answer 2 is required'), 
-        correctAnswer: Yup.string().required('Correct Answer is required'),
+        correctAnswer1: Yup.string().required('Correct Answer is required'),
         level: Yup.string().required('Level is required'),
     })
 
@@ -109,7 +113,11 @@ export default observer(function QuestionForm({origin}:Props) {
                         <MyTextArea rows = {3} placeholder = 'Question' name = 'question'/>
                         <MyTextInput name='answer1' placeholder = 'Answer 1'  />
                         <MyTextInput placeholder = 'Answer 2' name = 'answer2'/>
-                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer'/>
+                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer1'/>
+                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer2'/>
+                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer3'/>
+                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer4'/>
+                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer5'/>
                         <MySelectInput options = {levelOptions} placeholder = 'Level' name = 'level'/>
                         <MySelectInput options = {categoryOptions} placeholder = 'Category' name = 'category'/>
                         <Button 

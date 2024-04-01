@@ -4,9 +4,16 @@ namespace Domain {
         public string Question { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
-        public string CorrectAnswer { get; set; }
+        public string CorrectAnswer1 { get; set; }
+        public string CorrectAnswer2 { get; set; }
+        public string CorrectAnswer3 { get; set; }
+        public string CorrectAnswer4 { get; set; }
+        public string CorrectAnswer5 { get; set; }
         public string Level { get; set; }
         public string Category { get; set; }
         public string Confirmed { get; set; }
+        public string AuthorName { get; set; }
+        public ICollection<QuestionAuthor> Authors { get; set; } = new List<QuestionAuthor>();
+        //public ICollection<Photo> Photos { get; set; }
     }
 }

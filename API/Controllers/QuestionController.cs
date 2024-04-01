@@ -1,17 +1,26 @@
+using System.Security.Claims;
 using Application.Core.Questions;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers {
     public class QuestionController : BaseApiController  {
+        private readonly UserManager<Account> userManager;
+        public QuestionController(UserManager<Account> userManager){
+            this.userManager = userManager;
+        }
         [HttpGet]
-        public async Task<ActionResult<List<Question_Field>>> GetQuestions() {
-            return await Mediator.Send(new List.Query());
+        public async Task<ActionResult> GetQuestions() {
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Question_Field>> GetQuestion(Guid id) {
-            return await Mediator.Send(new Details.Query{Id = id});
+            var result =  await Mediator.Send(new Details.Query{Id = id});
+            return HandleResult(result);
         }
 
         [HttpPost]
@@ -23,12 +32,13 @@ namespace API.Controllers {
         [HttpPut("{id}")]
         public async Task<IActionResult> EditQuestion(Guid id, Question_Field question) {
             question.Id = id;
-            await Mediator.Send(new Edit.Command{Update_Question = question});
+            var user = await userManager.Users.FirstOrDefaultAsync(X => X.UserName == question.AuthorName);
+            await Mediator.Send(new Edit.Command{Update_Question = question, Author = user});
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAppUser(Guid id) {
+        public async Task<IActionResult> DeleteQuestion(Guid id) {
             await Mediator.Send(new Delete.Command{Id = id});
             return Ok();
         }

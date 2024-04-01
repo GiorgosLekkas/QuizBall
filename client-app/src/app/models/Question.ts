@@ -1,12 +1,20 @@
+import { Author } from "./Authror"
+
 export interface IQuestion {
     id: string
     question: string
     answer1: string
     answer2: string
-    correctAnswer: string
+    correctAnswer1: string
+    correctAnswer2: string
+    correctAnswer3: string
+    correctAnswer4: string
+    correctAnswer5: string
     level: string
     confirmed: string
     category: string
+    authorName?: string
+    authors?: Author[]
 }
 
 export class Question implements IQuestion{
@@ -15,20 +23,31 @@ export class Question implements IQuestion{
         this.question = init.question!
         this.answer1 = init.answer1!
         this.answer2 = init.answer2!
-        this.correctAnswer = init.correctAnswer!
+        this.correctAnswer1 = init.correctAnswer1!
+        this.correctAnswer2 = init.correctAnswer2!
+        this.correctAnswer3 = init.correctAnswer3!
+        this.correctAnswer4 = init.correctAnswer4!
+        this.correctAnswer5 = init.correctAnswer5!
         this.level = init.level!
         this.confirmed = init.confirmed!
         this.category = init.category!
+        this.authorName = init.authorName!
     }
 
     id: string
     question: string
     answer1: string
     answer2: string
-    correctAnswer: string
+    correctAnswer1: string
+    correctAnswer2: string
+    correctAnswer3: string
+    correctAnswer4: string
+    correctAnswer5: string
     level: string
     confirmed: string
     category: string
+    authorName?: string
+    authors?: Author[]
 }
 
 export class QuestionFormValues {
@@ -36,10 +55,15 @@ export class QuestionFormValues {
   question: string = '';
   answer1: string = '';
   answer2: string = '';
-  correctAnswer: string = '';
+  correctAnswer1: string = '';
+  correctAnswer2: string = '';
+  correctAnswer3: string = '';
+  correctAnswer4: string = '';
+  correctAnswer5: string = '';
   level: string = '';
   confirmed: string = '';
   category: string = '';
+  authorName?: string = "";
 
   constructor(question?: QuestionFormValues){
     if(question) {
@@ -47,10 +71,15 @@ export class QuestionFormValues {
         this.question = question.question;
         this.answer1 = question.answer1;
         this.answer2 = question.answer2;
-        this.correctAnswer = question.correctAnswer;
+        this.correctAnswer1 = question.correctAnswer1;
+        this.correctAnswer2 = question.correctAnswer2;
+        this.correctAnswer3 = question.correctAnswer3;
+        this.correctAnswer4 = question.correctAnswer4;
+        this.correctAnswer5 = question.correctAnswer5;
         this.level = question.level;
         this.confirmed = question.confirmed;
         this.category = question.category;
+        this.authorName = question.authorName;
     }
 }
 }

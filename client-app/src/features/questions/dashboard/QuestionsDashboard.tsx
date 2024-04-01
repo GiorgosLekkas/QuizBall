@@ -3,10 +3,6 @@ import { useStore } from "../../../app/stores/store";
 import { observer } from 'mobx-react-lite';
 import { useEffect } from "react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import Question_HistoryListConfirmed from "../history/list/Question_HistoryListConfirmed";
-import Question_GeographyListConfirmed from "../geography/list/Question_GeographyListConfirmed";
-import Question_GeographyListNotConfirmed from "../geography/list/Question_GeographyListNotConfirmed";
-import Question_HistoryListNotConfirmed from "../history/list/Question_HistoryListNotConfirmed";
 import QuestionListConfirmed from "../list/QuestionListConfirmed";
 import QuestionListNotConfirmed from "../list/QuestionListNotConfirmed";
 

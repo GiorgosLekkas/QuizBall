@@ -5,16 +5,17 @@ import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import {useState } from "react";
 import { useStore } from "../../../app/stores/store";
-import { Account } from "../../../app/models/Account";
+import { Account, AccountFormValues } from "../../../app/models/Account";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 interface Props {
     account: Account
+    origin: string
 }
 
-export default observer(function Question_HistoryForm({account}:Props) {
+export default observer(function Question_HistoryForm({account, origin}:Props) {
 
     const genderOptions = [
         {text: 'Male', value: 'Male'},
@@ -36,7 +37,7 @@ export default observer(function Question_HistoryForm({account}:Props) {
 
     const navigate = useNavigate();
 
-    const [question_History] = useState<Account>({
+    const [account_details] = useState<Account>({
         id: account.id,
         email: account.email,
         userName: account.userName,
@@ -45,6 +46,7 @@ export default observer(function Question_HistoryForm({account}:Props) {
         lastName: account.lastName,
         gender: account.gender,
         role: account.role,
+        token: account.token
     });
 
     const validationSchema = Yup.object({
@@ -56,17 +58,11 @@ export default observer(function Question_HistoryForm({account}:Props) {
         role: Yup.string().required('Level is required'),
     })
 
-    /*useEffect(() => {
-        if(origin === "edit")
-            if (questionHistoryStore.selectedQuestion_History != undefined){
-                let id = questionHistoryStore.selectedQuestion_History!.id;
-                if(id && questionHistoryStore.editMode == true)
-                    loadQuestion_History(id).then(question_History => setQuestion(question_History!))
-            }
-    }, [loadQuestion_History]);*/
-
     function handleFormSubmit(account: Account) {
-        updateAccount(account).then(() => navigate(`/users`));
+        if(origin === "users")
+            updateAccount(account).then(() => navigate(`/user`));
+        else 
+            updateAccount(account).then(() => navigate(`/profile/${account.userName}`));
         closeModal();
     }
 
@@ -80,23 +76,25 @@ export default observer(function Question_HistoryForm({account}:Props) {
 
     return (
         <Segment clearing>
-            <Formik validationSchema = {validationSchema} enableReinitialize initialValues = {question_History} onSubmit = {values => handleFormSubmit(values)} > 
+            <Formik validationSchema = {validationSchema} enableReinitialize initialValues = {account_details} onSubmit = {values => handleFormSubmit(values)} > 
                 {({handleSubmit, isValid, isSubmitting, dirty}) => (
                     <Form className = "ui form" onSubmit = {handleSubmit} autoComplete = 'off'>
                         <Header as = 'h2' content = 'Edit Account' color = 'teal' textAlign = 'center' />
                         <MyTextInput placeholder = 'First Name' name = 'firstName'/>
                         <MyTextInput placeholder = 'Last Name' name = 'lastName'/>
                         <MyTextInput placeholder = 'Userame' name = 'userName'/>
-                        <MyTextInput placeholder = 'Email'   name='email'/>
+                        <MyTextInput placeholder = 'Email' name='email'/>
+                        {((origin === 'users') &&
+                            <MySelectInput options = {roleOptions} placeholder = 'Role' name = 'role'/>
+                        )}
                         <MySelectInput options = {genderOptions} placeholder = 'Gender' name = 'gender'/>
-                        <MySelectInput options = {roleOptions} placeholder = 'Role' name = 'role'/>
                         <Button 
                             disabled = {isSubmitting || !isValid || !dirty } 
                             loading = {isSubmitting} floated = 'right'
                             positive type = 'submit'
                             content = 'Submit'
                         />
-                        <Button onClick = {handleFormCancel} to = '/questions' floated = 'right' type = 'submit' content = 'Cancel'/>
+                        <Button onClick = {handleFormCancel} floated = 'right' type = 'submit' content = 'Cancel'/>
                     </Form>
                 )}
             </Formik>
