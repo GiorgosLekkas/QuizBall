@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import {useState } from "react";
 import { useStore } from "../../../app/stores/store";
-import { Account, AccountFormValues } from "../../../app/models/Account";
+import { Account } from "../../../app/models/Account";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -84,7 +84,7 @@ export default observer(function Question_HistoryForm({account, origin}:Props) {
                         <MyTextInput placeholder = 'Last Name' name = 'lastName'/>
                         <MyTextInput placeholder = 'Userame' name = 'userName'/>
                         <MyTextInput placeholder = 'Email' name='email'/>
-                        {((origin === 'users') &&
+                        {((origin === 'user') &&
                             <MySelectInput options = {roleOptions} placeholder = 'Role' name = 'role'/>
                         )}
                         <MySelectInput options = {genderOptions} placeholder = 'Gender' name = 'gender'/>

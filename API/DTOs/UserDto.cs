@@ -1,3 +1,5 @@
+using Domain;
+
 namespace API.DTOs {
     public class UserDto {
         public string Token { get; set; }
@@ -9,5 +11,7 @@ namespace API.DTOs {
         public string LastName { get; set; }
         //public string Password { get; set; }
         public string Gender { get; set; }
+        public string Image { get; set; }
+        public Photo Photo { get; set; }
     }
 }

@@ -1,15 +1,16 @@
 import { Account } from "./Account";
 
-export interface IProfile {
+export interface Profile {
     email: string
     userName: string
     firstName: string
     lastName: string
     gender: string
     role: string
+    photo?: Photo
 }
 
-export class Profile implements IProfile {
+export class Profile implements Profile {
     constructor(user: Account){
         this.email = user.email;
         this.userName = user.userName;
@@ -17,6 +18,7 @@ export class Profile implements IProfile {
         this.lastName = user.lastName;
         this.gender = user.gender;
         this.role = user.role;
+        this.image = user.image;
     }
 
     email: string
@@ -25,4 +27,10 @@ export class Profile implements IProfile {
     lastName: string
     gender: string
     role: string
+    image?: string
+}
+
+export interface Photo {
+    id: string;
+    url: string;
 }

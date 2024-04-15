@@ -262,6 +262,8 @@ body{
   transition-duration: 14s !important;
 }
 
+
+
 .segmentq{
   border: 1px solid!important;
   width: 300px!important;
@@ -364,4 +366,9 @@ body{
   height: 38px!important;
   margin-left: 10px!important;
   margin-right: 10px!important;
+}
+
+.category_selection_image{
+  margin-right: '10px'!important;
+  margin-top:'-5px'!important;
 }

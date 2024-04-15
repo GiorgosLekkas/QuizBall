@@ -7,5 +7,6 @@ namespace Domain {
         public string Role { get; set; }
         public string Gender { get; set; }
         public ICollection<QuestionAuthor> Questions { get; set; }
+        public Photo Photo { get; set; }
     }
 }

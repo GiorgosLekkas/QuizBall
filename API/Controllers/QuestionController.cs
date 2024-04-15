@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers {
+    [AllowAnonymous]
     public class QuestionController : BaseApiController  {
         private readonly UserManager<Account> userManager;
         public QuestionController(UserManager<Account> userManager){

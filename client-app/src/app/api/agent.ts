@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Question_Geography } from '../models/Question_Geography';
 import { Question_History } from '../models/Question_History';
 import { Question, QuestionFormValues } from '../models/Question';
-import { Profile } from '../models/Profile';
+import { Photo, Profile } from '../models/Profile';
 
 const sleep = (delay: number) => {
     return new Promise ((resolve) => {
@@ -104,7 +104,15 @@ const Questions = {
 }
 
 const Profiles = {
-    get: (username: string) => requests.get<Profile>(`/profiles/${username}`)
+    get: (username: string) => requests.get<Profile>(`/profiles/${username}`),
+    uploadPhoto: (file: Blob) => {
+        let formData = new FormData();
+        formData.append('File', file);
+        return axios.post<Photo>('photos', formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    },
+    deletePhoto: (id: string) => axios.delete(`/photos/${id}`)
 }
 
 const agent = {

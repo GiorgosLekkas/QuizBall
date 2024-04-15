@@ -28,20 +28,20 @@ namespace Application.Photos
             }
 
             public async Task<Result<Photo>> Handle(Command request, CancellationToken cancellationToken) {
-                /*var photoUploadResult = await photoAccessor.AddPhoto(request.File);
-                var user = await context.Questions.Include(p => p.Photos)
-                    .FirstOrDefaultAsync(x => x.UserName == userAccessor.GetUsername());
+                var photoUploadResult = await photoAccessor.AddPhoto(request.File);
+                var user = await context.Accounts.Include(p => p.Photo)
+                    .FirstOrDefaultAsync(x => x.UserName == userAccessor.GetUserName());
 
                 var photo = new Photo {
                     Url = photoUploadResult.Url,
                     Id = photoUploadResult.PublicId
                 };
 
-                user.Photos.Add(photo);*/
+                user.Photo = photo;
 
                 var result = await context.SaveChangesAsync() > 0;
 
-                //if (result) return Result<Photo>.Success(photo);
+                if (result) return Result<Photo>.Success(photo);
 
                 return Result<Photo>.Failure("Problem adding photo");
             }

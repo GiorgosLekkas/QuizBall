@@ -170,4 +170,9 @@ export default class AccountStrore {
         this.loadingInitial = state;
     }
 
+    setImage = (image: string) => {
+        if(this.user)
+            this.user.image = image;
+    }
+
 }

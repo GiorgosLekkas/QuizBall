@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Button, Item, Image, Segment, Header } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
-import { Link } from "react-router-dom";
-import QuestionPopUp from "./QuestionPopUp";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
     category?: string
@@ -10,13 +9,21 @@ interface Props {
 
 export default observer(function Question_Display({category}: Props) {
 
-    const {questionGeographyStore, modalStore } = useStore();
-    const {question_GeographyEasy, question_GeographyMedium, question_GeographyHard, openForm} = questionGeographyStore;
+    const {questionStore } = useStore();
+    const {openForm, allQuestionsGame, buttons} = questionStore;
 
-    function handleQuestion_GeographyUpdate(id: string | undefined) {
-        questionGeographyStore.selectQuestion_Geography(id!);
+    const navigate = useNavigate();
+ 
+    function openQuestion(id: string, level: string) {
+        questionStore.selectQuestion(id!);
+        if(level === 'Easy')
+            questionStore.easyButton(category + ' Easy');
+        else if (level === 'Medium')
+            questionStore.mediumButton(category + ' Medium');
+        else if(level === 'Hard')
+            questionStore.hardButton(category + ' Hard');
         openForm(id);
-        modalStore.openModal(<QuestionPopUp question = {questionGeographyStore.question_GeographyRegistry.get(id!)}/>)
+        navigate(`/qpopup/${id}`)
     }
 
     return (
@@ -29,30 +36,45 @@ export default observer(function Question_Display({category}: Props) {
                     <Item>
                         <Item.Content>
                             <Item.Extra>
-                                <Button 
-                                    size="big" 
-                                    content = "x1" 
-                                    className = {`buttonq b_${category?.replace(" ","").replace(" ","").replace(" ","")}`}
-                                    //key = {question_GeographyEasy?.id}
-                                    onClick = { () => handleQuestion_GeographyUpdate(question_GeographyEasy?.id) } 
-                                    as = {Link} 
-                                />
-                                <Button 
-                                    size="big" 
-                                    content = "x2" 
-                                    className = {`buttonq b_${category?.replace(" ","").replace(" ","").replace(" ","")}`}
-                                    //key = {question_GeographyMedium?.id}
-                                    onClick = { () => handleQuestion_GeographyUpdate(question_GeographyMedium?.id) } 
-                                    as = {Link} 
-                                />
-                                <Button 
-                                    size="big" 
-                                    content = "x3" 
-                                    className = {`buttonq b_${category?.replace(" ","").replace(" ","").replace(" ","")}`}
-                                    key = {question_GeographyHard?.id}
-                                    onClick = { () => handleQuestion_GeographyUpdate(question_GeographyHard?.id!) } 
-                                    as = {Link} 
-                                />
+                            {allQuestionsGame.map(q => ( <>
+                                {(q.category === category) && (q.level === 'Easy') && 
+                                    <>
+                                        <Button 
+                                            size="big" 
+                                            content = "x1" 
+                                            className = {buttons.get(category + ' Easy') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                            key = {q?.id}
+                                            onClick = { () => openQuestion(q.id, 'Easy') }
+                                            as = {Link}
+                                        />
+                                    </>
+                                }
+                                {(q.category === category) && (q.level === 'Medium') && 
+                                    <>
+                                        <Button 
+                                            size="big" 
+                                            content = "x2" 
+                                            className = {buttons.get(category + ' Medium') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                            key = {q?.id}
+                                            onClick = { () => openQuestion(q.id, 'Medium') }
+                                            as = {Link}
+                                        />
+                                    </>
+                                }
+                                {(q.category === category) && (q.level === 'Hard') && 
+                                    <>
+                                        <Button 
+                                            size="big" 
+                                            content = "x3" 
+                                            className = {buttons.get(category + ' Hard') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                            key = {q?.id}
+                                            onClick = { () => openQuestion(q.id, 'Hard') }
+                                            as = {Link}
+                                        />
+                                    </>
+                                }
+                                </>
+                                ))}
                             </Item.Extra>
                         </Item.Content>
                     </Item>

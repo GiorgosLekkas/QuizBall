@@ -13,13 +13,13 @@ export default observer(function HomePage() {
         <Segment inverted textAlign = 'center' vertical className = 'masthead' > 
             <Container text >
                 <Header as = 'h1' inverted >
-                    <Image size = 'massive' src = '/assets/logo.png' alt = 'logo' style = {{marginBottom: 12}} />
+                    <Image size = 'massive' src = '/assets/logo.png' alt = 'logo' style = {{marginBottom: 12, width: '150px', height: '150px'}} />
                     QuizBall
                 </Header>
                 {accountStore.isLoggedIn ? (
                     <>
                         <Header as = 'h2' inverted content = 'Welcome to QuizBall'></Header>
-                        <Button as = {Link} to = '/game' size = 'huge' inverted >Go to QuizBall</Button>
+                        <Button as = {Link} to = '/categories_selection' size = 'huge' inverted >Go to QuizBall</Button>
                     </>
                 ) : (
                     <>

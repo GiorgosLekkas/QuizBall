@@ -1,12 +1,22 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
-import {Container, Menu, Dropdown, Icon } from "semantic-ui-react";
+import {Container, Menu, Dropdown, Image } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import QuestionForm from "../../features/questions/form/QuestionForm";
+import { useEffect } from "react";
 
 export default observer(function NavBar() {
 
     const {accountStore: {user, logout, getRole}, modalStore} = useStore();
+    const {questionStore} = useStore();
+
+    const {questionRegistry, loadQuestions} = questionStore;
+
+    useEffect(() => {
+        if(questionRegistry.size <= 1) {
+            loadQuestions();
+        }
+    }, [loadQuestions, questionRegistry.size])
 
     return (
         <Menu inverted fixed = 'top'>
@@ -25,7 +35,7 @@ export default observer(function NavBar() {
                         <Menu.Item as = {Link} to = '/users' name = 'Users' />
                     </>
                 )}
-                <Menu.Item as = {Link} to = '/game' name = 'Game' />
+                <Menu.Item as = {Link} to = '/categories_selection' name = 'Game' />
                 <Menu.Item 
                     onClick = {() => modalStore.openModal(<QuestionForm origin = {"create"}/>)}
                     to = '/createQuestion'
@@ -33,7 +43,7 @@ export default observer(function NavBar() {
                     content = "Submit Question"
                 />
                 <Menu.Item position = 'right'>
-                    <Icon name='user' />
+                    <Image avatar spaced='right' src={user?.image || '/assets/user.png'} />
                     <Dropdown pointing = 'top left' text = {user?.userName} >
                         <Dropdown.Menu>
                             <Dropdown.Item as={Link} to={`/profile/${user?.userName}`} text='My Profile' icon='user' />

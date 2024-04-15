@@ -21,10 +21,12 @@ namespace Application.Core.Questions {
         public class Handler : IRequestHandler<Command, Result<Unit>> {
             private readonly DataContext context;
             private readonly UserManager<Account> userManager;
+            private readonly IMapper mapper;
 
-            public Handler(DataContext context,UserManager<Account> userManager) {
+            public Handler(DataContext context,UserManager<Account> userManager, IMapper mapper) {
                 this.context = context;
                 this.userManager = userManager;
+                this.mapper = mapper;
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken) {
@@ -50,6 +52,18 @@ namespace Application.Core.Questions {
                 if (!result) return Result<Unit>.Failure("Failed to create Question");
 
                 return Result<Unit>.Success(Unit.Value);
+
+                /*var quesion = await context.Questions.FindAsync(request.Update_Question.Id);
+
+                if (quesion == null) return null;
+
+                mapper.Map(request.Update_Question, quesion);
+
+                var result = await  context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to update activity");
+
+                return Result<Unit>.Success(Unit.Value);*/
             }
         }
     }

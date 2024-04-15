@@ -12,6 +12,15 @@ export default class QuestionStore {
     confirmed = new Map<string, Question>();
     selectedQuestion: Question | undefined = undefined;
     tmp = new Map<string, Question>();
+    allQuestions = new Map<string, Question>();
+    categories: Array<string> = []
+    easy = new Map<string, Question>();
+    medium = new Map<string, Question>();
+    hard = new Map<string, Question>();
+    buttons = new Map<string, boolean>();
+    questionEasy: Question | undefined = undefined;
+    questionMedium: Question | undefined = undefined;
+    questionHard: Question | undefined = undefined;
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -20,19 +29,86 @@ export default class QuestionStore {
         makeAutoObservable(this)
     }
 
+    get isSet() {
+        if(this.categories.length === 9)
+            return true;
+        return false;
+    }
+
+    endGame(){
+        this.categories = [];
+    }
+
+    easyButton(str: string) {
+        this.buttons.set(str, false);
+    }
+
+    mediumButton(str: string) {
+        this.buttons.set(str, false);
+    }
+
+    hardButton(str: string) {
+        this.buttons.set(str, false);
+    }
+
     get questionsByCategory() {
-        return Array.from(this.questionRegistry.values()).sort((a,b) => 
+        return Array.from(this.questionRegistry.values()).sort((a,b) =>
             String(a.category).localeCompare(b.category))
     }
 
     get questionsNotConfirmedByCategory() {
-        return Array.from(this.not_confirmed.values()).sort((a,b) => 
+        return Array.from(this.not_confirmed.values()).sort((a,b) =>
             String(a.category).localeCompare(b.category))
     }
 
     get questionsConfirmedByCategory() {
-        return Array.from(this.confirmed.values()).sort((a,b) => 
+        return Array.from(this.confirmed.values()).sort((a,b) =>
             String(a.category).localeCompare(b.category))
+    }
+
+    gameQuestions(){
+        if(this.categories != undefined)
+        this.categories.forEach(category => {
+            this.easy.clear();
+            this.medium.clear();
+            this.hard.clear();
+            this.confirmed.forEach((value: Question, key: string) => {
+                if(value.level === "Easy" && category === value.category)
+                    this.easy.set(value.id, value);
+                if(value.level === "Medium" && category === value.category)
+                    this.medium.set(value.id, value);
+                if(value.level === "Hard" && category === value.category)
+                    this.hard.set(value.id, value);
+            });
+    
+            let ekeys: string[] = new Array;
+            ekeys = Array.from(this.easy.keys());
+            let ne: number = Math.floor(Math.random() * ekeys.length);
+            this.questionEasy = this.easy.get(ekeys[ne]);
+    
+            let mkeys: string[] = new Array;
+            mkeys = Array.from(this.medium.keys());
+            let nm: number = Math.floor(Math.random() * mkeys.length);
+            this.questionMedium = this.medium.get(mkeys[nm]);
+    
+            let hkeys: string[] = new Array;
+            hkeys = Array.from(this.hard.keys());
+            let nh: number = Math.floor(Math.random() * hkeys.length);
+            this.questionHard = this.hard.get(hkeys[nh]);
+
+            if(this.questionEasy) this.allQuestions.set(category + ' easy',this.questionEasy);
+            if(this.questionMedium) this.allQuestions.set(category + ' medium',this.questionMedium);
+            if(this.questionHard) this.allQuestions.set(category + ' hard',this.questionHard);
+
+            this.buttons.set(category + ' Easy', true);
+            this.buttons.set(category + ' Medium', true);
+            this.buttons.set(category + ' Hard', true);
+        });
+
+    }
+
+    get allQuestionsGame() {
+        return Array.from(this.allQuestions.values());  
     }
 
     /*get groupedQuestions() {
@@ -44,17 +120,7 @@ export default class QuestionStore {
         )
     }*/
 
-    get questions() { //let n: number = Math.floor(Math.random() * keys.length);
-        /*let keys: string[] = new Array;//selectedQuestion
-        keys = Array.from(this.questionRegistry.keys());
-
-        if(keys.length>3){
-            while(this.tmp.size!=3){
-                let n: number = Math.floor(Math.random() * keys.length);
-                if(this.tmp.has(keys[n])==false)
-                    this.tmp.set(keys[n],this.questionRegistry.get(keys[n])!);
-            }
-        }*/
+    get questions() {
         return Array.from(this.questionRegistry.values());  
     }
 
@@ -96,7 +162,7 @@ export default class QuestionStore {
     }
 
     loadQuestions = async () => {
-        this.setLoadingInitial
+        this.setLoadingInitial;
         try {
             const questions = await agent.Questions.list();
             questions.forEach(question => {
@@ -145,7 +211,10 @@ export default class QuestionStore {
     }
 
     createQuestion = async (question: QuestionFormValues) => {
+        store.accountStore.getUser();
+        const user = store.accountStore!.user;
         question.confirmed = 'false'
+        if(user!.role === 'User') question.category = "Fans Question";
         if(question.category === "Top5"){
             question.answer1 = "-";
             question.answer2 = "-";
@@ -155,8 +224,6 @@ export default class QuestionStore {
             question.correctAnswer4 = "-";
             question.correctAnswer5 = "-";
         }
-        store.accountStore.getUser();
-        const user = store.accountStore!.user;
         try {
             //question.id = uuid();
             question.authorName = user?.userName;

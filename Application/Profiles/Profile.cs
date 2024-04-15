@@ -1,3 +1,5 @@
+using Domain;
+
 namespace Application.Profiles {
     public class Profile {
         public string UserName { get; set; }
@@ -6,5 +8,7 @@ namespace Application.Profiles {
         public string Email { get; set; }
         public string Role { get; set; }
         public string Gender { get; set; }
+        public string Image { get; set; }
+        public Photo Photo { get; set; }
     }
 }

@@ -1,35 +1,39 @@
 import { Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import { Button, Header, Segment, Image, Form, Modal } from "semantic-ui-react";
+import { Button, Header, Segment, Image, Form } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import { useState } from "react";
-import { Question_History } from "../../app/models/Question_History";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useStore } from "../../app/stores/store";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import * as Yup from 'yup';
-import { HistoryQuestion } from "../../app/models/HistoryQuestion";
+import { Question } from "../../app/models/Question";
 
-interface Props {
-    question?: HistoryQuestion
-}
+/*interface Props {
+    question?: Question
+}*/
 
-export default observer(function QuestionPopUp({question}: Props) {
+export default observer(function QuestionPopUp() {
 
-    const {questionHistoryStore, modalStore} = useStore();
+    const {questionStore, modalStore} = useStore();
 
-    const {createQuestion_History, closeForm, loadingInitial} = questionHistoryStore;
+    const {closeForm, loadingInitial, loadQuestion } = questionStore;
 
     const {closeModal} = modalStore;
 
-    const navigate = useNavigate();
+    const {id} = useParams();
 
-    const [question_History] = useState<Question_History>({
+    const [question, setQuestion] = useState<Question>({
         id: '',
         question: '',
         answer1: '',
         answer2: '',
-        correctAnswer: '',
+        correctAnswer1: '',
+        correctAnswer2: '',
+        correctAnswer3: '',
+        correctAnswer4: '',
+        correctAnswer5: '',
+        category: '',
         level: '',
         confirmed: ''
     });
@@ -38,8 +42,13 @@ export default observer(function QuestionPopUp({question}: Props) {
         answer: Yup.string().required('Question is required')
     })
 
-    function handleFormSubmit(question: Question_History) {
-        createQuestion_History(question).then(() => navigate(`/game`));
+    useEffect(() => {
+        if (id)
+            loadQuestion(id).then(activity => setQuestion(activity!));
+    }, [id, loadQuestion]);
+
+    function handleFormSubmit(question: Question) {
+        //createQuestion(question).then(() => navigate(`/game`));
         closeModal();
     }
 
@@ -52,15 +61,15 @@ export default observer(function QuestionPopUp({question}: Props) {
         return <LoadingComponent content = "Loading Question..." />
 
     return (
-        <Modal open
-            closeIcon
-            onClose={handleFormCancel}>
-            <Segment className = {`segment_popup s_geography`}>
-                <Header className = {`header_popup h_geography`}>
-                    <Image className = {`icon_popup i_geography`} size = 'small'><img src = {`/assets/Questions_Logo/geography.png`} alt = "logo"></img></Image>
-                    <span className = {`lebelq l_history`}> History </span>
+        //<Modal open
+            //closeIcon
+            //onClose={handleFormCancel}>
+            <Segment className = {`segment_popup s_${question?.category?.replace(" ","").replace(" ","").replace(" ","")}`}>
+                <Header className = {`header_popup h_${question?.category?.replace(" ","").replace(" ","").replace(" ","")}`}>
+                    <Image className = {`icon_popup i_${question?.category?.replace(" ","").replace(" ","").replace(" ","")}`} size = 'small'><img src = {`/assets/Questions_Logo/${question?.category}.png`} alt = "logo"></img></Image>
+                    <span className = {`lebelq l_${question?.category?.replace(" ","").replace(" ","").replace(" ","")}`}> {question?.category} </span>
                 </Header>
-                <Formik validationSchema = {validationSchema} enableReinitialize initialValues = {question_History} onSubmit = {values => handleFormSubmit(values)} > 
+                <Formik validationSchema = {validationSchema} enableReinitialize initialValues = {question} onSubmit = {values => handleFormSubmit(values)} > 
                     {({handleSubmit, isValid, isSubmitting, dirty}) => (
                         <Form className = "ui form" onSubmit = {handleSubmit} autoComplete = 'off'>
                             <Header as = 'h1' color = 'black' textAlign = 'center' content = {question?.question} >{question?.question}</Header>
@@ -71,11 +80,11 @@ export default observer(function QuestionPopUp({question}: Props) {
                                 positive type = 'submit'
                                 content = 'Submit'
                             />
-                            <Button onClick = {handleFormCancel} to = '/game' floated = 'right' type = 'submit' content = 'Cancel'/>
+                            <Button as = {Link}  to = '/game' floated = 'right' type = 'submit' content = 'Cancel'/>
                         </Form>
                     )}
                 </Formik>
             </Segment>
-        </Modal>
+        //</Modal>
     );
 })

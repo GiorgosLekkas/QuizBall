@@ -8,6 +8,7 @@ export interface IAccount {
   gender?: string
   role?: string
   token?: string
+  image?: string
 }
 
 export interface AccountFormValues {
@@ -19,6 +20,8 @@ export interface AccountFormValues {
   lastName?: string
   gender?: string
   role?: string
+  token?: string
+  image?: string
 }
 
 export class Account implements IAccount{
@@ -42,6 +45,7 @@ export class Account implements IAccount{
   gender: string
   role: string
   token?: string
+  image?: string
 }
 
 export class AccountFormValues {

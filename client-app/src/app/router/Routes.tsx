@@ -15,6 +15,9 @@ import RequireAdminRole from "./RequireAdminRole";
 import RequireModeratorRole from "./RequireModeratorRole";
 import AccessDenied from "../../features/errors/AccessDenied";
 import ProfilePage from "../../features/account/profile/ProfilePage";
+import SelectCategories from "../../features/game/SelectCategories";
+import RequireGameStart from "./RequireGameStart";
+import ActiveGame from "../../features/errors/ActiveGame";
 
 
 export const routes: RouteObject[] = [
@@ -29,9 +32,13 @@ export const routes: RouteObject[] = [
                 {path: 'questions', element: <QuestionsDashboard />},
             ]},
             {element: <RequireAuth />, children: [
-                {path: 'game', element: <Game />},
                 {path: 'questionpopup', element: <QuestionPopUp />},
                 {path: 'profile/:userName', element: <ProfilePage />},
+                {path: 'categories_selection', element: <SelectCategories />},
+            ]},
+            {element: <RequireGameStart />, children: [
+                {path: 'game', element: <Game />},
+                {path: 'qpopup/:id', element: <QuestionPopUp key = 'manage' />}
             ]},
             {path: '', element: <HomePage />},
             {path: 'homepage', element: <HomePage />},
@@ -41,6 +48,7 @@ export const routes: RouteObject[] = [
             {path: 'not-found', element: <NotFound />},
             {path: 'server-error', element: <ServerError />},
             {path: 'accessdenied', element: <AccessDenied />},
+            {path: 'activegame', element: <ActiveGame />},
             {path: '*', element: <Navigate replace to='/not-found' />},
         ],
     }

@@ -29,7 +29,8 @@ namespace API.Controllers {
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto){
-            var user = await userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
+            var user = await userManager.Users.Include(p => p.Photo)
+                .FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
 
             if (user == null) return Unauthorized();
 
@@ -76,7 +77,10 @@ namespace API.Controllers {
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser() {
-            var user = await userManager.Users.FirstOrDefaultAsync(X => X.Email == User.FindFirstValue(ClaimTypes.Email));
+            var user = await userManager.Users
+                .Include(p => p.Photo)
+                .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+
             return CreateUserObject(user);
         }
 
@@ -110,7 +114,8 @@ namespace API.Controllers {
         }
 
         private UserDto CreateUserObject(Account user) {
-            return new UserDto {
+
+            UserDto account =  new UserDto {
                 Id = user.Id,
                 UserName = user.UserName,
                 Role = user.Role,
@@ -118,8 +123,15 @@ namespace API.Controllers {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Gender = user.Gender,
-                Token = tokenService.CreateToken(user)
+                Token = tokenService.CreateToken(user),
             };
+
+            if(user.Photo == null)
+                account.Image = null;
+            else
+                account.Image = user.Photo.Url;
+            
+            return account;
         }
     }
 }

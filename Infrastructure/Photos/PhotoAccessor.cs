@@ -36,6 +36,7 @@ namespace Infrastructure.Photos {
             }
             return null;
         }
+        
         public async Task<string> DeletePhoto(string publicId){
             var deleteParams = new DeletionParams(publicId);
             var result = await cloudinary.DestroyAsync(deleteParams);
