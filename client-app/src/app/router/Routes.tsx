@@ -18,6 +18,7 @@ import ProfilePage from "../../features/account/profile/ProfilePage";
 import SelectCategories from "../../features/game/SelectCategories";
 import RequireGameStart from "./RequireGameStart";
 import ActiveGame from "../../features/errors/ActiveGame";
+import CoinFlip from "../../features/game/CoinFlip";
 
 
 export const routes: RouteObject[] = [
@@ -41,6 +42,7 @@ export const routes: RouteObject[] = [
                 {path: 'qpopup/:id', element: <QuestionPopUp key = 'manage' />}
             ]},
             {path: '', element: <HomePage />},
+            {path: 'coinflip', element: <CoinFlip />},
             {path: 'homepage', element: <HomePage />},
             {path: 'signup', element: <SignUpForm />},
             {path: 'login', element: <LoginForm key='manage'/>},

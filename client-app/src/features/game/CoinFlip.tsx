@@ -1,44 +1,58 @@
-import { observer } from "mobx-react-lite";
+import React, { useState } from 'react';
+import { Button, Header, Image, Segment } from 'semantic-ui-react';
 
-export default observer( function CoinFlip() {
+type CoinSide = 'heads' | 'tails';
 
-    /*constructor(props) {
-        super(props);
-        this.state = {
-          result: "",
-          nader: "nader"
-        };
-        this.coinToss = coinToss.bind(this);
-    }*/
+const useCoinFlip = () => {
+    const [result, setResult] = useState<CoinSide | null>(null);
 
-    function coinToss() {
-        /*setState({ nader: "" }, () => {
-            if (Math.random() < 0.5) {
-                setState({ result: "heads" });
-                console.log("heads");
-            } else {
-                setState({ result: "tails" });
-                console.log("tails");
-            }
-        });*/
-    }
+    const flipCoin = () => {
+        const random = Math.random();
+        const side: CoinSide = random < 0.5 ? 'heads' : 'tails';
+        setResult(side);
+    };
+
+    return { result, flipCoin };
+};
+
+const CoinFlip: React.FC = () => {
+    const { result, flipCoin } = useCoinFlip();
+    const [isFlipping, setIsFlipping] = useState<boolean>(false);
+
+    const handleFlip = () => {
+        setIsFlipping(true);
+        setTimeout(() => {
+            flipCoin();
+            setIsFlipping(false);
+        }, 1000); // Adjust this time to match your animation duration
+    };
 
     return (
-        <>
-            <div className="App">
-                <div id="coin" className={/*this.state.result*/"m"} key={+new Date()}>
-                <div className="side-a">
-                    <h2>TAIL</h2>
+        <Segment>
+            <Header content = "Coin Flip Game" as = 'h1' textAlign = 'center' />
+            <Button color = 'green' onClick = {handleFlip} disabled = {isFlipping}>
+                {isFlipping ? 'Flipping...' : 'Flip Coin'}
+            </Button>
+            <div className = {`coin ${isFlipping ? 'flipping' : ''}`}>
+                <div className="coin-inner">
+                    {result==='heads' && (
+                        <div className="coin-front">
+                            <Image style = {{width: '250px', height: '250px'}} src = "/assets/heads.png" alt = "heads" />
+                        </div>
+                    )} { result==='tails' && (
+                        <div className="coin-back">
+                            <Image style = {{width: '250px', height: '250px'}} src = "/assets/tails.png" alt = "tails" />
+                        </div>
+                    )}
                 </div>
-                <div className="side-b">
-                    <h2>HEAD</h2>
-                </div>
-                </div>
-                    <h1>Flip a coin</h1>
-                <button id="btn" onClick={coinToss}>
-                    Coin Toss
-                </button>
             </div>
-        </>
+            {result && (
+                <div>
+                    <p style={{marginTop:'500px'}}>The result is: {result} </p>
+                </div>
+            )}
+        </Segment>
     );
-})
+};
+
+export default CoinFlip;

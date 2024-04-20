@@ -77,7 +77,7 @@ export default class AccountStrore {
             if(user.token){
                 store.commonStore.setToken(user.token);
                 runInAction(() => this.user = user);
-                router.navigate('/game');
+                router.navigate('/categories_selection');
                 store.modalStore.closeModal();
             }
         } catch (error) {
@@ -96,7 +96,7 @@ export default class AccountStrore {
                     this.user = user;
                     this.accountRegistry.set(user.id!,user);
                 });
-                router.navigate('/game');
+                router.navigate('/categories_selection');
                 store.modalStore.closeModal();
             }
         } catch (error) {
@@ -148,9 +148,12 @@ export default class AccountStrore {
     }
 
     logout = () => {
-        store.commonStore.setToken(null);
-        this.user = null;
-        router.navigate('/');
+        if(store.questionStore.isSet == false) {
+            store.commonStore.setToken(null);
+            this.user = null;
+            router.navigate('/');
+        }else 
+            router.navigate('/activegame');
     }
 
     getUser = async () => {
