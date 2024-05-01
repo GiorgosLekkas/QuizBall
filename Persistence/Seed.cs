@@ -6,7 +6,8 @@ namespace Persistence {
 
         public static async Task SeedData(DataContext context, UserManager<Account> userManager) {
 
-            var account = new Account {
+            if (!userManager.Users.Any() && !context.Questions.Any()) {
+                var account = new Account {
                 FirstName = "admin",
                 LastName = "admin",
                 UserName = "admin",
@@ -15,14 +16,22 @@ namespace Persistence {
                 Gender = "Male"
             };
             var accounts = new List<Account> {
-                account
+                account,
+                new Account {
+                    FirstName = "Giorgos",
+                    LastName = "Lekkas",
+                    UserName = "glekkas",
+                    Email = "glekkas@test.com",
+                    Role = "User",
+                    Gender = "Male"
+                }
             };
             foreach (var user in accounts) {
                 await userManager.CreateAsync(user, "Pa$$w0rd");
             }
 
             var questions = new List<Question_Field> {
-                new Question_Field {
+                new Question_Field {                                                    //History
                     Question = "How many Super League titles has Pao won?",
                     Answer1 = "20",
                     Answer2 = "21",
@@ -33,14 +42,9 @@ namespace Persistence {
                     CorrectAnswer5 = "-",
                     Level = "Easy",
                     Category = "History",
-                    Confirmed = "false",
+                    Confirmed = "true",
                     AuthorName = "admin",
-                    Authors = new List<QuestionAuthor> {
-                        new QuestionAuthor  {
-                            Account = account,
-                            IsAuthor = true
-                        }
-                    }
+                    Author = account
                 },
                 new Question_Field {
                     Question = "How many Super League titles has Aris won?",
@@ -53,14 +57,9 @@ namespace Persistence {
                     CorrectAnswer5 = "-",
                     Level = "Medium",
                     Category = "History",
-                    Confirmed = "false",
+                    Confirmed = "true",
                     AuthorName = "admin",
-                    Authors = new List<QuestionAuthor> {
-                        new QuestionAuthor  {
-                            Account = account,
-                            IsAuthor = true
-                        }
-                    }
+                    Author = account
                 },
                 new Question_Field {
                     Question = "Which team has won Super League title apart from big 5?",
@@ -75,12 +74,7 @@ namespace Persistence {
                     Category = "History",
                     Confirmed = "true",
                     AuthorName = "admin",
-                    Authors = new List<QuestionAuthor> {
-                        new QuestionAuthor  {
-                            Account = account,
-                            IsAuthor = true
-                        }
-                    }
+                    Author = account
                 },
                 new Question_Field {
                     Question = "When was the first time Greece participated in World Cup? ",
@@ -95,12 +89,7 @@ namespace Persistence {
                     Category = "History",
                     Confirmed = "true",
                     AuthorName = "admin",
-                    Authors = new List<QuestionAuthor> {
-                        new QuestionAuthor  {
-                            Account = account,
-                            IsAuthor = true
-                        }
-                    }
+                    Author = account
                 },
                 new Question_Field {
                     Question = "When did Pao played against Ajax in Champions League/Champion Clubs' Cup final?",
@@ -115,12 +104,7 @@ namespace Persistence {
                     Category = "History",
                     Confirmed = "true",
                     AuthorName = "admin",
-                    Authors = new List<QuestionAuthor> {
-                        new QuestionAuthor  {
-                            Account = account,
-                            IsAuthor = true
-                        }
-                    }
+                    Author = account
                 },
                 new Question_Field {
                     Question = "When did Champion Clubs' Cup renamed to Champions League?",
@@ -135,17 +119,407 @@ namespace Persistence {
                     Category = "History",
                     Confirmed = "true",
                     AuthorName = "admin",
-                    Authors = new List<QuestionAuthor> {
-                        new QuestionAuthor  {
-                            Account = account,
-                            IsAuthor = true
-                        }
-                    }
+                    Author = account
+                },
+
+                new Question_Field {                                                //Geography
+                    Question = "Where is Levi Garcia from?",
+                    Answer1 = "Trinidad and Tobago",
+                    Answer2 = "Martinique",
+                    CorrectAnswer1 = "Trinidad and Tobago",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Geography",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "What is Khedira's second nationality?",
+                    Answer1 = "Moroccan",
+                    Answer2 = "Tunisian",
+                    CorrectAnswer1 = "Tunisian",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Medium",
+                    Category = "Geography",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "In which city did the first Champions League final take place?",
+                    Answer1 = "Paris",
+                    Answer2 = "London",
+                    CorrectAnswer1 = "Paris",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Hard",
+                    Category = "Geography",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Where is Allianz Stadium located?",
+                    Answer1 = "Italy",
+                    Answer2 = "Germany",
+                    CorrectAnswer1 = "Italy",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Geography",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Where is Stadio Olimpico located?",
+                    Answer1 = "Argentina",
+                    Answer2 = "Italy",
+                    CorrectAnswer1 = "Italy",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Medium",
+                    Category = "Geography",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "In which country's championship does the team Palestino participate?",
+                    Answer1 = "Chile",
+                    Answer2 = "Uruguay",
+                    CorrectAnswer1 = "Chile",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Hard",
+                    Category = "Geography",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+
+                new Question_Field {                                                //Guess The Score
+                    Question = "Guess The Score of 2022 World Cup final between Argentina and France(Including extra time if, there was any, but no penalties)",
+                    Answer1 = "Trinidad and Tobago",
+                    Answer2 = "Martinique",
+                    CorrectAnswer1 = "Trinidad and Tobago",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Guess The Score",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Guess The Score of 2008 Euro final between Spain and Germany(Including extra time if, there was any, but no penalties)",
+                    Answer1 = "0-1",
+                    Answer2 = "0-0",
+                    CorrectAnswer1 = "0-1",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Medium",
+                    Category = "Guess The Score",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Guess The Score of 2019 Champions League final between Tottenham and Liverpool(Including extra time if, there was any, but no penalties)",
+                    Answer1 = "0-2",
+                    Answer2 = "0-1",
+                    CorrectAnswer1 = "0-2",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Hard",
+                    Category = "Guess The Score",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Guess The Score of 2009 Greek Cup final between AEK and Olympiakos(Including extra time if, there was any, but no penalties)",
+                    Answer1 = "3-3",
+                    Answer2 = "4-4",
+                    CorrectAnswer1 = "4-4",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Guess The Score",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Guess The Score of 2009 Greek Cup final between Asteras Tripolis and Olympiakos(Including extra time if, there was any, but no penalties)",
+                    Answer1 = "1-3",
+                    Answer2 = "1-2",
+                    CorrectAnswer1 = "1-3",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Medium",
+                    Category = "Guess The Score",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Guess The Score of 2006 World Cup final between Italy and France(Including extra time if, there was any, but no penalties)",
+                    Answer1 = "0-0",
+                    Answer2 = "1-1",
+                    CorrectAnswer1 = "1-1",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Hard",
+                    Category = "Guess The Score",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+
+                new Question_Field {                                                //Higher Lower
+                    Question = "Who has won the most Ballon d'Or trophies, Messi or Ronaldo?",
+                    Answer1 = "Messi",
+                    Answer2 = "Ronaldo",
+                    CorrectAnswer1 = "Messi",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Which team has won the most Premier League titles, Chelsea or Manchester City?",
+                    Answer1 = "Chelsea",
+                    Answer2 = "Manchester City",
+                    CorrectAnswer1 = "Manchester City",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Which team has won the most UEFA Europa League/UEFA Cup titles, Liverpool or Tottenham?",
+                    Answer1 = "Liverpool",
+                    Answer2 = "Tottenham",
+                    CorrectAnswer1 = "Liverpool",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Which team has won the most UEFA Europa League/UEFA Cup titles, Real Madrid or Juventus?",
+                    Answer1 = "Real Madrid",
+                    Answer2 = "Juventus",
+                    CorrectAnswer1 = "Juventus",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Who has scored the most goals in his career, Rafik Djebbour or Youssef El Arabi",
+                    Answer1 = "Rafik Djebbour",
+                    Answer2 = "Youssef El Arabi",
+                    CorrectAnswer1 = "Rafik Djebbour",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Who has scored the most goals in his career, Leonardo Bonucci or Giorgio Chiellini",
+                    Answer1 = "Leonardo Bonucci",
+                    Answer2 = "Giorgio Chiellini",
+                    CorrectAnswer1 = "Leonardo Bonucci",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Who has scored the most goals in his career, Roberto Carlos or Dani Alves",
+                    Answer1 = "Roberto Carlos",
+                    Answer2 = "Dani Alves",
+                    CorrectAnswer1 = "Roberto Carlos",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Who has the most clean sheet in his career, Petr Cech or Edwin van der Sar",
+                    Answer1 = "Petr Cech",
+                    Answer2 = "Edwin van der Sar",
+                    CorrectAnswer1 = "Edwin van der Sar",
+                    CorrectAnswer2 = "-",
+                    CorrectAnswer3 = "-",
+                    CorrectAnswer4 = "-",
+                    CorrectAnswer5 = "-",
+                    Level = "Easy",
+                    Category = "Higher Lower",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+
+                new Question_Field {                                                //Top5
+                    Question = "Name the top 5 scorers of Greek Super League 2022-2023, in regular season",
+                    Answer1 = "-",
+                    Answer2 = "-",
+                    CorrectAnswer1 = "Cédric Bakambu",
+                    CorrectAnswer2 = "Nikos Karelis",
+                    CorrectAnswer3 = "Levi Garcia",
+                    CorrectAnswer4 = "Pep Biel",
+                    CorrectAnswer5 = "Andraz Sporar",//Nordin Amrabat//Aitor Cantalapiedra//Rodrigo Erramuspe
+                    Level = "Hard",
+                    Category = "Top5",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Name the top 5 scorers of Greek Super League 2023-2024, in regular season",
+                    Answer1 = "-",
+                    Answer2 = "-",
+                    CorrectAnswer1 = "Ayoub El Kaabi",
+                    CorrectAnswer2 = "Loren Moron",
+                    CorrectAnswer3 = "Juan Miritello",
+                    CorrectAnswer4 = "Ognjen Ozegovic",
+                    CorrectAnswer5 = "Levi Garcia", //Ezequiel Ponce
+                    Level = "Hard",
+                    Category = "Top5",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Name the 5 most expensive transfers in Manchester City's history",
+                    Answer1 = "-",
+                    Answer2 = "-",
+                    CorrectAnswer1 = "Jack Grealish",
+                    CorrectAnswer2 = "Josko Gvardiol",
+                    CorrectAnswer3 = "Kevin De Bruyne",
+                    CorrectAnswer4 = "Rúben Dias",
+                    CorrectAnswer5 = "Rodri",
+                    Level = "Hard",
+                    Category = "Top5",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Name the top 5 scorers of Premier League 2022-2023",
+                    Answer1 = "-",
+                    Answer2 = "-",
+                    CorrectAnswer1 = "Erling Haaland",
+                    CorrectAnswer2 = "harry Kane",
+                    CorrectAnswer3 = "Ivan Toney",
+                    CorrectAnswer4 = "Mohamed Salah",
+                    CorrectAnswer5 = "Callum Wilson",
+                    Level = "Hard",
+                    Category = "Top5",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Name the top 5 scorers of all time in Premier League",
+                    Answer1 = "-",
+                    Answer2 = "-",
+                    CorrectAnswer1 = "Alan Shearer",
+                    CorrectAnswer2 = "Harry Kane",
+                    CorrectAnswer3 = "Wayne Rooney",
+                    CorrectAnswer4 = "Andy Cole",
+                    CorrectAnswer5 = "Sergio Aguero",
+                    Level = "Hard",
+                    Category = "Top5",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
+                },
+                new Question_Field {
+                    Question = "Name the 5 most expensive transfers in Barcelona's history",
+                    Answer1 = "-",
+                    Answer2 = "-",
+                    CorrectAnswer1 = "Philippe Coutinho",
+                    CorrectAnswer2 = "Ousmane Dembele",
+                    CorrectAnswer3 = "Antoine Griezmann",
+                    CorrectAnswer4 = "Neymar",
+                    CorrectAnswer5 = "Frenkie de Jong",
+                    Level = "Hard",
+                    Category = "Top5",
+                    Confirmed = "true",
+                    AuthorName = "admin",
+                    Author = account
                 },
             };
 
             await context.Questions.AddRangeAsync(questions);
             await context.SaveChangesAsync();
+            }
         }
     }
 }

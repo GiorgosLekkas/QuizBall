@@ -16,7 +16,7 @@ namespace Persistence {
 
             builder.Entity<QuestionAuthor>(x => x.HasKey(aa => new {aa.AccountId, aa.QuestionId}));
 
-            builder.Entity<QuestionAuthor>()
+            /*builder.Entity<QuestionAuthor>()
                 .HasOne(u => u.Account)
                 .WithMany(a => a.Questions)
                 .HasForeignKey(aa => aa.AccountId);
@@ -24,7 +24,12 @@ namespace Persistence {
             builder.Entity<QuestionAuthor>()
                 .HasOne(u => u.Question)
                 .WithMany(a => a.Authors)
-                .HasForeignKey(aa => aa.QuestionId);
+                .HasForeignKey(aa => aa.QuestionId);*/
+
+            builder.Entity<Question_Field>()
+                .HasOne(a => a.Author)
+                .WithMany(aa => aa.Questions)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

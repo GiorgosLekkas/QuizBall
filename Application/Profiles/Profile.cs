@@ -1,3 +1,4 @@
+using Application.Core.Questions;
 using Domain;
 
 namespace Application.Profiles {
@@ -10,5 +11,6 @@ namespace Application.Profiles {
         public string Gender { get; set; }
         public string Image { get; set; }
         public Photo Photo { get; set; }
+        public ICollection<Question_Field> Questions { get; set; } = new List<Question_Field>();
     }
 }

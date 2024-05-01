@@ -15,6 +15,6 @@ namespace Application.Core.Questions {
         public string Category { get; set; }
         public string Confirmed { get; set; }
         public string AuthorName { get; set; }
-        public ICollection<Profile> Authors { get; set; }
+        public Profile Author { get; set; }
     }
 }

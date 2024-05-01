@@ -19,6 +19,8 @@ import SelectCategories from "../../features/game/SelectCategories";
 import RequireGameStart from "./RequireGameStart";
 import ActiveGame from "../../features/errors/ActiveGame";
 import CoinFlip from "../../features/game/CoinFlip";
+import RequireCoinFlip from "./RequireCoinFlip";
+import CategorySelectionOnGoing from "../../features/errors/CategorySelectionOnGoing";
 
 
 export const routes: RouteObject[] = [
@@ -35,14 +37,16 @@ export const routes: RouteObject[] = [
             {element: <RequireAuth />, children: [
                 {path: 'questionpopup', element: <QuestionPopUp />},
                 {path: 'profile/:userName', element: <ProfilePage />},
-                {path: 'categories_selection', element: <SelectCategories />},
+                {path: 'coinflip', element: <CoinFlip />},
             ]},
             {element: <RequireGameStart />, children: [
                 {path: 'game', element: <Game />},
                 {path: 'qpopup/:id', element: <QuestionPopUp key = 'manage' />}
             ]},
+            {element: <RequireCoinFlip />, children: [
+                {path: 'categories_selection', element: <SelectCategories />},
+            ]},
             {path: '', element: <HomePage />},
-            {path: 'coinflip', element: <CoinFlip />},
             {path: 'homepage', element: <HomePage />},
             {path: 'signup', element: <SignUpForm />},
             {path: 'login', element: <LoginForm key='manage'/>},
@@ -51,6 +55,7 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError />},
             {path: 'accessdenied', element: <AccessDenied />},
             {path: 'activegame', element: <ActiveGame />},
+            {path: 'category_selection_is_going', element: <CategorySelectionOnGoing />},
             {path: '*', element: <Navigate replace to='/not-found' />},
         ],
     }

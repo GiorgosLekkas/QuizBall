@@ -72,29 +72,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Questions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Question = table.Column<string>(type: "TEXT", nullable: true),
-                    Answer1 = table.Column<string>(type: "TEXT", nullable: true),
-                    Answer2 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnswer1 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnswer2 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnswer3 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnswer4 = table.Column<string>(type: "TEXT", nullable: true),
-                    CorrectAnswer5 = table.Column<string>(type: "TEXT", nullable: true),
-                    Level = table.Column<string>(type: "TEXT", nullable: true),
-                    Category = table.Column<string>(type: "TEXT", nullable: true),
-                    Confirmed = table.Column<string>(type: "TEXT", nullable: true),
-                    AuthorName = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -236,6 +213,36 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Question = table.Column<string>(type: "TEXT", nullable: true),
+                    Answer1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Answer2 = table.Column<string>(type: "TEXT", nullable: true),
+                    CorrectAnswer1 = table.Column<string>(type: "TEXT", nullable: true),
+                    CorrectAnswer2 = table.Column<string>(type: "TEXT", nullable: true),
+                    CorrectAnswer3 = table.Column<string>(type: "TEXT", nullable: true),
+                    CorrectAnswer4 = table.Column<string>(type: "TEXT", nullable: true),
+                    CorrectAnswer5 = table.Column<string>(type: "TEXT", nullable: true),
+                    Level = table.Column<string>(type: "TEXT", nullable: true),
+                    Category = table.Column<string>(type: "TEXT", nullable: true),
+                    Confirmed = table.Column<string>(type: "TEXT", nullable: true),
+                    AuthorName = table.Column<string>(type: "TEXT", nullable: true),
+                    AuthorId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuestionAuthor",
                 columns: table => new
                 {
@@ -306,6 +313,11 @@ namespace Persistence.Migrations
                 name: "IX_QuestionAuthor_QuestionId",
                 table: "QuestionAuthor",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_AuthorId",
+                table: "Questions",
+                column: "AuthorId");
         }
 
         /// <inheritdoc />
@@ -339,10 +351,10 @@ namespace Persistence.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Photos");

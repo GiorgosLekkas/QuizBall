@@ -10,7 +10,7 @@ export default observer(function NavBar() {
     const {accountStore: {user, logout, getRole}, modalStore} = useStore();
     const {questionStore} = useStore();
 
-    const {questionRegistry, loadQuestions, isSet} = questionStore;
+    const {questionRegistry, loadQuestions, isSet, coinflip} = questionStore;
 
     useEffect(() => {
         if(questionRegistry.size <= 1) {
@@ -35,10 +35,10 @@ export default observer(function NavBar() {
                         <Menu.Item as = {Link} to = '/users' name = 'Users' />
                     </>
                 )}
-                <Menu.Item as = {Link} to = '/categories_selection' name = 'Game' />
+                <Menu.Item as = {Link} to = '/coinflip' name = 'Game' />
                 <Menu.Item 
                     onClick = {() => modalStore.openModal(<QuestionForm origin = {"create"}/>)}
-                    disabled = {isSet}
+                    disabled = {isSet || coinflip}
                     to = '/createQuestion'
                     positive
                     content = "Submit Question"

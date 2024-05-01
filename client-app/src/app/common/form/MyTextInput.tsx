@@ -16,7 +16,7 @@ export default function MyTextInput(props: Props) {
             <label>{props.label}</label>
             <input {...field} {...props} />
             {meta.touched && meta.error ? (
-                <Label basic color = 'red' > {meta.error} </Label>
+                <Label className = "error_mes" basic color = 'red' > {meta.error} </Label>
             ): null}
         </Form.Field>
     )

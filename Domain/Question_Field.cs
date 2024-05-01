@@ -13,7 +13,7 @@ namespace Domain {
         public string Category { get; set; }
         public string Confirmed { get; set; }
         public string AuthorName { get; set; }
-        public ICollection<QuestionAuthor> Authors { get; set; } = new List<QuestionAuthor>();
+        public Account Author { get; set; }
         //public ICollection<Photo> Photos { get; set; }
     }
 }

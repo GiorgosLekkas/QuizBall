@@ -35,8 +35,7 @@ export default function SelectCategoriess() {
 
         questionStore.categories = Object.entries(checkboxes).filter(([name, isChecked]) => isChecked).map(([name]) => name);
 
-        console.log("Selected checkboxes:", Object.entries(checkboxes).filter(([name, isChecked]) => isChecked).map(([name]) => name));
-        if(questionStore.categories.length === 9){
+        if(questionStore.categories.length === 5){
             questionStore.gameQuestions();
             navigate(`/game`);
         }

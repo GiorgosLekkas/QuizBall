@@ -70,7 +70,7 @@ export default observer(function QuestionForm({origin}:Props) {
         answer2: Yup.string().required('Answer 2 is required'), 
         correctAnswer1: Yup.string().required('Correct Answer is required'),
         level: Yup.string().required('Level is required'),
-        category: Yup.string().required('Level is required')
+        category: Yup.string().required('Category is required')
     })
 
     const validationSchemaUser = Yup.object({
@@ -130,7 +130,6 @@ export default observer(function QuestionForm({origin}:Props) {
                                 <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer3'/>
                                 <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer4'/>
                                 <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer5'/>
-                                <MySelectInput options = {levelOptions} placeholder = 'Level' name = 'level'/>
                                 <MySelectInput options = {categoryOptions} placeholder = 'Category' name = 'category'/>
                             </>
                         }

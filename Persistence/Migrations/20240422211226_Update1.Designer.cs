@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240406001049_Update1")]
+    [Migration("20240422211226_Update1")]
     partial class Update1
     {
         /// <inheritdoc />
@@ -202,6 +202,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Answer2")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("AuthorName")
                         .HasColumnType("TEXT");
 
@@ -233,6 +236,8 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Questions");
                 });
@@ -377,13 +382,13 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.QuestionAuthor", b =>
                 {
                     b.HasOne("Domain.Account", "Account")
-                        .WithMany("Questions")
+                        .WithMany()
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Question_Field", "Question")
-                        .WithMany("Authors")
+                        .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -391,6 +396,16 @@ namespace Persistence.Migrations
                     b.Navigation("Account");
 
                     b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("Domain.Question_Field", b =>
+                {
+                    b.HasOne("Domain.Account", "Author")
+                        .WithMany("Questions")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -447,11 +462,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Account", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("Domain.Question_Field", b =>
-                {
-                    b.Navigation("Authors");
                 });
 #pragma warning restore 612, 618
         }

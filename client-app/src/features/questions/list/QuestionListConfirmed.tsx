@@ -81,7 +81,7 @@ export default observer(function QuestionListConfirmed() {
                                                 <GridColumn><div>{q.correctAnswer4}</div> </GridColumn>
                                             </GridRow>
                                             <GridRow>
-                                                <GridColumn><div>Correct Answe5:</div> </GridColumn>
+                                                <GridColumn><div>Correct Answer5:</div> </GridColumn>
                                                 <GridColumn><div>{q.correctAnswer5}</div> </GridColumn>
                                             </GridRow>
                                         </>
@@ -89,6 +89,10 @@ export default observer(function QuestionListConfirmed() {
                                     <GridRow>
                                         <GridColumn><div>Author:</div> </GridColumn>
                                         <GridColumn><div>{q.authorName}</div> </GridColumn>
+                                    </GridRow>
+                                    <GridRow>
+                                        <GridColumn><div>Auth:</div> </GridColumn>
+                                        <GridColumn><div>{q.author?.userName}</div> </GridColumn>
                                     </GridRow>
                                 </Grid>
                                 <Item.Extra>

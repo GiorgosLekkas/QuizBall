@@ -1,4 +1,5 @@
-import { Author } from "./Authror"
+import { Account } from "./Account"
+import { Profile } from "./Profile"
 
 export interface IQuestion {
     id: string
@@ -14,7 +15,7 @@ export interface IQuestion {
     confirmed: string
     category: string
     authorName?: string
-    authors?: Author[]
+    author?: Profile
 }
 
 export class Question implements IQuestion{
@@ -47,7 +48,7 @@ export class Question implements IQuestion{
     confirmed: string
     category: string
     authorName?: string
-    authors?: Author[]
+    author?: Profile
 }
 
 export class QuestionFormValues {

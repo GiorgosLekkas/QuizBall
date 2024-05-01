@@ -2,8 +2,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Question, QuestionFormValues } from "../models/Question";
 //import {v4 as uuid} from 'uuid';
-import { Author } from "../models/Authror";
 import { store } from "./store";
+import { Profile } from "../models/Profile";
 
 export default class QuestionStore {
 
@@ -21,6 +21,9 @@ export default class QuestionStore {
     questionEasy: Question | undefined = undefined;
     questionMedium: Question | undefined = undefined;
     questionHard: Question | undefined = undefined;
+    player1: boolean = false;
+    player2: boolean = false;
+    coinflip: boolean = false;
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -30,24 +33,30 @@ export default class QuestionStore {
     }
 
     get isSet() {
-        if(this.categories.length === 9)
+        if(this.categories.length === 5)
             return true;
         return false;
     }
 
     endGame(){
         this.categories = [];
+        this.player1 = false;
+        this.player2 = false;
+        this.coinflip = false;
     }
 
     easyButton(str: string) {
+        this.changePlayer();
         this.buttons.set(str, false);
     }
 
     mediumButton(str: string) {
+        this.changePlayer();
         this.buttons.set(str, false);
     }
 
     hardButton(str: string) {
+        this.changePlayer();
         this.buttons.set(str, false);
     }
 
@@ -73,38 +82,88 @@ export default class QuestionStore {
             this.medium.clear();
             this.hard.clear();
             this.confirmed.forEach((value: Question, key: string) => {
-                if(value.level === "Easy" && category === value.category)
+                if(value.level === "Easy" && category === value.category) 
                     this.easy.set(value.id, value);
                 if(value.level === "Medium" && category === value.category)
                     this.medium.set(value.id, value);
                 if(value.level === "Hard" && category === value.category)
                     this.hard.set(value.id, value);
             });
-    
-            let ekeys: string[] = new Array;
-            ekeys = Array.from(this.easy.keys());
-            let ne: number = Math.floor(Math.random() * ekeys.length);
-            this.questionEasy = this.easy.get(ekeys[ne]);
-    
-            let mkeys: string[] = new Array;
-            mkeys = Array.from(this.medium.keys());
-            let nm: number = Math.floor(Math.random() * mkeys.length);
-            this.questionMedium = this.medium.get(mkeys[nm]);
-    
-            let hkeys: string[] = new Array;
-            hkeys = Array.from(this.hard.keys());
-            let nh: number = Math.floor(Math.random() * hkeys.length);
-            this.questionHard = this.hard.get(hkeys[nh]);
 
-            if(this.questionEasy) this.allQuestions.set(category + ' easy',this.questionEasy);
-            if(this.questionMedium) this.allQuestions.set(category + ' medium',this.questionMedium);
-            if(this.questionHard) this.allQuestions.set(category + ' hard',this.questionHard);
+            
+            if(category === 'Higher Lower'){
+                for (var i = 0; i < 3; i++) {
+                    let ekeys: string[] = new Array;
+                    ekeys = Array.from(this.easy.keys());
+                    let ne: number = Math.floor(Math.random() * ekeys.length);
+                    this.questionEasy = this.easy.get(ekeys[ne]);
+                    this.easy.delete(ekeys[ne]);
+                    var q = new Question(this.questionEasy!);
+                    q!.level = 'Easy_' + (i+1);
 
-            this.buttons.set(category + ' Easy', true);
-            this.buttons.set(category + ' Medium', true);
-            this.buttons.set(category + ' Hard', true);
+                    if(q) this.allQuestions.set(category + ' easy_' + (i+1), q);
+                    this.buttons.set(category + ' Easy_' + (i+1), true);
+                }
+            }else if(category === 'Top5' || category === 'Who Is Missing'){
+                for (var i = 0; i < 3; i++) {
+                    let hkeys: string[] = new Array;
+                    hkeys = Array.from(this.hard.keys());
+                    let nh: number = Math.floor(Math.random() * hkeys.length);
+                    this.questionHard = this.hard.get(hkeys[nh]);
+                    this.hard.delete(hkeys[nh]);
+                    var q = new Question(this.questionHard!);
+                    q!.level = 'Hard_' + (i+1);
+
+                    if(q) this.allQuestions.set(category + ' hard_' + (i+1), q);
+                    this.buttons.set(category + ' Hard_' + (i+1), true);
+                }
+            }else {
+                let ekeys: string[] = new Array;
+                ekeys = Array.from(this.easy.keys());
+                let ne: number = Math.floor(Math.random() * ekeys.length);
+                this.questionEasy = this.easy.get(ekeys[ne]);
+        
+                let mkeys: string[] = new Array;
+                mkeys = Array.from(this.medium.keys());
+                let nm: number = Math.floor(Math.random() * mkeys.length);
+                this.questionMedium = this.medium.get(mkeys[nm]);
+        
+                let hkeys: string[] = new Array;
+                hkeys = Array.from(this.hard.keys());
+                let nh: number = Math.floor(Math.random() * hkeys.length);
+                this.questionHard = this.hard.get(hkeys[nh]);
+    
+                if(this.questionEasy) this.allQuestions.set(category + ' easy',this.questionEasy);
+                if(this.questionMedium) this.allQuestions.set(category + ' medium',this.questionMedium);
+                if(this.questionHard) this.allQuestions.set(category + ' hard',this.questionHard);
+    
+                this.buttons.set(category + ' Easy', true);
+                this.buttons.set(category + ' Medium', true);
+                this.buttons.set(category + ' Hard', true);
+            }
         });
+    }
 
+    changePlayer(){
+        if(this.player1){
+            this.player1 = false;
+            this.player2 = true;
+        }else {
+            this.player2 = false;
+            this.player1 = true;
+        }
+    }
+
+    setPlayer(result: string){
+        if(result === 'heads') {
+            this.player1 = true;
+            this.player2 = false;
+        }else if(result === 'tails') {
+            this.player1 = false;
+            this.player2 = true;
+        }
+        this.coinflip = true;
+        console.log(result);
     }
 
     get allQuestionsGame() {
@@ -230,8 +289,8 @@ export default class QuestionStore {
             await agent.Questions.create(question);
             const newQuestion = new Question(question);
             newQuestion.authorName = user!.userName;
-            const profile = new Author(user!, question);
-            newQuestion.authors = [profile];
+            const profile = new Profile(user!);
+            newQuestion.author = profile;
             runInAction(() => {
                 this.selectedQuestion = newQuestion;
                 this.setActivity(newQuestion);

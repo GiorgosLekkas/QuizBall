@@ -16,14 +16,15 @@ export default function MyTextInput(props: Props) {
             <label>{props.label}</label>
             <Select
                 clearable
+                selection
                 options = {props.options}
                 value = {field.value || null}
                 onChange = {(e, d) => helpers.setValue(d.value)}
-                onBlur = {() => helpers.setTouched(true)}
+                //onBlur = {() => helpers.setTouched(true)}
                 placeholder = {props.placeholder}
             />
             {meta.touched && meta.error ? (
-                <Label basic color = 'red' > {meta.error} </Label>
+                <Label className = "error_mes" basic color = 'red' > {meta.error} </Label>
             ): null}
         </Form.Field>
     )

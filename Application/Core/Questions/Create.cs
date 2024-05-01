@@ -28,7 +28,7 @@ namespace Application.Core.Questions {
                     QuestionId = request.New_Question.Id,
                     IsAuthor = true
                 };
-                request.New_Question.Authors.Add(author);
+                request.New_Question.Author = user;
 
                 context.Questions.Add(request.New_Question);
 

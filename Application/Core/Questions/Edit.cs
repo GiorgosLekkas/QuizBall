@@ -40,8 +40,7 @@ namespace Application.Core.Questions {
                     IsAuthor = true
                 };
 
-                request.Update_Question.Authors.Clear();
-                request.Update_Question.Authors.Add(author);
+                request.Update_Question.Author = request.Author;
 
                 context.Questions.Remove(question);
                 var result = await context.SaveChangesAsync() > 0;
