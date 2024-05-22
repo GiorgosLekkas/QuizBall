@@ -26,19 +26,19 @@ function App() {
   if(!commonStore.appLoaded) return <LoadingComponent content = 'Loading app...' />
 
   return (
-    <>
+    <div className = "masthead_white">
       <ScrollRestoration />
       <ModalContainer/>
       <ToastContainer position='bottom-right' hideProgressBar theme = 'colored'/>
       {location.pathname === '/' ? <HomePage/> :(
         <>
           <NavBar/>
-            <Container style = {{marginTop: '7em'}}>
+            <Container >
               <Outlet />
             </Container>
         </>
       )}
-    </>
+    </div>
   )
 }
 

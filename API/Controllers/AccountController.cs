@@ -62,7 +62,14 @@ namespace API.Controllers {
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
                 Role = registerDto.Role,
-                Gender = registerDto.Gender
+                Gender = registerDto.Gender,
+                /*GamesPlayed = registerDto.GamesPlayed,
+                Won = registerDto.Won,
+                Drawn = registerDto.Drawn,
+                Lost = registerDto.Lost,
+                Plus = registerDto.Plus,
+                Minus = registerDto.Minus,
+                Plus_Minus = registerDto.Plus - registerDto.Minus,*/
             };
 
             var result = await userManager.CreateAsync(user, registerDto.Password);
@@ -100,6 +107,15 @@ namespace API.Controllers {
             user.LastName = account.LastName;
             user.Gender = account.Gender;
             user.Role = account.Role;
+            user.GamesPlayed = account.GamesPlayed;
+            user.Won = account.Won;
+            user.Drawn = account.Drawn;
+            user.Lost = account.Lost;
+            user.Plus = account.Plus;
+            user.Minus = account.Minus;
+            user.Plus_Minus = account.Plus_Minus;
+            user.Winrate = account.Winrate;
+            user.TotalPoints = account.TotalPoints;
             var result = await userManager.UpdateAsync(user);
             if(result.Succeeded)
                 return Ok();
@@ -123,6 +139,15 @@ namespace API.Controllers {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Gender = user.Gender,
+                GamesPlayed = user.GamesPlayed,
+                Won = user.Won,
+                Drawn = user.Drawn,
+                Lost = user.Lost,
+                Plus = user.Plus,
+                Minus = user.Minus,
+                Plus_Minus = user.Plus - user.Minus,
+                Winrate = user.Winrate,
+                TotalPoints = user.TotalPoints,
                 Token = tokenService.CreateToken(user),
             };
 

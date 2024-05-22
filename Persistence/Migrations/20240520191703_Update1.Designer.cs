@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240422211226_Update1")]
+    [Migration("20240520191703_Update1")]
     partial class Update1
     {
         /// <inheritdoc />
@@ -32,6 +32,9 @@ namespace Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Drawn")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -41,6 +44,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("GamesPlayed")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Gender")
                         .HasColumnType("TEXT");
@@ -53,6 +59,12 @@ namespace Persistence.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Lost")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Minus")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -74,11 +86,20 @@ namespace Persistence.Migrations
                     b.Property<string>("PhotoId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Plus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Plus_Minus")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Role")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("TotalPoints")
+                        .HasColumnType("REAL");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
@@ -86,6 +107,12 @@ namespace Persistence.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("Winrate")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("Won")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

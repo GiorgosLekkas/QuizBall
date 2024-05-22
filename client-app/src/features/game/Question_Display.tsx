@@ -2,7 +2,6 @@ import { observer } from "mobx-react-lite";
 import { Button, Item, Image, Segment, Header } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 interface Props {
     category?: string
@@ -10,33 +9,34 @@ interface Props {
 
 export default observer(function Question_Display({category}: Props) {
 
-    const {questionStore } = useStore();
-    const {openForm, allQuestionsGame, buttons, changePlayer} = questionStore;
+    const {questionStore, gameStore} = useStore();
+    const {openForm, allQuestionsGame} = gameStore;
+    const {buttons} = gameStore;
 
     const navigate = useNavigate();
  
     function openQuestion(id: string, level: string) {
         questionStore.selectQuestion(id!);
         if(level === 'Easy')
-            questionStore.easyButton(category + ' Easy');
+            gameStore.easyButton(category + ' Easy');
         else if (level === 'Medium')
-            questionStore.mediumButton(category + ' Medium');
+            gameStore.mediumButton(category + ' Medium');
         else if(level === 'Hard')
-            questionStore.hardButton(category + ' Hard');
+            gameStore.hardButton(category + ' Hard');
 
         if(level === 'Easy_1' && category === 'Higher Lower')
-            questionStore.easyButton(category + ' Easy_1');
+            gameStore.easyButton(category + ' Easy_1');
         else if(level === 'Easy_2' && category === 'Higher Lower') 
-            questionStore.easyButton(category + ' Easy_2');
+            gameStore.easyButton(category + ' Easy_2');
         else if(level === 'Easy_3' && category === 'Higher Lower') 
-            questionStore.easyButton(category + ' Easy_3');
+            gameStore.easyButton(category + ' Easy_3');
 
         if(level === 'Hard_1' && category === 'Top5')
-            questionStore.hardButton(category + ' Hard_1');
+            gameStore.hardButton(category + ' Hard_1');
         else if(level === 'Hard_2' && category === 'Top5') 
-            questionStore.hardButton(category + ' Hard_2');
+            gameStore.hardButton(category + ' Hard_2');
         else if(level === 'Hard_3' && category === 'Top5') 
-            questionStore.hardButton(category + ' Hard_3');
+            gameStore.hardButton(category + ' Hard_3');
 
         openForm(id);
         navigate(`/qpopup/${id}`)

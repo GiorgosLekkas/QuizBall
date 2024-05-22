@@ -4,17 +4,19 @@ import Question_Display from "./Question_Display";
 import { useStore } from "../../app/stores/store";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import ScoreBoard from "./ScoreBoard";
 
 export default observer( function Game() {
 
-    const {questionStore} = useStore();
+    const {gameStore} = useStore();
 
     const navigate = useNavigate();
-    const {buttons, player1} = questionStore;
+    const {buttons, player1} = gameStore;
 
-    function endGame(){
-        questionStore.endGame();
-        navigate('/');
+
+    function endGame() {
+        gameStore.endGame();
+        navigate('/winner');
     }
 
     useEffect(() => {
@@ -25,39 +27,39 @@ export default observer( function Game() {
         });
         if(i === 15) {
             endGame();
-            navigate(`/`);
         }
     }, [])
 
     return(
         <>
-            <Segment>
-                <Header as = 'h1' content = {player1 ? "Player1" : "Player2"} color = 'black' textAlign = 'center' style = {{paddingBottom: '10px'}} />
+            <Segment style = {{marginTop: '7em'}}>
+                <ScoreBoard />
+                <Header as = 'h1' content = {player1 ? `${gameStore.user1}'s turn` : `${gameStore.user2}'s turn`} color = 'black' textAlign = 'center' style = {{paddingBottom: '10px'}} />
                 <Grid columns='three' width = "5">
                     <GridRow>
                         <GridColumn>
-                            <Question_Display category = {questionStore.categories[0]}/>
+                            <Question_Display category = {gameStore.categories[0]}/>
                         </GridColumn>
                         <GridColumn>
-                            <Question_Display category = {questionStore.categories[1]}/>
+                            <Question_Display category = {gameStore.categories[1]}/>
                         </GridColumn>
                         <GridColumn>
-                            <Question_Display category = {questionStore.categories[2]}/>
+                            <Question_Display category = {gameStore.categories[2]}/>
                         </GridColumn>
                     </GridRow>
                 </Grid>
                 <Grid columns='three' width = "5">
                     <GridRow>
                         <GridColumn>
-                            <Question_Display category = {questionStore.categories[3]}/>
+                            <Question_Display category = {gameStore.categories[3]}/>
                         </GridColumn>
                         <GridColumn>
-                            <Question_Display category = {questionStore.categories[4]}/>
+                            <Question_Display category = {gameStore.categories[4]}/>
                         </GridColumn>
                     </GridRow>
                 </Grid>
                 <Button onClick={ () => endGame()} content = 'End Game' />
             </Segment>
-        </> 
+        </>
     );
 })

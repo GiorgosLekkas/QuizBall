@@ -20,7 +20,7 @@ const useCoinFlip = () => {
 const CoinFlip: React.FC = () => {
     const { result, flipCoin } = useCoinFlip();
     const [isFlipping, setIsFlipping] = useState<boolean>(false);
-    const {questionStore} = useStore();
+    const {gameStore} = useStore();
     const navigate = useNavigate();
 
     const handleFlip = () => {
@@ -33,38 +33,40 @@ const CoinFlip: React.FC = () => {
 
     const startGame = () => {
         if(result)
-            questionStore.setPlayer(result);
+            gameStore.setPlayer(result);
         navigate("/categories_selection");
     };
 
     return (
-        <Segment>
-            <Header content = "Coin Flip Game" as = 'h1' textAlign = 'center' />
-            {!result && (
-                <Button color = 'green' onClick = {handleFlip} disabled = {isFlipping}>
-                    {isFlipping ? 'Flipping...' : 'Flip Coin'}
-                </Button>
-            )}
-            <div className = {`coin ${isFlipping ? 'flipping' : ''}`}>
-                <div className="coin-inner">
-                    {result==='heads' && (
-                        <div className="coin-front">
-                            <Image style = {{width: '250px', height: '250px'}} src = "/assets/heads.png" alt = "heads" />
-                        </div>
-                    )} { result==='tails' && (
-                        <div className="coin-back">
-                            <Image style = {{width: '250px', height: '250px'}} src = "/assets/tails.png" alt = "tails" />
-                        </div>
-                    )}
+        <div >
+            <Segment style = {{marginTop: '7em'}} >
+                <Header content = "Coin Flip Game" as = 'h1' textAlign = 'center' />
+                {!result && (
+                    <Button color = 'green' onClick = {handleFlip} disabled = {isFlipping}>
+                        {isFlipping ? 'Flipping...' : 'Flip Coin'}
+                    </Button>
+                )}
+                <div className = {`coin ${isFlipping ? 'flipping' : ''}`}>
+                    <div className="coin-inner">
+                        {result==='heads' && (
+                            <div className="coin-front">
+                                <Image style = {{width: '250px', height: '250px'}} src = "/assets/heads.png" alt = "heads" />
+                            </div>
+                        )} { result==='tails' && (
+                            <div className="coin-back">
+                                <Image style = {{width: '250px', height: '250px'}} src = "/assets/tails.png" alt = "tails" />
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-            {result && (
-                <div>
-                    <p style={{marginTop:'500px'}}>The result is: {result} </p>
-                    <Button color = 'green' onClick = {startGame}>Start Game</Button>
-                </div>
-            )}
-        </Segment>
+                {result && (
+                    <div>
+                        <p style={{marginTop:'500px'}}>The result is: {result} </p>
+                        <Button color = 'green' onClick = {startGame}>Start Game</Button>
+                    </div>
+                )}
+            </Segment>
+        </div>
     );
 };
 

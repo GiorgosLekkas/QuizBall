@@ -136,7 +136,8 @@ export default observer(function QuestionForm({origin}:Props) {
                         <MySelectInput options = {levelOptions} placeholder = 'Level' name = 'level'/>
                         <Button 
                             disabled = {isSubmitting || !isValid || !dirty } 
-                            loading = {isSubmitting} floated = 'right'
+                            loading = {isSubmitting} 
+                            floated = 'right'
                             positive type = 'submit'
                             content = 'Submit'
                         />

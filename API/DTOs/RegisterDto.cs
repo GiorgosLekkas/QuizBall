@@ -19,5 +19,12 @@ namespace API.DTOs {
         public string Role { get; set; }
         [Required]
         public string Gender { get; set; }
+        /*public int GamesPlayed { get; set; }
+        public int Won { get; set; }
+        public int Drawn { get; set; }
+        public int Lost { get; set; }
+        public int Plus { get; set; }
+        public int Minus { get; set; }
+        public int Plus_Minus { get; set; }*/
     }
 }

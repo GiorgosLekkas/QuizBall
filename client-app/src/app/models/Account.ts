@@ -6,6 +6,15 @@ export interface IAccount {
   firstName?: string
   lastName?: string
   gender?: string
+  gamesPlayed?: number
+  won?: number
+  drawn?: number
+  lost?: number
+  plus?: number
+  minus?: number
+  winrate?: number
+  plus_minus?: number
+  totalPoints: number
   role?: string
   token?: string
   image?: string
@@ -22,6 +31,15 @@ export interface AccountFormValues {
   role?: string
   token?: string
   image?: string
+  gamesPlayed?: number
+  won?: number
+  drawn?: number
+  lost?: number
+  plus?: number
+  minus?: number
+  winrate?: number
+  plus_Minus?: number
+  totalPoints?: number
 }
 
 export class Account implements IAccount{
@@ -34,6 +52,15 @@ export class Account implements IAccount{
       this.lastName = init.lastName!
       this.gender = init.gender!
       this.role = init.role!
+      this.gamesPlayed = init.gamesPlayed!
+      this.won = init.won!
+      this.drawn = init.drawn!
+      this.lost = init.lost!
+      this.plus = init.plus!
+      this.minus = init.minus!
+      this.plus_Minus = init.plus_Minus!
+      this.winrate = init.winrate!
+      this.totalPoints = init.totalPoints!
   }
 
   id: string
@@ -46,6 +73,15 @@ export class Account implements IAccount{
   role: string
   token?: string
   image?: string
+  gamesPlayed?: number
+  won: number
+  drawn?: number
+  lost?: number
+  plus?: number
+  minus?: number
+  winrate: number
+  plus_Minus: number
+  totalPoints: number
 }
 
 export class AccountFormValues {
@@ -56,6 +92,15 @@ export class AccountFormValues {
   firstName?: string = ''
   lastName?: string = ''
   gender?: string = ''
+  gamesPlayed?: number = 0
+  won?: number = 0
+  drawn?: number = 0
+  lost?: number = 0
+  plus?: number = 0
+  minus?: number = 0
+  winrate?: number = 0
+  plus_Minus?: number = 0
+  totalPoints?: number = 0
   role?: string = ''
 
   constructor(user?: AccountFormValues){
@@ -66,6 +111,15 @@ export class AccountFormValues {
         this.password = user.password;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
+        this.gamesPlayed = user.gamesPlayed;
+        this.won = user.won;
+        this.drawn = user.drawn;
+        this.lost = user.lost;
+        this.plus = user.plus;
+        this.minus = user.minus;
+        this.winrate = user.winrate;
+        this.plus_Minus = user.plus_Minus;
+        this.totalPoints = user.totalPoints;
         this.gender = user.gender;
         this.role = user.role;
       }

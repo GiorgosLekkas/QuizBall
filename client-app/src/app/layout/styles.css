@@ -1,9 +1,27 @@
 body{
-    background-color: #eaeaea !important;
+  background-color: #eaeaea !important;
 }
 
-.ui.inverted.top.fixed.menu {
-    background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 10%, #105f7a  60%) !important;
+.v1 {
+  background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 10%, #105f7a  60%) !important;
+  /*background: none !important;
+  background: transparent !important;
+  box-shadow: inset 0 0 0 2000px rgba(16, 95, 122, 0.8) !important;*/
+}
+
+.v2 {
+  background: none !important;
+  background: transparent !important;
+  /*background-color: #111111 !important;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 1) !important;*/
+}
+
+.hero_context {
+  background-color: #eaeaea !important;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.8) !important;
+  display:inherit;
+  align-items: center !important;
+  height: 150vh;
 }
 
 .react-calendar {
@@ -15,11 +33,22 @@ body{
 /*home page styles*/
 
 .masthead {
-  display: flex;
+  display:inherit;
   align-items: center !important;
-  background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%) !important;
+  /*background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%);*/
+  background: url('assets/homepage.png') center center/cover no-repeat !important;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.9) !important;
   height: 100vh;
 }
+
+/*.masthead_white {
+  display:inherit;
+  align-items: center !important;
+  /*background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%);
+  background: url('assets/homepage4.png') center center/cover no-repeat !important;
+  box-shadow: inset 0 0 0 2000px rgba(233, 233, 233, 0.9) !important;
+  height: 103vh;
+}*/
 
 .masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {
@@ -343,30 +372,150 @@ body{
   border-color: #974B00!important;
 }
 
-.segment_popup{
-  margin-top: -30px !important;
-  width: auto!important;
-  height: 250px !important;
-  border: 1px solid!important;
-  border-radius: 2px;
-  border-width: 2px!important;
+.header_text{
+  color: #fff !important;
 }
 
 .header_popup{
-  margin-top: -14px !important;
-  margin-left: -14px !important;
-  margin-right: -14px !important;
-  height: 45px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
   text-align: left !important;
   color: #fff !important;
-  border: 1px solid!important;
 }
+
+.hpop_Geography {
+  background-image: linear-gradient(135deg, #57AFCE 0%, #2596BE 38.5%)!important;
+}
+
+.hpop_History {
+  background-image: linear-gradient(135deg, #F3D89F 0%, #EBC36C 38.5%)!important;
+}
+
+.hpop_Top5 {
+  background-image: linear-gradient(135deg, #8991EB 0%, #6873E5 38.5%)!important;
+}
+
+.hpop_Gossip {
+  background-image: linear-gradient(135deg, #FD9C6D 0%, #FB7839 38.5%)!important;
+}
+
+.hpop_GuessTheScore {
+  background-image: linear-gradient(135deg, #667F68 0%, #48654A 38.5%)!important;
+}
+
+.hpop_GuessThePlayer {
+  background-image: linear-gradient(135deg, #A04040 0%, #902020 38.5%)!important;
+}
+
+.hpop_LogoQuiz {
+  background-image: linear-gradient(135deg, #3E5269 0%, #263D57 38.5%)!important;
+}
+
+.hpop_Managerid {
+  background-image: linear-gradient(135deg, #9D98B7 0%, #7C759F 38.5%)!important;
+}
+
+.hpop_Playerid {
+  background-image: linear-gradient(135deg, #65B5BA 0%, #319CA2 38.5%)!important;
+}
+
+.hpop_WhoIsMissing {
+  background-image: linear-gradient(135deg, #54C08A 0%, #15A85F 38.5%)!important;
+}
+
+.hpop_HigherLower {
+  background-image: linear-gradient(135deg, #FF708E 0%, #FF204F 38.5%)!important;
+}
+
+.hpop_FindTheStadium {
+  background-image: linear-gradient(135deg, #75777A 0%, #3D4144 38.5%)!important;
+}
+
+.hpop_FindPlayerByPhoto {
+  background-image: linear-gradient(135deg, #8667A4 0%, #552980 38.5%)!important;
+}
+
+.hpop_FansQuestion {
+  background-image: linear-gradient(135deg, #BE8F60 0%, #9E5710 38.5%)!important;
+}
+
 .icon_popup{
   width: 38px!important;
   height: 38px!important;
   margin-left: 10px!important;
   margin-right: 10px!important;
 }
+
+.modal_description{
+  padding-top: 15px !important;
+  padding-right: 40px !important;
+  padding-left: 40px !important;
+}
+
+.modal_actions{
+  height: 65px !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  padding-right: 15px !important;
+}
+
+.spop_History{
+  background-image: linear-gradient( 135deg, #F9F0D5 0%, #F6E8C0 50%)!important;
+}
+
+.spop_Geography{
+  background-image: linear-gradient( 135deg, #C9E5EF 0%, #92CBDF 50%)!important;
+}
+
+.spop_Top5{
+  background-image: linear-gradient( 135deg, #D4D7F8 0%, #BFC3F4 50%)!important;
+}
+
+.spop_Gossip{
+  background-image: linear-gradient( 135deg, #FED9C7 0%, #FDB28E 50%)!important;
+}
+
+.spop_GuessTheScore {
+  background-image: linear-gradient( 135deg, #B6C2B7 0%, #9DAD9E 50%)!important;
+}
+
+.spop_GuessThePlayer {
+  background-image: linear-gradient( 135deg, #D0A0A0 0%, #B87070 50%)!important;
+}
+
+.spop_LogoQuiz {
+  background-image: linear-gradient( 135deg, #83909F 0%, #55677B 50%)!important;
+}
+
+.spop_Managerid {
+  background-image: linear-gradient( 135deg, #DFDDE7 0%, #B7B3C9 50%)!important;
+}
+
+.spop_Playerid {
+  background-image: linear-gradient( 135deg, #CCE7E8 0%, #98CED1 50%)!important;
+}
+
+.spop_WhoIsMissing {
+  background-image: linear-gradient( 135deg, #C1E8D5 0%, #A2DDC0 50%)!important;
+}
+
+.spop_HigherLower {
+  background-image: linear-gradient( 135deg, #FFE0E6 0%, #FFC0CD 50%)!important;
+}
+
+.spop_FindTheStadium {
+  background-image: linear-gradient( 135deg, #D6D7D8 0%, #C8C9CA 50%)!important;
+}
+
+.spop_FindPlayerByPhoto {
+  background-image: linear-gradient( 135deg, #CFC2DB 0%, #B7A4C9 50%)!important;
+}
+
+.spop_FansQuestion {
+  background-image: linear-gradient( 135deg, #F2E9E0 0%, #E5D2C0 50%)!important;
+}
+
+
 
 .category_selection_image{
   margin-right: '10px'!important;
@@ -411,4 +560,46 @@ body{
 .coin-back {
   position: absolute!important;
   backface-visibility: hidden!important;
+}
+
+.hero_container {
+  margin-top: -6vh;
+  background: url('assets/homepage.png') center center/cover no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center !important;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
+  object-fit: contain;
+}
+
+.table_score{
+  border: 2px solid !important;
+  width: 300px !important;
+  height: 10px !important;
+  border-radius: 2px !important;
+  border-width: 2px !important;
+  margin-top: -90px !important;
+  margin-left: 90px !important;
+  margin-right: 600px !important;
+  background-color: #1d9ea0 !important;
+  border-color: #105f7a !important;
+}
+
+.score_cell{
+  background-color: #105f7a !important;
+  max-width: 50px !important;
+  min-width: 50px !important;
+}
+
+.player{
+  background-color: #1d9ea0 !important;
+  max-width: 50px !important;
+  min-width: 50px !important;
+}
+
+.score_header{
+  color: #fff !important;
 }

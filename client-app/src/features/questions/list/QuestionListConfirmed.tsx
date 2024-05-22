@@ -23,8 +23,8 @@ export default observer(function QuestionListConfirmed() {
     }
 
     return (
-        <Segment>
-            <Header as = 'h2'>
+        <Segment style = {{marginTop: '7em'}} >
+            <Header as = 'h1'>
                 Questions
             </Header>
             {questionsConfirmedByCategory.map(q => (

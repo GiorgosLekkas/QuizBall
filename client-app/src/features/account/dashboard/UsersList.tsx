@@ -25,8 +25,8 @@ export default observer(function UsersList () {
     }
 
     return (
-        <Segment>
-            <Header as = 'h2'>Users</Header>
+        <Segment style = {{marginTop: '7em'}} >
+            <Header as = 'h1'>Users</Header>
             <Item.Group divided>
                 {Accounts.map(account => (
                     <Card width = '15' key={account.id}>

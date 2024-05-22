@@ -29,8 +29,8 @@ export default observer(function QuestionListNotConfirmed() {
     }
 
     return (
-        <Segment>
-            <Header as = 'h2'>
+        <Segment style = {{marginTop: '7em'}} >
+            <Header as = 'h1'>
                 Questions
             </Header>
             {questionsNotConfirmedByCategory.map(q => (

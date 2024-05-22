@@ -21,6 +21,14 @@ import ActiveGame from "../../features/errors/ActiveGame";
 import CoinFlip from "../../features/game/CoinFlip";
 import RequireCoinFlip from "./RequireCoinFlip";
 import CategorySelectionOnGoing from "../../features/errors/CategorySelectionOnGoing";
+import Home_Page from "../../features/home/Home_Page";
+import CreateGame from "../../features/game/CreateGame";
+import RequireSecondUser from "./RequireSecondUser";
+import Leaderboard from "../../features/game/Leaderboard";
+import Winner from "../../features/game/Winner";
+import SecoundUserSelection from "../../features/errors/SecoundUserSelection";
+import CorrectAnswer from "../../features/game/CorrectAnswer";
+import WrongAnswer from "../../features/game/WrongAnswer";
 
 
 export const routes: RouteObject[] = [
@@ -37,9 +45,15 @@ export const routes: RouteObject[] = [
             {element: <RequireAuth />, children: [
                 {path: 'questionpopup', element: <QuestionPopUp />},
                 {path: 'profile/:userName', element: <ProfilePage />},
+                {path: 'leaderboard', element: <Leaderboard />},
+                {path: 'winner', element: <Winner />},
+            ]},
+            {element: <RequireSecondUser />, children: [
                 {path: 'coinflip', element: <CoinFlip />},
             ]},
             {element: <RequireGameStart />, children: [
+                {path: 'correct', element: <CorrectAnswer />},
+                {path: 'wrong', element: <WrongAnswer />},
                 {path: 'game', element: <Game />},
                 {path: 'qpopup/:id', element: <QuestionPopUp key = 'manage' />}
             ]},
@@ -48,6 +62,7 @@ export const routes: RouteObject[] = [
             ]},
             {path: '', element: <HomePage />},
             {path: 'homepage', element: <HomePage />},
+            {path: 'home_page', element: <Home_Page />},
             {path: 'signup', element: <SignUpForm />},
             {path: 'login', element: <LoginForm key='manage'/>},
             {path: 'errors', element: <TestErrors />},
@@ -55,7 +70,9 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError />},
             {path: 'accessdenied', element: <AccessDenied />},
             {path: 'activegame', element: <ActiveGame />},
+            {path: 'creategame', element: <CreateGame />},
             {path: 'category_selection_is_going', element: <CategorySelectionOnGoing />},
+            {path: 'seconduserselection', element: <SecoundUserSelection />},
             {path: '*', element: <Navigate replace to='/not-found' />},
         ],
     }

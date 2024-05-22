@@ -3,7 +3,7 @@ import { Button, Header, Icon, Segment } from "semantic-ui-react";
 
 export default function ActiveGame() {
     return (
-        <Segment>
+        <Segment style = {{marginTop: '7em'}}>
             <Header icon textAlign="center">
                 <Icon name = 'ban' />
                     Oops - there is a game going, you don't have access here

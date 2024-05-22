@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useStore } from "../stores/store";
 
 export default function RequireCoinFlip(){
-    const {accountStore: {isLoggedIn}, questionStore: {coinflip}} = useStore();
+    const {accountStore: {isLoggedIn}, gameStore: {coinflip}} = useStore();
     const location = useLocation();
 
     if (!isLoggedIn || (!coinflip))

@@ -5,7 +5,7 @@ import { router } from '../router/Routes';
 import { toast } from 'react-toastify';
 import { Question_Geography } from '../models/Question_Geography';
 import { Question_History } from '../models/Question_History';
-import { Question, QuestionFormValues } from '../models/Question';
+import { Question } from '../models/Question';
 import { Photo, Profile } from '../models/Profile';
 
 const sleep = (delay: number) => {
@@ -21,7 +21,7 @@ const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
     if( token && config.headers ) config.headers.Authorization = `Bearer ${token}`
-    return config;
+        return config;
 })
 
 axios.interceptors.response.use(async response => {

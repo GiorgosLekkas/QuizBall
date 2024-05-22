@@ -1,4 +1,3 @@
-import { Account } from "./Account"
 import { Profile } from "./Profile"
 
 export interface IQuestion {
@@ -83,4 +82,8 @@ export class QuestionFormValues {
         this.authorName = question.authorName;
     }
 }
+}
+
+export interface AnswerQuestion {
+    answer: string;
 }

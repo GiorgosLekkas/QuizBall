@@ -5,11 +5,13 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function LoginForm() {
+
     const {accountStore} = useStore();
+    
     return (
         <Formik
             initialValues={{userName: "", password: "", error: null}}
-            onSubmit = {(values, {setErrors}) => accountStore.login(values).catch(error => setErrors({error: 'Invalid email or password'}))} 
+            onSubmit = {(values, {setErrors}) => accountStore.login(values).catch(error => setErrors({error: 'Invalid username or password'}))} 
         >
             {({handleSubmit, isSubmitting, errors}) => (
                 <Form className = 'ui form' onSubmit = {handleSubmit} autoComplete = 'off'>
