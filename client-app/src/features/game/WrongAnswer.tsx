@@ -19,8 +19,15 @@ export default observer( function WrongAnswer() {
                 </ModalHeader>
                 <ModalContent>
                     <ModalDescription>
-                        {(lastQuestion) &&
+                        {(lastQuestion) && (lastQuestion.category != 'Top5') &&
                             "The correct answer is " + lastQuestion.correctAnswer1 
+                        }
+                        {(lastQuestion) && (lastQuestion.category === 'Top5') &&
+                            "The correct answers are " + lastQuestion.correctAnswer1 + ", "
+                            + lastQuestion.correctAnswer2 + ", "
+                            + lastQuestion.correctAnswer3 + ", "
+                            + lastQuestion.correctAnswer4 + ", "
+                            + lastQuestion.correctAnswer5
                         }
                     </ModalDescription>
                 </ModalContent>

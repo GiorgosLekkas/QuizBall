@@ -6,6 +6,7 @@ import { router } from "../router/Routes";
 export default class GameStrore {
 
     categories: Array<string> = []
+    top5_answers: Array<string> = ['', '', '', '', '', '']
     user1: string = '';
     user2: string = '';
     easy = new Map<string, Question>();
@@ -20,10 +21,19 @@ export default class GameStrore {
     lastQuestion: Question | undefined = undefined;
     player1: boolean = false;
     player2: boolean = false;
+    fiftyfifty1: string = 'false';
+    fiftyfifty2: string = 'false';
+    double1: string = 'false';
+    double2: string = 'false';
+    telephone1: boolean = false;
+    telephone2: boolean = false;
     score1 = 0;
     score2 = 0;
     coinflip: boolean = false;
     secPlayer: boolean = false;
+    questionIsSelected: boolean = false;
+    correctAnswersTop5: number = 0;
+    wrongAnswersTop5: number = 0;
 
     constructor() {
         makeAutoObservable(this)
@@ -42,37 +52,127 @@ export default class GameStrore {
         this.player2 = false;
         this.coinflip = false;
         this.secPlayer = false;
+        this.fiftyfifty1 = 'false';
+        this.fiftyfifty2 = 'false';
+        this.double1 = 'false';
+        this.double2 = 'false';
+        this.telephone1 = false;
+        this.telephone2 = false;
     }
 
     easyButton(str: string) {
-        this.changePlayer();
+        //this.changePlayer(
         this.buttons.set(str, false);
+        this.questionIsSelected = true;
     }
 
     mediumButton(str: string) {
-        this.changePlayer();
+        //this.changePlayer();
         this.buttons.set(str, false);
+        this.questionIsSelected = true;
     }
 
     hardButton(str: string) {
-        this.changePlayer();
+        //this.changePlayer();
         this.buttons.set(str, false);
+        this.questionIsSelected = true;
+    }
+
+    hintDouble() {
+        if(this.player1)
+            if(this.double1 === 'false' && this.questionIsSelected === false) this.double1 = 'active';
+        if(this.player2)
+            if(this.double2 === 'false' && this.questionIsSelected === false) this.double2 = 'active';
+        if(this.player1) console.log("P1");
+        if(this.player2) console.log("P2");
+        console.log("x2");
+    }
+
+    hintFiftyFifty() {
+        if(this.player1)
+            if(this.fiftyfifty1 === 'false' && this.questionIsSelected === true) this.fiftyfifty1 = 'active';
+        if(this.player2)
+            if(this.fiftyfifty2 === 'false' && this.questionIsSelected === true) this.fiftyfifty2 = 'active';
+        if(this.player1) console.log("P1");
+        if(this.player2) console.log("P2");
+        console.log("50-50");
+    }
+
+    hintTelephone() {
+        if(this.player1)
+            if(this.telephone1 === false && this.questionIsSelected === true) this.telephone1 = true;
+        if(this.player2)
+            if(this.telephone2 === false && this.questionIsSelected === true) this.telephone2 = true;
+        if(this.player1) console.log("P1");
+        if(this.player2) console.log("P2");
+        console.log("telephone");
     }
 
     answering(question: Question, q: AnswerQuestion) {
-        runInAction(() => {this.lastQuestion = question;});
+        runInAction(() => {
+            this.lastQuestion = question;
+        });
         var score = 0;
-        if(question.correctAnswer1.toUpperCase() === q.answer.toUpperCase()){
-            if(question.level === 'Easy') score = 1;
-            if(question.level === 'Medium') score = 2;
-            if(question.level === 'Hard') score = 3;
-            if(this.player1)
-                this.score2 = score;
-            else if(this.player2)
-                this.score1 = score;
-            router.navigate('/correct');
+        if(question.category === 'Top5') {
+            if(question.correctAnswer1.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+                this.top5_answers[0] = question.correctAnswer1;
+                this.correctAnswersTop5++;
+            } else if(question.correctAnswer2.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+                this.top5_answers[1] = question.correctAnswer2;
+                this.correctAnswersTop5++;
+            } else if(question.correctAnswer3.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+                this.top5_answers[2] = question.correctAnswer3;
+                this.correctAnswersTop5++;
+            } else if(question.correctAnswer4.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+                this.top5_answers[3] = question.correctAnswer4;
+                this.correctAnswersTop5++;
+            } else if(question.correctAnswer5.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+                this.top5_answers[4] = question.correctAnswer5;
+                this.correctAnswersTop5++;
+            } else{
+                this.top5_answers[5] = q.answer;
+                this.wrongAnswersTop5++;
+            }
+
+            if(this.wrongAnswersTop5 === 2){
+                this.changePlayer();
+                this.questionIsSelected = false;
+                this.clearTop5();
+                router.navigate('/wrong');
+            }
+            if(this.correctAnswersTop5 === 5){
+                if(this.player2) {
+                    if(this.double2 === 'active') this.score2 += 6;
+                    else this.score2 += 3;
+                }else if(this.player1) {
+                    if(this.double1 === 'active') this.score1 += 6;
+                    else this.score1 += 3;
+                }
+                this.changePlayer();
+                this.questionIsSelected = false;
+                this.clearTop5();
+                router.navigate('/correct');
+            }
         } else {
-            router.navigate('/wrong');
+            if(question.correctAnswer1.toUpperCase() === q.answer.toUpperCase()){
+                if(question.level === 'Easy') score = 1;
+                if(question.level === 'Medium') score = 2;
+                if(question.level === 'Hard') score = 3;
+                if(this.player2) {
+                    if(this.double2 === 'active') this.score2 += score*2;
+                    else if(this.fiftyfifty2 === 'active') this.score2 += 1;
+                    else this.score2 += score;
+                }else if(this.player1) {
+                    if(this.double1 === 'active') this.score1 += score*2;
+                    else if(this.fiftyfifty1 === 'active') this.score1 += 1;
+                    else this.score1 += score;
+                }
+                router.navigate('/correct');
+            } else {
+                router.navigate('/wrong');
+            }
+            this.changePlayer();
+            this.questionIsSelected = false;
         }
     }
 
@@ -84,6 +184,7 @@ export default class GameStrore {
             this.player2 = false;
             this.player1 = true;
         }
+        this.clearHints();
     }
 
     setPlayer(result: string){
@@ -97,12 +198,42 @@ export default class GameStrore {
         this.coinflip = true;
     }
 
+    stopTop5() {
+        if(this.player2) {
+            if(this.double2 === 'active') this.score2 += 2;
+            else this.score2 += 1;
+        }else if(this.player1) {
+            if(this.double1 === 'active') this.score1 += 2;
+            else this.score1 += 1;
+        }
+        this.changePlayer();
+        this.questionIsSelected = false;
+        this.clearTop5();
+        router.navigate('/correct');
+    }
+
+    clearHints() {
+        if(this.double2 === 'active') this.double2 = 'true';
+        if(this.fiftyfifty2 === 'active') this.fiftyfifty2 = 'true';
+        if(this.double1 === 'active') this.double1 = 'true';
+        if(this.fiftyfifty1 === 'active') this.fiftyfifty1 = 'true';
+    }
+
+    clearTop5() {
+        this.top5_answers[0] = '';
+        this.top5_answers[1] = '';
+        this.top5_answers[2] = '';
+        this.top5_answers[3] = '';
+        this.top5_answers[4] = '';
+        this.top5_answers[5] = '';
+        this.correctAnswersTop5 = 0;
+        this.wrongAnswersTop5 = 0;
+    }
+
     gameQuestions(){
 
         this.score1 = 0;
         this.score2 = 0;
-        this.player1 = false;
-        this.player2 = false;
 
         if(store.accountStore.user)
             this.user1 = store.accountStore.user?.userName;

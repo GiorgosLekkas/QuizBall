@@ -5,6 +5,7 @@ import { useStore } from "../../app/stores/store";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ScoreBoard from "./ScoreBoard";
+import Hints from "./Hints";
 
 export default observer( function Game() {
 
@@ -33,8 +34,17 @@ export default observer( function Game() {
     return(
         <>
             <Segment style = {{marginTop: '7em'}}>
-                <ScoreBoard />
-                <Header as = 'h1' content = {player1 ? `${gameStore.user1}'s turn` : `${gameStore.user2}'s turn`} color = 'black' textAlign = 'center' style = {{paddingBottom: '10px'}} />
+                <Grid columns='three' width = "5">
+                    <GridColumn>
+                        <ScoreBoard />
+                    </GridColumn>
+                    <GridColumn>
+                        <Header as = 'h1' content = {player1 ? `${gameStore.user1}'s turn` : `${gameStore.user2}'s turn`} color = 'black' textAlign = 'center' style = {{marginTop: '1em'}} />
+                    </GridColumn>
+                    <GridColumn>
+                        <Hints />
+                    </GridColumn>
+                </Grid>
                 <Grid columns='three' width = "5">
                     <GridRow>
                         <GridColumn>

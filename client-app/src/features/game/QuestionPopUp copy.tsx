@@ -8,6 +8,7 @@ import { useStore } from "../../app/stores/store";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import * as Yup from 'yup';
 import { AnswerQuestion, Question } from "../../app/models/Question";
+import Hints from "./Hints";
 
 export default observer(function QuestionPopUp() {
 
@@ -75,6 +76,7 @@ export default observer(function QuestionPopUp() {
                             <Form className = "ui form" onSubmit = {handleSubmit} autoComplete = 'off'>
                                 <Header as = 'h1' color = 'black' textAlign = 'center' >{question?.question}</Header>
                                 <MyTextInput name = 'answer' placeholder = 'Answer'  />
+                                <Hints/>
                                 <Button 
                                     disabled = {isSubmitting || !isValid || !dirty}
                                     loading = {isSubmitting} floated = 'right'

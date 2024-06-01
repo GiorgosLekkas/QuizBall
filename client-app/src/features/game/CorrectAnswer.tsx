@@ -5,7 +5,7 @@ import { useStore } from "../../app/stores/store";
 
 export default observer( function CorrectAnswer() {
 
-    const {gameStore: {lastQuestion}} = useStore();
+    const {gameStore} = useStore();
 
     return (
         <>
@@ -19,13 +19,13 @@ export default observer( function CorrectAnswer() {
                 </ModalHeader>
                 <ModalContent>
                     <ModalDescription>
-                        {(lastQuestion?.level === 'Easy') &&
+                        {(gameStore.lastQuestion?.level === 'Easy') &&
                             "Congratulations! You won 1 point"
                         }
-                        {(lastQuestion?.level === 'Medium') &&
+                        {(gameStore.lastQuestion?.level === 'Medium') &&
                             "Congratulations! You won 2 points"
                         }
-                        {(lastQuestion?.level === 'Hard') &&
+                        {(gameStore.lastQuestion?.level === 'Hard') &&
                             "Congratulations! You won 3 points"
                         }
                     </ModalDescription>

@@ -109,10 +109,12 @@ export default class AccountStrore {
             await agent.Profiles.get(name.userName!);
             if(name.userName){
                 this.user2 = this.accountByUserName.get(name.userName);
-                if(this.user2) {
-                    router.navigate('/coinflip');
-                    store.gameStore.secPlayer = true;
-                }
+                runInAction(() => {
+                    if(this.user2) {
+                        router.navigate('/coinflip');
+                        store.gameStore.secPlayer = true;
+                    }
+                });
             }
         } catch (error) {
             router.navigate('/');

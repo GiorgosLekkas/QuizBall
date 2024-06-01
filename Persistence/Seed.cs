@@ -475,7 +475,7 @@ namespace Persistence {
                     Answer1 = "-",
                     Answer2 = "-",
                     CorrectAnswer1 = "Erling Haaland",
-                    CorrectAnswer2 = "harry Kane",
+                    CorrectAnswer2 = "Harry Kane",
                     CorrectAnswer3 = "Ivan Toney",
                     CorrectAnswer4 = "Mohamed Salah",
                     CorrectAnswer5 = "Callum Wilson",

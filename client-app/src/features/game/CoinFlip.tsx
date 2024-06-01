@@ -20,6 +20,7 @@ const useCoinFlip = () => {
 const CoinFlip: React.FC = () => {
     const { result, flipCoin } = useCoinFlip();
     const [isFlipping, setIsFlipping] = useState<boolean>(false);
+    const [gameStart, setStartGame] = useState<boolean>(false);
     const {gameStore} = useStore();
     const navigate = useNavigate();
 
@@ -32,9 +33,14 @@ const CoinFlip: React.FC = () => {
     };
 
     const startGame = () => {
-        if(result)
+        if(result) {
             gameStore.setPlayer(result);
-        navigate("/categories_selection");
+            setStartGame(true);
+            setTimeout(() => {
+                setStartGame(false);
+                navigate("/categories_selection");
+            }, 1000);
+        }
     };
 
     return (
@@ -42,8 +48,8 @@ const CoinFlip: React.FC = () => {
             <Segment style = {{marginTop: '7em'}} >
                 <Header content = "Coin Flip Game" as = 'h1' textAlign = 'center' />
                 {!result && (
-                    <Button color = 'green' onClick = {handleFlip} disabled = {isFlipping}>
-                        {isFlipping ? 'Flipping...' : 'Flip Coin'}
+                    <Button color = 'green' onClick = {handleFlip} disabled = {isFlipping} loading = {isFlipping}>
+                        {'Flip Coin'}
                     </Button>
                 )}
                 <div className = {`coin ${isFlipping ? 'flipping' : ''}`}>
@@ -62,7 +68,7 @@ const CoinFlip: React.FC = () => {
                 {result && (
                     <div>
                         <p style={{marginTop:'500px'}}>The result is: {result} </p>
-                        <Button color = 'green' onClick = {startGame}>Start Game</Button>
+                        <Button loading = {gameStart} disabled = {gameStart} color = 'green' onClick = {startGame}>Start Game</Button>
                     </div>
                 )}
             </Segment>

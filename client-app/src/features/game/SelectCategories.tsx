@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FormField, Form, Checkbox, Segment, Grid, GridRow, GridColumn, Header, Button, Image, Label } from 'semantic-ui-react'
 import { useStore } from '../../app/stores/store';
 import { useNavigate } from 'react-router-dom';
+import { runInAction } from 'mobx';
 
 export default function SelectCategoriess() {
 
@@ -9,6 +10,7 @@ export default function SelectCategoriess() {
 
     const navigate = useNavigate();
     const [error, setError] = useState<boolean>(false);
+    const [gameStart, setStartGame] = useState<boolean>(false);
 
     const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
         'Fans Question' : false,
@@ -34,11 +36,17 @@ export default function SelectCategoriess() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        gameStore.categories = Object.entries(checkboxes).filter(([name, isChecked]) => isChecked).map(([name]) => name);
+        runInAction(() => {
+            gameStore.categories = Object.entries(checkboxes).filter(([name, isChecked]) => isChecked).map(([name]) => name);
+        });
 
         if(gameStore.categories.length === 5){
-            gameStore.gameQuestions();
-            navigate(`/game`);
+            setStartGame(true);
+            setTimeout(() => {
+                setStartGame(false);
+                gameStore.gameQuestions();
+                navigate(`/game`);
+            }, 1000);
         } else {
             setError(true);
         }
@@ -300,7 +308,7 @@ export default function SelectCategoriess() {
                             </GridColumn>
                         </GridRow>
                     </Grid>
-                    <Button content = 'Submit' style = {{marginTop: '30px'}} color = 'green' />
+                    <Button loading = {gameStart} disabled = {gameStart} content = 'Submit' style = {{marginTop: '30px'}} color = 'green' />
                     <Label className = "error_mes" style = {{marginBottom: 10}} basic color = 'red' content = {error ? "Wrong number of categories, you should select N categories!" : ""} /> 
                 </Form>
             </Segment>
