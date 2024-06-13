@@ -9,15 +9,17 @@ import Hints from "./Hints";
 
 export default observer( function Game() {
 
-    const {gameStore} = useStore();
+    const {gameStore, accountStore} = useStore();
 
     const navigate = useNavigate();
     const {buttons, player1} = gameStore;
 
 
     function endGame() {
-        gameStore.endGame();
-        navigate('/winner');
+        if(accountStore.result === false) {
+            gameStore.endGame();
+            navigate('/winner');
+        }
     }
 
     useEffect(() => {

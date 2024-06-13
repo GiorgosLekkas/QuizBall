@@ -1,9 +1,11 @@
 using Application.Profiles;
+using Domain;
 
 namespace Application.Core.Questions {
     public class Question_FieldDto {
         public Guid Id { get; set; }
         public string Question { get; set; }
+        public string Photo { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
         public string CorrectAnswer1 { get; set; }

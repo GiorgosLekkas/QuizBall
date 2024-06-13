@@ -21,7 +21,7 @@ export default observer(function UsersList () {
     function handleAccountUpdate(account: Account) {
         //questionHistoryStore.selectQuestion_History(id);
         //openForm();
-        modalStore.openModal(<EditForm account={account} origin="user" />);
+        modalStore.openModal(<EditForm account={account} origin = "users" />);
     }
 
     return (
@@ -29,39 +29,41 @@ export default observer(function UsersList () {
             <Header as = 'h1'>Users</Header>
             <Item.Group divided>
                 {Accounts.map(account => (
-                    <Card width = '15' key={account.id}>
-                        <CardContent>
-                            <CardHeader>{account.userName}</CardHeader>
-                            <CardMeta>
-                                <div>{account.role}</div>
-                            </CardMeta>
-                            <CardDescription>
-                                <div>{account.firstName}</div>
-                                <div>{account.lastName}</div>
-                                <div>{account.email}</div>
-                                <div>{account.gender}</div>
-                            </CardDescription>
-                        </CardContent>
-                        <CardContent extra>
-                            <Button
-                                name = {account.id}
-                                loading = {loading && target === account.id}
-                                onClick = { (e) => handleAccountDelete(e, account.id!)}
-                                floated = 'right'
-                                color = 'red' 
-                                icon = 'delete'
-                            />
-                            <Button
-                                name = {account.id}
-                                onClick = { () => handleAccountUpdate(account) } 
-                                as = {Link} 
-                                to = {`/users`} 
-                                floated = 'right' 
-                                color = 'teal'
-                                icon = 'edit'
-                            />
-                        </CardContent>
-                    </Card>
+                    (account.userName !== accountStore.user?.userName) && 
+                        <Card width = '15' key={account.id}>
+                            <CardContent>
+                                <CardHeader>{account.userName}</CardHeader>
+                                <CardMeta>
+                                    <div>{account.role}</div>
+                                </CardMeta>
+                                <CardDescription>
+                                    <div>{account.firstName}</div>
+                                    <div>{account.lastName}</div>
+                                    <div>{account.email}</div>
+                                    <div>{account.gender}</div>
+                                </CardDescription>
+                            </CardContent>
+                            <CardContent extra>
+                                <Button
+                                    name = {account.id}
+                                    loading = {loading && target === account.id}
+                                    onClick = { (e) => handleAccountDelete(e, account.id!)}
+                                    floated = 'right'
+                                    color = 'red' 
+                                    icon = 'delete'
+                                />
+                                <Button
+                                    name = {account.id}
+                                    onClick = { () => handleAccountUpdate(account) } 
+                                    as = {Link} 
+                                    to = {`/users`} 
+                                    floated = 'right' 
+                                    color = 'teal'
+                                    icon = 'edit'
+                                />
+                            </CardContent>
+                        </Card>
+                    
                 ))}
             </Item.Group>
         </Segment>

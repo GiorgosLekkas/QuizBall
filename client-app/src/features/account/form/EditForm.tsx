@@ -44,23 +44,32 @@ export default observer(function Question_HistoryForm({account, origin}:Props) {
         password: account.password,
         firstName: account.firstName,
         lastName: account.lastName,
+        gamesPlayed: account.gamesPlayed,
+        won: account.won,
+        drawn: account.drawn,
+        lost: account.lost,
+        plus: account.plus,
+        minus: account.minus,
+        winrate: account.winrate,
+        plus_Minus: account.plus_Minus,
+        totalPoints: account.totalPoints,
         gender: account.gender,
         role: account.role,
         token: account.token
     });
 
     const validationSchema = Yup.object({
-        email: Yup.string().required('Question is required'),
-        userName: Yup.string().required('Answer 1 is required'),
-        firstName: Yup.string().required('Answer 2 is required'), 
-        lastName: Yup.string().required('Correct Answer is required'),
-        gender: Yup.string().required('Level is required'),
-        role: Yup.string().required('Level is required'),
+        email: Yup.string().required('Email is required'),
+        userName: Yup.string().required('User name 1 is required'),
+        firstName: Yup.string().required('First Name 2 is required'), 
+        lastName: Yup.string().required('Last Name Answer is required'),
+        gender: Yup.string().required('Gender is required'),
+        role: Yup.string().required('Role is required'),
     })
 
     function handleFormSubmit(account: Account) {
         if(origin === "users")
-            updateAccount(account).then(() => navigate(`/user`));
+            updateAccount(account).then(() => navigate(`/users`));
         else 
             updateAccount(account).then(() => navigate(`/profile/${account.userName}`));
         closeModal();
@@ -84,7 +93,7 @@ export default observer(function Question_HistoryForm({account, origin}:Props) {
                         <MyTextInput placeholder = 'Last Name' name = 'lastName'/>
                         <MyTextInput placeholder = 'Userame' name = 'userName'/>
                         <MyTextInput placeholder = 'Email' name='email'/>
-                        {((origin === 'user') &&
+                        {((origin === 'users') &&
                             <MySelectInput options = {roleOptions} placeholder = 'Role' name = 'role'/>
                         )}
                         <MySelectInput options = {genderOptions} placeholder = 'Gender' name = 'gender'/>

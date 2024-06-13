@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240520191703_Update1")]
+    [Migration("20240601223717_Update1")]
     partial class Update1
     {
         /// <inheritdoc />
@@ -257,6 +257,9 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Level")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Photo")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Question")

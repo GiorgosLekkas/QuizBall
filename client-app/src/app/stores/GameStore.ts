@@ -232,6 +232,8 @@ export default class GameStrore {
 
     gameQuestions(){
 
+        store.accountStore.result = false;
+
         this.score1 = 0;
         this.score2 = 0;
 
@@ -267,7 +269,20 @@ export default class GameStrore {
                     if(q) this.allQuestions.set(category + ' easy_' + (i+1), q);
                     this.buttons.set(category + ' Easy_' + (i+1), true);
                 }
-            }else if(category === 'Top5' || category === 'Who Is Missing'){
+            } else if(category === 'Player id' || category === 'Manager id'){
+                for (var i = 0; i < 3; i++) {
+                    let mkeys: string[] = new Array;
+                    mkeys = Array.from(this.medium.keys());
+                    let nm: number = Math.floor(Math.random() * mkeys.length);
+                    this.questionMedium = this.medium.get(mkeys[nm]);
+                    this.medium.delete(mkeys[nm]);
+                    var q = new Question(this.questionMedium!);
+                    q!.level = 'Medium_' + (i+1);
+
+                    if(q) this.allQuestions.set(category + ' medium_' + (i+1), q);
+                    this.buttons.set(category + ' Medium_' + (i+1), true);
+                }
+            } else if(category === 'Top5'){
                 for (var i = 0; i < 3; i++) {
                     let hkeys: string[] = new Array;
                     hkeys = Array.from(this.hard.keys());
@@ -280,7 +295,20 @@ export default class GameStrore {
                     if(q) this.allQuestions.set(category + ' hard_' + (i+1), q);
                     this.buttons.set(category + ' Hard_' + (i+1), true);
                 }
-            }else {
+            } else if(category === 'Who Is Missing'){
+                for (var i = 0; i < 3; i++) {
+                    let hkeys: string[] = new Array;
+                    hkeys = Array.from(this.hard.keys());
+                    let nh: number = Math.floor(Math.random() * hkeys.length);
+                    this.questionHard = this.hard.get(hkeys[nh]);
+                    this.hard.delete(hkeys[nh]);
+                    var q = new Question(this.questionHard!);
+                    q!.level = 'Hard_' + (i+1);
+
+                    if(q) this.allQuestions.set(category + ' hard_' + (i+1), q);
+                    this.buttons.set(category + ' Hard_' + (i+1), true);
+                }
+            } else {
                 let ekeys: string[] = new Array;
                 ekeys = Array.from(this.easy.keys());
                 let ne: number = Math.floor(Math.random() * ekeys.length);

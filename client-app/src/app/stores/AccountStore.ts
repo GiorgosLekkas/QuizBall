@@ -11,6 +11,7 @@ export default class AccountStrore {
     selectedUsers: Account | undefined = undefined;
     accountRegistry = new Map<string, Account>();
     accountByUserName = new Map<string, Account>();
+    result : boolean = false;
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -36,6 +37,8 @@ export default class AccountStrore {
     }
 
     setResult(){
+
+        this.result = true;
 
         if(this.user?.gamesPlayed != null) this.user.gamesPlayed++;
         if(this.user2?.gamesPlayed != null) this.user2.gamesPlayed++;
@@ -160,6 +163,8 @@ export default class AccountStrore {
         this.loading = true;
         try {
             await agent.Accounts.update(account);
+            if(store.profileStore.profile?.userName === account.userName)
+                store.profileStore.loadProfile(account.userName);
             runInAction(() => {
                 if (account.id) {
                     this.accountRegistry.set(account.id, account);

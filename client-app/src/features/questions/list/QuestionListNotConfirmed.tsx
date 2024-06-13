@@ -102,13 +102,15 @@ export default observer(function QuestionListNotConfirmed() {
                                         name = {q.id}
                                         loading = {loading && target === q.id}
                                         onClick = { (e) => handleQuestionDelete(e, q.id)}
+                                        disabled = {loading && target === q.id}
                                         floated = 'right'
                                         color = 'red' 
                                         icon = 'delete'
                                     />
                                     <Button
                                         name = {q.id}
-                                        onClick = { () => handleQuestionUpdate(q.id) } 
+                                        onClick = { () => handleQuestionUpdate(q.id) }
+                                        disabled = {loading && target === q.id}
                                         as = {Link} 
                                         to = {`/questions`} 
                                         floated = 'right' 
@@ -118,7 +120,8 @@ export default observer(function QuestionListNotConfirmed() {
                                     <Button
                                         name = {q.id}
                                         loading = {loading && target1 === q.id}
-                                        onClick = { (e) => handleConfirmQuestion(e, q.id)} 
+                                        onClick = { (e) => handleConfirmQuestion(e, q.id)}
+                                        disabled = {loading && target === q.id}
                                         floated = 'right' 
                                         color = 'green'
                                         icon = 'check'

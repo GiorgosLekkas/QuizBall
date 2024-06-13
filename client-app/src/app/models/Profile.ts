@@ -1,4 +1,5 @@
 import { Account } from "./Account";
+import { Question } from "./Question";
 
 export interface Profile {
     email: string
@@ -8,6 +9,7 @@ export interface Profile {
     gender: string
     role: string
     photo?: Photo
+    questions?: Question[]
 }
 
 export class Profile implements Profile {
@@ -28,6 +30,7 @@ export class Profile implements Profile {
     gender: string
     role: string
     image?: string
+    questions?: Question[]
 }
 
 export interface Photo {

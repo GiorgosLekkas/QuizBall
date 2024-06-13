@@ -97,9 +97,9 @@ export default observer(function QuestionForm({origin}:Props) {
                 ...question,
                 id: uuid()
             };
-            createQuestion(newQuestion).then(() => navigate(`/questions`));
+            createQuestion(newQuestion).then(() => navigate(`/`));
         } else {
-            updateQuestion(question).then(() => navigate(`/questions`));
+            updateQuestion(question).then(() => navigate(`/`));
         }
         closeModal();
         closeForm();

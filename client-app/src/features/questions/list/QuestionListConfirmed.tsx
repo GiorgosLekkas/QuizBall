@@ -34,7 +34,7 @@ export default observer(function QuestionListConfirmed() {
                         {q.category}
                     </Header>
                     <Item.Group divided>
-                        {<Item key = {q.id} >
+                        <Item key = {q.id}>
                             <Item.Content>
                                 <Item.Header as = 'a'>{q.question}</Item.Header>
                                 <Grid relaxed columns='2'>
@@ -99,6 +99,7 @@ export default observer(function QuestionListConfirmed() {
                                     <Button
                                         name = {q.id}
                                         loading = {loading && target === q.id}
+                                        disabled = {loading && target === q.id}
                                         onClick = { (e) => handleQuestionDelete(e, q.id)}
                                         floated = 'right'
                                         color = 'red' 
@@ -106,7 +107,8 @@ export default observer(function QuestionListConfirmed() {
                                     />
                                     <Button
                                         name = {q.id}
-                                        onClick = { () => handleQuestionUpdate(q.id) } 
+                                        onClick = { () => handleQuestionUpdate(q.id) }
+                                        disabled = {loading && target === q.id}
                                         as = {Link} 
                                         to = {`/questions`} 
                                         floated = 'right' 
@@ -115,7 +117,7 @@ export default observer(function QuestionListConfirmed() {
                                     />
                                 </Item.Extra>
                             </Item.Content>
-                        </Item>}
+                        </Item>
                     </Item.Group>
                 </>
             ))}

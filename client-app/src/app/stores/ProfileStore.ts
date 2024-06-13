@@ -2,9 +2,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { Profile } from "../models/Profile";
 import agent from "../api/agent";
 import { store } from "./store";
+import { Question } from "../models/Question";
 
 export default class ProfileStore{
     profile: Profile | null = null;
+    questions: Question[] | undefined = undefined;
     loadingProfile = false;
     uploading = false;
 
@@ -26,6 +28,8 @@ export default class ProfileStore{
             runInAction(() => {
                 this.profile = profile;
                 this.loadingProfile = false;
+                this.questions = profile.questions?.sort((a, b) => 
+                    String(a.category).localeCompare(b.category));
             })
         } catch (error) {
             console.log(error);
@@ -60,8 +64,11 @@ export default class ProfileStore{
                 const result = await agent.Profiles.deletePhoto(this.profile?.photo!.id);
                 runInAction(() => {
                     if(result) {
-                        if(this.profile)
+                        if(this.profile) {
                             this.profile.image = undefined;
+                            if(store.accountStore.user)
+                                store.accountStore.user.image = '';
+                        }
                     }
                 });
             }

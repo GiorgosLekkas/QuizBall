@@ -2,6 +2,7 @@ namespace Domain {
     public class Question_Field {
         public Guid Id { get; set; }
         public string Question { get; set; }
+        public string Photo { get; set; }
         public string Answer1 { get; set; }
         public string Answer2 { get; set; }
         public string CorrectAnswer1 { get; set; }

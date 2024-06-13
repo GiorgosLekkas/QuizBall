@@ -1,8 +1,9 @@
-import { Profile } from "./Profile"
+import { Photo, Profile } from "./Profile"
 
 export interface IQuestion {
     id: string
     question: string
+    photo?: string
     answer1: string
     answer2: string
     correctAnswer1: string
@@ -20,6 +21,7 @@ export interface IQuestion {
 export class Question implements IQuestion{
     constructor(init: QuestionFormValues){
         this.id = init.id!
+        this.photo = init.photo!
         this.question = init.question!
         this.answer1 = init.answer1!
         this.answer2 = init.answer2!
@@ -36,6 +38,7 @@ export class Question implements IQuestion{
 
     id: string
     question: string
+    photo?: string
     answer1: string
     answer2: string
     correctAnswer1: string
@@ -53,6 +56,7 @@ export class Question implements IQuestion{
 export class QuestionFormValues {
   id: string = '';
   question: string = '';
+  photo?: string = '';
   answer1: string = '';
   answer2: string = '';
   correctAnswer1: string = '';

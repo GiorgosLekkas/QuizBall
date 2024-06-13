@@ -31,11 +31,18 @@ export default observer(function Question_Display({category}: Props) {
         else if(level === 'Easy_3' && category === 'Higher Lower') 
             gameStore.easyButton(category + ' Easy_3');
 
-        if(level === 'Hard_1' && category === 'Top5')
+        if(level === 'Medium_1' && (category === 'Manager id' || category === 'Player id'))
+            gameStore.mediumButton(category + ' Medium_1');
+        else if(level === 'Medium_2' && (category === 'Manager id' || category === 'Player id'))
+            gameStore.mediumButton(category + ' Medium_2');
+        else if(level === 'Medium_3' && (category === 'Manager id' || category === 'Player id'))
+            gameStore.mediumButton(category + ' Medium_3');
+
+        if(level === 'Hard_1' && (category === 'Top5' || category === 'Who Is Missing'))
             gameStore.hardButton(category + ' Hard_1');
-        else if(level === 'Hard_2' && category === 'Top5') 
+        else if(level === 'Hard_2' && (category === 'Top5' || category === 'Who Is Missing'))
             gameStore.hardButton(category + ' Hard_2');
-        else if(level === 'Hard_3' && category === 'Top5') 
+        else if(level === 'Hard_3' && (category === 'Top5' || category === 'Who Is Missing'))
             gameStore.hardButton(category + ' Hard_3');
 
         openForm(id);
@@ -134,12 +141,93 @@ export default observer(function Question_Display({category}: Props) {
                                                 }
                                             </>
                                         }
+                                        {(q.category === category) && (q.category === 'Player id') &&
+                                            <>
+                                                {(q.category === category) && (q.level === 'Medium_1') && (q.category === 'Player id') &&
+                                                    <>
+                                                        <Button 
+                                                            size = "big" 
+                                                            content = {'x2'}
+                                                            className = {buttons.get(category + ' Medium_1') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Medium_1') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                                {(q.category === category) && (q.level === 'Medium_2') && (q.category === 'Player id') &&
+                                                    <>
+                                                        <Button 
+                                                            size = "big" 
+                                                            content = {'x2'}
+                                                            className = {buttons.get(category + ' Medium_2') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Medium_2') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                                {(q.category === category) && (q.level === 'Medium_3') && (q.category === 'Player id') &&
+                                                    <>
+                                                        <Button 
+                                                            size = "big" 
+                                                            content = {'x2'}
+                                                            className = {buttons.get(category + ' Medium_3') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Medium_3') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                            </>
+                                        }
+                                        {(q.category === category) && (q.category === 'Manager id') &&
+                                            <>
+                                                {(q.category === category) && (q.level === 'Medium_1') && (q.category === 'Manager id') &&
+                                                    <>
+                                                        <Button 
+                                                            size="big" 
+                                                            content = {'x2'}
+                                                            className = {buttons.get(category + ' Medium_1') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Medium_1') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                                {(q.category === category) && (q.level === 'Medium_2') && (q.category === 'Manager id') &&
+                                                    <>
+                                                        <Button 
+                                                            size="big" 
+                                                            content = {'x2'}
+                                                            className = {buttons.get(category + ' Medium_2') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Medium_2') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                                {(q.category === category) && (q.level === 'Medium_3') && (q.category === 'Manager id') &&
+                                                    <>
+                                                        <Button 
+                                                            size="big" 
+                                                            content = {'x2'}
+                                                            className = {buttons.get(category + ' Medium_3') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Medium_3') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                            </>
+                                        }
+
                                         {(q.category === category) && (q.category === 'Top5') &&
                                             <>
                                                 {(q.category === category) && (q.level === 'Hard_1') && (q.category === 'Top5') &&
                                                     <>
                                                         <Button 
-                                                            size="big" 
+                                                            size = "big" 
                                                             content = {'x3'}
                                                             className = {buttons.get(category + ' Hard_1') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
                                                             key = {q?.id}
@@ -151,7 +239,7 @@ export default observer(function Question_Display({category}: Props) {
                                                 {(q.category === category) && (q.level === 'Hard_2') && (q.category === 'Top5') &&
                                                     <>
                                                         <Button 
-                                                            size="big" 
+                                                            size = "big" 
                                                             content = {'x3'}
                                                             className = {buttons.get(category + ' Hard_2') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
                                                             key = {q?.id}
@@ -163,7 +251,48 @@ export default observer(function Question_Display({category}: Props) {
                                                 {(q.category === category) && (q.level === 'Hard_3') && (q.category === 'Top5') &&
                                                     <>
                                                         <Button 
-                                                            size="big" 
+                                                            size = "big" 
+                                                            content = {'x3'}
+                                                            className = {buttons.get(category + ' Hard_3') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Hard_3') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                            </>
+                                        }
+
+                                        {(q.category === category) && (q.category === 'Who Is Missing') &&
+                                            <>
+                                                {(q.category === category) && (q.level === 'Hard_1') && (q.category === 'Who Is Missing') &&
+                                                    <>
+                                                        <Button 
+                                                            size = "big" 
+                                                            content = {'x3'}
+                                                            className = {buttons.get(category + ' Hard_1') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Hard_1') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                                {(q.category === category) && (q.level === 'Hard_2') && (q.category === 'Who Is Missing') &&
+                                                    <>
+                                                        <Button 
+                                                            size = "big" 
+                                                            content = {'x3'}
+                                                            className = {buttons.get(category + ' Hard_2') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
+                                                            key = {q?.id}
+                                                            onClick = { () => openQuestion(q.id, 'Hard_2') }
+                                                            as = {Link}
+                                                        />
+                                                    </>
+                                                }
+                                                {(q.category === category) && (q.level === 'Hard_3') && (q.category === 'Who Is Missing') &&
+                                                    <>
+                                                        <Button 
+                                                            size = "big" 
                                                             content = {'x3'}
                                                             className = {buttons.get(category + ' Hard_3') ? `buttonq b_${q.category?.replace(" ","").replace(" ","").replace(" ","")}` : 'buttonq disabled'}
                                                             key = {q?.id}

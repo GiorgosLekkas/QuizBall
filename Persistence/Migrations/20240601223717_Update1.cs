@@ -227,6 +227,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Question = table.Column<string>(type: "TEXT", nullable: true),
+                    Photo = table.Column<string>(type: "TEXT", nullable: true),
                     Answer1 = table.Column<string>(type: "TEXT", nullable: true),
                     Answer2 = table.Column<string>(type: "TEXT", nullable: true),
                     CorrectAnswer1 = table.Column<string>(type: "TEXT", nullable: true),

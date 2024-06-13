@@ -38,6 +38,7 @@ export default function SelectCategoriess() {
 
         runInAction(() => {
             gameStore.categories = Object.entries(checkboxes).filter(([name, isChecked]) => isChecked).map(([name]) => name);
+            console.log(gameStore.categories);
         });
 
         if(gameStore.categories.length === 5){

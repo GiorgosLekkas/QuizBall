@@ -256,6 +256,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Level")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Question")
                         .HasColumnType("TEXT");
 
