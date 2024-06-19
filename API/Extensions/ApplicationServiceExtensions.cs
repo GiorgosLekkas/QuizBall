@@ -1,12 +1,12 @@
-using Application.Questions.HistoryQuestions;
 using Application.Core;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
+using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Photos;
-using Application.Interfaces;
 using Infrastructure.Security;
+using Microsoft.EntityFrameworkCore;
+using Persistence;
+using Application.Core.Questions;
 
 namespace API.Extensions {
     public static class ApplicationServiceExtensions {
@@ -15,7 +15,7 @@ namespace API.Extensions {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            services.AddDbContext<DataContext>( opt =>{
+            services.AddDbContext<DataContext>( opt => {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
@@ -34,9 +34,11 @@ namespace API.Extensions {
             services.AddValidatorsFromAssemblyContaining<Create>();
 
             services.AddHttpContextAccessor();
+
             services.AddScoped<IUserAccessor, UserAccessor>();
 
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
             return services;

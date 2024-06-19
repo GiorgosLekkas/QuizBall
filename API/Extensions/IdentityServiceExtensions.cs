@@ -1,9 +1,7 @@
 using System.Text;
 using API.Services;
 using Domain;
-using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
 
@@ -29,11 +27,11 @@ namespace API.Extentions {
             });
             services.AddScoped<TokenService>();
 
-            services.AddAuthorization(opt => {
+            /*services.AddAuthorization(opt => {
                 opt.AddPolicy("IsAdmin", policy => {
                     policy.Requirements.Add(new IsAdminRequirement());
                 });
-            });
+            });*/
             //services.AddTransient<IAuthorizationHandler, IsAdminRequirement>();
 
             return services;

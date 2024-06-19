@@ -17,13 +17,9 @@ namespace API.Controllers {
     public class AccountController: BaseApiController {
         private readonly UserManager<Account> userManager;
         private readonly TokenService tokenService;
-        private readonly DataContext context;
-        private readonly IUserAccessor userAccessor;
-        public AccountController(UserManager<Account> userManager, TokenService tokenService, DataContext context, IUserAccessor userAccessor){
+        public AccountController(UserManager<Account> userManager, TokenService tokenService){
             this.userManager = userManager;
             this.tokenService = tokenService;
-            this.context = context;
-            this.userAccessor = userAccessor;
         }
 
         [AllowAnonymous]
