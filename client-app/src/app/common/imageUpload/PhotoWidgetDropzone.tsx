@@ -33,7 +33,7 @@ export default function PhotoWidgetDropzone({setFiles}: Props) {
         <div {...getRootProps()} style = {isDragActive ? {...dzStyles, ...dzActive} : dzStyles}>
             <input {...getInputProps()} />
             <Icon name="upload" size="huge" />
-            <Header content = 'Drope image here' />
+            <Header content = 'Drop image here' />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import { Button, Header, Segment } from "semantic-ui-react";
+import { Button, Image, Header, Segment, Icon } from "semantic-ui-react";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import MyTextArea from "../../../app/common/form/MyTextArea";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MySelectInput from "../../../app/common/form/MySelectInput";
+import PhotoWidgetDropzone from "../../../app/common/imageUpload/PhotoWidgetDropzone";
 
 interface Props {
     origin?: string
@@ -48,6 +49,8 @@ export default observer(function QuestionForm({origin}:Props) {
     const {closeModal} = modalStore;
 
     const navigate = useNavigate();
+
+    const [files, setFiles] = useState<any>([]);
 
     const [question, setQuestion] = useState<Question>({
         id: '',
@@ -91,6 +94,13 @@ export default observer(function QuestionForm({origin}:Props) {
         }
     }, [loadQuestion]);
 
+    useEffect(() => {
+        console.log(files);
+        return () => {
+            files.forEach((file: any) => URL.revokeObjectURL(file.preview));
+        }
+    }, [files])
+
     function handleFormSubmit(question: Question) {
         if (!question.id) {
             let newQuestion = {
@@ -131,6 +141,16 @@ export default observer(function QuestionForm({origin}:Props) {
                                 <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer4'/>
                                 <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer5'/>
                                 <MySelectInput options = {categoryOptions} placeholder = 'Category' name = 'category'/>
+                                {
+                                    files! && files.length === 0 ? (
+                                        <PhotoWidgetDropzone setFiles = {setFiles} />
+                                    ) : (
+                                        <>
+                                            <Icon name = 'close' onClick = {() => setFiles([])} />
+                                            <Image size = 'medium' src = {files[0].preview} />
+                                        </>
+                                    )
+                                }
                             </>
                         }
                         <MySelectInput options = {levelOptions} placeholder = 'Level' name = 'level'/>

@@ -18,7 +18,7 @@ export default function PhotoUploadWidget({loading, uploadPhoto}: Props) {
         if (cropper)
             cropper.getCroppedCanvas().toBlob(blob => uploadPhoto(blob!));
     }
-
+ 
     useEffect(() => {
         return () => {
             files.forEach((file: any) => URL.revokeObjectURL(file.preview));
@@ -29,7 +29,7 @@ export default function PhotoUploadWidget({loading, uploadPhoto}: Props) {
         <Grid>
             <Grid.Column width = {4}>
                 <Header sub color="teal" content = 'Step 1 - Add Photo' />
-                <PhotoWidgetDropzone setFiles={setFiles}  />
+                <PhotoWidgetDropzone setFiles = {setFiles} />
             </Grid.Column>
             <Grid.Column width = {1}/>
             <Grid.Column width = {4}>
