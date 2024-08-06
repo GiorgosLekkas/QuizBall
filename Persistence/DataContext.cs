@@ -10,6 +10,7 @@ namespace Persistence {
         public DbSet<QuestionGeography> Question_Geography { get; set; }
         public DbSet<Question_Field> Questions { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Photo_Question> Photos_Question { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);

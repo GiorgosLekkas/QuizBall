@@ -3,7 +3,7 @@ import { Photo, Profile } from "./Profile"
 export interface IQuestion {
     id: string
     question: string
-    photo?: string
+    photo?: Photo
     answer1: string
     answer2: string
     correctAnswer1: string
@@ -38,7 +38,7 @@ export class Question implements IQuestion{
 
     id: string
     question: string
-    photo?: string
+    photo?: Photo
     answer1: string
     answer2: string
     correctAnswer1: string
@@ -56,7 +56,7 @@ export class Question implements IQuestion{
 export class QuestionFormValues {
   id: string = '';
   question: string = '';
-  photo?: string = '';
+  photo?: Photo = undefined
   answer1: string = '';
   answer2: string = '';
   correctAnswer1: string = '';

@@ -12,6 +12,7 @@ export default class QuestionStore {
     confirmed = new Map<string, Question>();
     selectedQuestion: Question | undefined = undefined;
     tmp = new Map<string, Question>();
+    category: String = '';
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -64,6 +65,10 @@ export default class QuestionStore {
         return this.questionRegistry.get(id);
     }
 
+    setCategory(category: String) {
+        this.category = category;
+    }
+
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;
     }
@@ -83,6 +88,7 @@ export default class QuestionStore {
 
     closeForm = () => {
         this.editMode = false;
+        this.category = '';
     }
 
     loadQuestions = async () => {
@@ -90,12 +96,14 @@ export default class QuestionStore {
         try {
             const questions = await agent.Questions.list();
             questions.forEach(question => {
-                if(question.confirmed == 'true')
-                    this.confirmed.set(question.id, question);
-                else
-                    this.not_confirmed.set(question.id, question);
-                this.setQuestion(question);
-                this.setActivity(question);
+                runInAction(() => {
+                    if(question.confirmed == 'true')
+                        this.confirmed.set(question.id, question);
+                    else
+                        this.not_confirmed.set(question.id, question);
+                    this.setQuestion(question);
+                    this.setActivity(question);
+                })
             })
             this.setLoadingInitial(false);
         } catch (error) {
@@ -134,7 +142,8 @@ export default class QuestionStore {
         }   
     }
 
-    createQuestion = async (question: QuestionFormValues) => {
+    createQuestion = async (question: QuestionFormValues, photo: Blob) => {
+        console.log(photo);
         store.accountStore.getUser();
         const user = store.accountStore!.user;
         question.confirmed = 'false'
@@ -148,7 +157,7 @@ export default class QuestionStore {
             question.correctAnswer4 = "-";
             question.correctAnswer5 = "-";
         }
-        try {
+        /*try {
             //question.id = uuid();
             question.authorName = user?.userName;
             await agent.Questions.create(question);
@@ -162,11 +171,44 @@ export default class QuestionStore {
             });
         } catch (error) {
             console.log(error);
+        }*/
+
+        try {
+            //question.id = uuid();
+            question.authorName = user?.userName;
+            await agent.Questions.addPhoto(question ,photo);
+            const newQuestion = new Question(question);
+            newQuestion.authorName = user!.userName;
+            const profile = new Profile(user!);
+            newQuestion.author = profile;
+            runInAction(() => {
+                this.selectedQuestion = newQuestion;
+                this.setActivity(newQuestion);
+            });
+        } catch (error) {
+            console.log(error);
         }
     }
 
-    updateQuestion = async (question: Question) => {
-        this.loading = true;
+    updateQuestion = async (question: Question, photo: Blob) => {
+        store.accountStore.getUser();
+        const user = store.accountStore!.user;
+        try {
+            //question.id = uuid();
+            question.authorName = user?.userName;
+            await agent.Questions.addPhoto(question,photo);
+            const newQuestion = new Question(question);
+            newQuestion.authorName = user!.userName;
+            const profile = new Profile(user!);
+            newQuestion.author = profile;
+            runInAction(() => {
+                this.selectedQuestion = newQuestion;
+                this.setActivity(newQuestion);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        /*this.loading = true;
         try {
             if(question.category === "Top5"){
                 question.answer1 = "-";
@@ -193,7 +235,7 @@ export default class QuestionStore {
                 this.setLoadingInitial(false);
             })
         }
-        this.closeForm();
+        this.closeForm();*/
     }
 
     confirmQuestion = async (id: string) => {

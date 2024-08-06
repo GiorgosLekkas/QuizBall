@@ -5,7 +5,7 @@ import { router } from '../router/Routes';
 import { toast } from 'react-toastify';
 import { Question_Geography } from '../models/Question_Geography';
 import { Question_History } from '../models/Question_History';
-import { Question } from '../models/Question';
+import { Question, QuestionFormValues } from '../models/Question';
 import { Photo, Profile } from '../models/Profile';
 
 const sleep = (delay: number) => {
@@ -100,7 +100,15 @@ const Questions = {
     details: (id: string) => requests.get<Question>(`/Question/${id}`),
     create: (Question: Question) => requests.post<void>(`/Question`, Question),
     update: (Question: Question) => requests.put<void>(`/Question/${Question.id}`, Question),
-    delete: (id: string) => requests.del<void>(`/Question/${id}`)
+    delete: (id: string) => requests.del<void>(`/Question/${id}`),
+    addPhoto: (Question: QuestionFormValues, file: Blob) => {
+        let formData = new FormData();
+        formData.append('File', file);
+        return axios.post<Photo>(`/Photos_Question`, formData, {
+                headers: {'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
 }
 
 const Profiles = {

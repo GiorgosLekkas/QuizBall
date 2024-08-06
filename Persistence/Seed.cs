@@ -522,7 +522,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Red Star",
                     Answer2 = "Monaco",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718055570/Questions/Logo%20Quiz/Easy/monaco.png",
+                    Photo = new Photo_Question {
+                        Id = "monaco",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718055570/Questions/Logo%20Quiz/Easy/monaco.png"
+                    },
                     CorrectAnswer1 = "Monaco",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -538,7 +541,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Larisa",
                     Answer2 = "Sivaspor",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718055570/Questions/Logo%20Quiz/Easy/larisa.png",
+                    Photo = new Photo_Question {
+                        Id = "larisa",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718055570/Questions/Logo%20Quiz/Easy/larisa.png"
+                    },
                     CorrectAnswer1 = "Larisa",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -550,7 +556,7 @@ namespace Persistence {
                     AuthorName = "admin",
                     Author = account
                 },
-                new Question_Field {
+                /*new Question_Field {
                     Question = "Which team's logo is this?",
                     Answer1 = "Inter Miami",
                     Answer2 = "LA Galaxy",
@@ -677,13 +683,16 @@ namespace Persistence {
                     Confirmed = "true",
                     AuthorName = "admin",
                     Author = account
-                },
+                },*/
                 //MEDIUM
                 new Question_Field {
                     Question = "Which team's logo is this?",
                     Answer1 = "Lorient",
                     Answer2 = "Lens",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056618/Questions/Logo%20Quiz/Medium/lorient.png",
+                    Photo = new Photo_Question {
+                        Id = "lorient",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056618/Questions/Logo%20Quiz/Medium/lorient.png"
+                    },
                     CorrectAnswer1 = "Lorient",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -699,7 +708,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Kalloni",
                     Answer2 = "Kalithea",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056617/Questions/Logo%20Quiz/Medium/kalithea.png",
+                    Photo = new Photo_Question {
+                        Id = "kalithea",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056617/Questions/Logo%20Quiz/Medium/kalithea.png"
+                    },
                     CorrectAnswer1 = "Kalithea",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -715,7 +727,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Ipswich",
                     Answer2 = "Twente",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056615/Questions/Logo%20Quiz/Medium/ipswich.png",
+                    Photo = new Photo_Question {
+                        Id = "ipswoch",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056615/Questions/Logo%20Quiz/Medium/ipswich.png"
+                    },
                     CorrectAnswer1 = "Ipswich",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -731,7 +746,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Getafe",
                     Answer2 = "Espanyol",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056615/Questions/Logo%20Quiz/Medium/getafe.png",
+                    Photo = new Photo_Question {
+                        Id = "getafe",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056615/Questions/Logo%20Quiz/Medium/getafe.png"
+                    },
                     CorrectAnswer1 = "Getafe",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -747,7 +765,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Odense",
                     Answer2 = "Darmstadt",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056614/Questions/Logo%20Quiz/Medium/darmstadt.png",
+                    Photo = new Photo_Question {
+                        Id = "darmstadt",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056614/Questions/Logo%20Quiz/Medium/darmstadt.png"
+                    },
                     CorrectAnswer1 = "Darmstadt",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -763,7 +784,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Frosinone",
                     Answer2 = "Hellas Verona",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056612/Questions/Logo%20Quiz/Medium/frosinone.png",
+                    Photo = new Photo_Question {
+                        Id = "frosinone",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056612/Questions/Logo%20Quiz/Medium/frosinone.png"
+                    },
                     CorrectAnswer1 = "Frosinone",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -780,7 +804,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Olimpija Ljubljana",
                     Answer2 = "Bohemians",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057277/Questions/Logo%20Quiz/Hard/olimpija_ljubljana.png",
+                    Photo = new Photo_Question {
+                        Id = "olimpija_ljubljana",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057277/Questions/Logo%20Quiz/Hard/olimpija_ljubljana.png"
+                    },
                     CorrectAnswer1 = "Olimpija Ljubljana",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -796,7 +823,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Odense",
                     Answer2 = "Brighton",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057272/Questions/Logo%20Quiz/Hard/odense.png",
+                    Photo = new Photo_Question {
+                        Id = "odense",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057272/Questions/Logo%20Quiz/Hard/odense.png"
+                    },
                     CorrectAnswer1 = "Odense",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -812,7 +842,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Metalist",
                     Answer2 = "Maribor",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057271/Questions/Logo%20Quiz/Hard/metalist.png",
+                    Photo = new Photo_Question {
+                        Id = "metalist",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057271/Questions/Logo%20Quiz/Hard/metalist.png"
+                    },
                     CorrectAnswer1 = "Metalist",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -828,7 +861,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Maribor",
                     Answer2 = "Metalist",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057269/Questions/Logo%20Quiz/Hard/maribor.png",
+                    Photo = new Photo_Question {
+                        Id = "maribor",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057269/Questions/Logo%20Quiz/Hard/maribor.png"
+                    },
                     CorrectAnswer1 = "Maribor",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -844,7 +880,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "International",
                     Answer2 = "Independiente",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057267/Questions/Logo%20Quiz/Hard/international.png",
+                    Photo = new Photo_Question {
+                        Id = "international",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057267/Questions/Logo%20Quiz/Hard/international.png"
+                    },
                     CorrectAnswer1 = "International",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -860,7 +899,10 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Panathinaikos",
                     Answer2 = "Greuther Furth",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057265/Questions/Logo%20Quiz/Hard/greuther_furth.png",
+                    Photo = new Photo_Question {
+                        Id = "greuther_furth",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057265/Questions/Logo%20Quiz/Hard/greuther_furth.png"
+                    },
                     CorrectAnswer1 = "Greuther Furth",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -877,7 +919,10 @@ namespace Persistence {
                     Question = "Find the Manager",
                     Answer1 = "Parma",
                     Answer2 = "David Moyes",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/David_Moyes_bngdni.png",
+                    Photo = new Photo_Question {
+                        Id = "David_Moyes_bngdni",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/David_Moyes_bngdni.png"
+                    },
                     CorrectAnswer1 = "David Moyes",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -893,7 +938,10 @@ namespace Persistence {
                     Question = "Find the Manager",
                     Answer1 = "Antonio Conte",
                     Answer2 = "David Moyes",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/Antonio_Conte_mug126.png",
+                    Photo = new Photo_Question {
+                        Id = "Antonio_Conte_mug126",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/Antonio_Conte_mug126.png"
+                    },
                     CorrectAnswer1 = "Antonio Conte",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -909,7 +957,10 @@ namespace Persistence {
                     Question = "Find the Manager",
                     Answer1 = "Andre Vilas Boas",
                     Answer2 = "David Moyes",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/Andr%C3%A9_Vilas_Boas_fis96y.png",
+                    Photo = new Photo_Question {
+                        Id = "A9_Vilas_Boas_fis96y",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/Andr%C3%A9_Vilas_Boas_fis96y.png"
+                    },
                     CorrectAnswer1 = "Andre Vilas Boas",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -928,7 +979,10 @@ namespace Persistence {
                     Question = "Find the Player",
                     Answer1 = "Erik_Lamela",
                     Answer2 = "David Moyes",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548631/Questions/Player%20Id/Erik_Lamela_nbcymc.png",
+                    Photo = new Photo_Question {
+                        Id = "Erik_Lamela_nbcymc",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548631/Questions/Player%20Id/Erik_Lamela_nbcymc.png"
+                    },
                     CorrectAnswer1 = "Erik_Lamela",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -944,7 +998,10 @@ namespace Persistence {
                     Question = "Find the Palyer",
                     Answer1 = "Diego Costa",
                     Answer2 = "David Moyes",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548631/Questions/Player%20Id/Diego_Costa_zpvwzy.png",
+                    Photo = new Photo_Question {
+                        Id = "Diego_Costa_zpvwzy",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548631/Questions/Player%20Id/Diego_Costa_zpvwzy.png"
+                    },
                     CorrectAnswer1 = "Diego Costa",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",
@@ -960,7 +1017,10 @@ namespace Persistence {
                     Question = "Find the Palyer",
                     Answer1 = "David Luiz",
                     Answer2 = "David Moyes",
-                    Photo = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548630/Questions/Player%20Id/David_Luiz_l8ohyw.png",
+                    Photo = new Photo_Question {
+                        Id = "David_Luiz_l8ohyw",
+                        Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548630/Questions/Player%20Id/David_Luiz_l8ohyw.png"
+                    },
                     CorrectAnswer1 = "David Luiz",
                     CorrectAnswer2 = "-",
                     CorrectAnswer3 = "-",

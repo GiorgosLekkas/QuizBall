@@ -1,5 +1,6 @@
 import { useField } from "formik";
 import { Form, Label, Select } from "semantic-ui-react";
+import { useStore } from "../../stores/store";
 
 interface Props {
     placeholder: string;
@@ -10,6 +11,23 @@ interface Props {
 
 export default function MyTextInput(props: Props) {
     const [field, meta, helpers] = useField(props.name);
+    const {questionStore} = useStore();
+    const categories = [
+        'Fans Question',
+        'Find Player By Photo',
+        'Find The Stadium',
+        'Geography',
+        'Gossip',
+        'Guess The Player',
+        'Guess The Score',
+        'Higher Lower',
+        'History',
+        'Logo Quiz',
+        'Manager id',
+        'Player id',
+        'Top5',
+        'Who Is Missing'
+    ]
     
     return (
         <Form.Field error = {meta.touched && !!meta.error}>
@@ -19,7 +37,12 @@ export default function MyTextInput(props: Props) {
                 selection
                 options = {props.options}
                 value = {field.value || null}
-                onChange = {(e, d) => helpers.setValue(d.value)}
+                onChange = {(e, d) => {
+                    helpers.setValue(d.value)
+                    if( d.value && categories.includes(d.value.toString())){
+                        questionStore.setCategory(d.value.toString());
+                    }
+                }}
                 //onBlur = {() => helpers.setTouched(true)}
                 placeholder = {props.placeholder}
             />

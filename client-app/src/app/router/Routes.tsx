@@ -21,7 +21,6 @@ import ActiveGame from "../../features/errors/ActiveGame";
 import CoinFlip from "../../features/game/CoinFlip";
 import RequireCoinFlip from "./RequireCoinFlip";
 import CategorySelectionOnGoing from "../../features/errors/CategorySelectionOnGoing";
-import Home_Page from "../../features/home/Home_Page";
 import CreateGame from "../../features/game/CreateGame";
 import RequireSecondUser from "./RequireSecondUser";
 import Leaderboard from "../../features/game/Leaderboard";
@@ -31,8 +30,7 @@ import CorrectAnswer from "../../features/game/CorrectAnswer";
 import WrongAnswer from "../../features/game/WrongAnswer";
 
 
-export const routes: RouteObject[] = [
-    {
+export const routes: RouteObject[] = [{
         path: '/',
         element: <App/>,
         children:[
@@ -62,9 +60,8 @@ export const routes: RouteObject[] = [
             ]},
             {path: '', element: <HomePage />},
             {path: 'homepage', element: <HomePage />},
-            {path: 'home_page', element: <Home_Page />},
             {path: 'signup', element: <SignUpForm />},
-            {path: 'login', element: <LoginForm key='manage'/>},
+            {path: 'login', element: <LoginForm key = 'manage'/>},
             {path: 'errors', element: <TestErrors />},
             {path: 'not-found', element: <NotFound />},
             {path: 'server-error', element: <ServerError />},
@@ -73,7 +70,7 @@ export const routes: RouteObject[] = [
             {path: 'creategame', element: <CreateGame />},
             {path: 'category_selection_is_going', element: <CategorySelectionOnGoing />},
             {path: 'seconduserselection', element: <SecoundUserSelection />},
-            {path: '*', element: <Navigate replace to='/not-found' />},
+            {path: '*', element: <Navigate replace to = '/not-found' />},
         ],
     }
 ]

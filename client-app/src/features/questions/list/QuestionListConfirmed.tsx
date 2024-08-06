@@ -60,6 +60,12 @@ export default observer(function QuestionListConfirmed() {
                                                 <GridColumn><div>Correct Answer:</div> </GridColumn>
                                                 <GridColumn><div>{q.correctAnswer1}</div> </GridColumn>
                                             </GridRow>
+                                            {(q.photo) &&
+                                                <GridRow>
+                                                    <GridColumn><div></div> </GridColumn>
+                                                    <GridColumn><div><Image size = 'medium' src = {q.photo.url} /></div> </GridColumn>
+                                                </GridRow>
+                                            }
                                         </>
                                     )} 
                                     {(q.category === 'Top5') &&

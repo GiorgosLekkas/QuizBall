@@ -67,22 +67,7 @@ export default observer(function QuestionForm({origin}:Props) {
         category: '',
     });
 
-    const validationSchemaAdmin = Yup.object({
-        question: Yup.string().required('Question is required'),
-        answer1: Yup.string().required('Answer 1 is required'),
-        answer2: Yup.string().required('Answer 2 is required'), 
-        correctAnswer1: Yup.string().required('Correct Answer is required'),
-        level: Yup.string().required('Level is required'),
-        category: Yup.string().required('Category is required')
-    })
-
-    const validationSchemaUser = Yup.object({
-        question: Yup.string().required('Question is required'),
-        answer1: Yup.string().required('Answer 1 is required'),
-        answer2: Yup.string().required('Answer 2 is required'), 
-        correctAnswer1: Yup.string().required('Correct Answer is required'),
-        level: Yup.string().required('Level is required'),
-    })
+    const [validationSchema, setSchema] = useState<any>([]);
 
     useEffect(() => {
         if(origin === 'edit'){
@@ -101,15 +86,51 @@ export default observer(function QuestionForm({origin}:Props) {
         }
     }, [files])
 
+    useEffect(() => {
+        if(accountStore.user?.role === 'User')
+            setSchema (Yup.object( {
+                question: Yup.string().required('Question is required'),
+                answer1: Yup.string().required('Answer 1 is required'),
+                answer2: Yup.string().required('Answer 2 is required'), 
+                correctAnswer1: Yup.string().required('Correct Answer is required'),
+                level: Yup.string().required('Level is required'),
+            }))
+        else if (questionStore.category === 'Top5')
+            setSchema (Yup.object( {
+                question: Yup.string().required('Question is required'),
+                correctAnswer1: Yup.string().required('Correct Answer 1 is required'),
+                correctAnswer2: Yup.string().required('Correct Answer 2 is required'),
+                correctAnswer3: Yup.string().required('Correct Answer 3 is required'),
+                correctAnswer4: Yup.string().required('Correct Answer 4 is required'),
+                correctAnswer5: Yup.string().required('Correct Answer 5 is required'),
+                level: Yup.string().required('Level is required')
+            }))
+        else if(accountStore.user?.role === 'Admin')
+            setSchema (Yup.object( {
+                question: Yup.string().required('Question is required'),
+                answer1: Yup.string().required('Answer 1 is required'),
+                answer2: Yup.string().required('Answer 2 is required'), 
+                correctAnswer1: Yup.string().required('Correct Answer is required'),
+                level: Yup.string().required('Level is required'),
+                category: Yup.string().required('Category is required')
+            }))
+    }, [questionStore.category])
+
     function handleFormSubmit(question: Question) {
         if (!question.id) {
             let newQuestion = {
                 ...question,
                 id: uuid()
             };
-            createQuestion(newQuestion).then(() => navigate(`/`));
+            if(accountStore.user?.role === 'Admin' || accountStore.user?.role === 'Moderator')
+                createQuestion(newQuestion, files).then(() => navigate(`/questions`));
+            else
+                createQuestion(newQuestion, files).then(() => navigate(`/`));
         } else {
-            updateQuestion(question).then(() => navigate(`/`));
+            if(accountStore.user?.role === 'Admin' || accountStore.user?.role === 'Moderator')
+                updateQuestion(question, files).then(() => navigate(`/questions`));
+            else
+                updateQuestion(question, files).then(() => navigate(`/`));
         }
         closeModal();
         closeForm();
@@ -125,31 +146,46 @@ export default observer(function QuestionForm({origin}:Props) {
 
     return (
         <Segment clearing>
-            <Formik validationSchema = {accountStore.user!.role === 'Admin' ? validationSchemaAdmin : validationSchemaUser} enableReinitialize initialValues = {question} onSubmit = {values => handleFormSubmit(values)} > 
+            <Formik validationSchema = {validationSchema} 
+                    enableReinitialize initialValues = {question} onSubmit = {values => handleFormSubmit(values)} > 
                 {({handleSubmit, isValid, isSubmitting, dirty}) => (
                     <Form className = "ui form" onSubmit = {handleSubmit} autoComplete = 'off'>
                         <Header as = 'h2' content = ' Question' color = 'teal' textAlign = 'center' />
+                        {(accountStore.user!.role === 'Admin') &&
+                            <>
+                                <MySelectInput options = {categoryOptions} placeholder = 'Category' name = 'category' />
+                            </>
+                        }
                         <MyTextArea rows = {3} placeholder = 'Question' name = 'question'/>
-                        <MyTextInput name='answer1' placeholder = 'Answer 1'  />
-                        <MyTextInput placeholder = 'Answer 2' name = 'answer2'/>
-                        <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer1'/>
+                        {(questionStore.category !== 'Top5') &&
+                            <>
+                                <MyTextInput name='answer1' placeholder = 'Answer 1'  />
+                                <MyTextInput placeholder = 'Answer 2' name = 'answer2'/>
+                            </>
+                        }
+                        <MyTextInput placeholder = {questionStore.category !== 'Top5' ? 'Correct Answer' : 'Correct Answer 1'} name = 'correctAnswer1'/>
                         {
                             (accountStore.user!.role === 'Admin') &&
                             <>
-                                <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer2'/>
-                                <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer3'/>
-                                <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer4'/>
-                                <MyTextInput placeholder = 'Correct Answer' name = 'correctAnswer5'/>
-                                <MySelectInput options = {categoryOptions} placeholder = 'Category' name = 'category'/>
-                                {
-                                    files! && files.length === 0 ? (
-                                        <PhotoWidgetDropzone setFiles = {setFiles} />
-                                    ) : (
-                                        <>
-                                            <Icon name = 'close' onClick = {() => setFiles([])} />
-                                            <Image size = 'medium' src = {files[0].preview} />
-                                        </>
-                                    )
+                                {(questionStore.category === 'Top5') &&
+                                    <>
+                                        <MyTextInput placeholder = 'Correct Answer 2' name = 'correctAnswer2'/>
+                                        <MyTextInput placeholder = 'Correct Answer 3' name = 'correctAnswer3'/>
+                                        <MyTextInput placeholder = 'Correct Answer 4' name = 'correctAnswer4'/>
+                                        <MyTextInput placeholder = 'Correct Answer 5' name = 'correctAnswer5'/>
+                                    </>
+                                }
+                                {(questionStore.category === 'Logo Quiz'||questionStore.category === 'Guess The Score'||questionStore.category === 'Find Player By Photo'||questionStore.category === 'Manager id'||questionStore.category === 'Player id'||questionStore.category === 'Who Is Missing'||questionStore.category === 'Find The Stadium'||questionStore.category === 'Guess The Player') &&
+                                    <>
+                                        {files! && files.length === 0 ? (
+                                            <PhotoWidgetDropzone setFiles = {setFiles} />
+                                        ) : (
+                                            <>
+                                                <Icon name = 'close' onClick = {() => setFiles([])} />
+                                                <Image size = 'medium' src = {files[0].preview} />
+                                            </>
+                                        )}
+                                    </>
                                 }
                             </>
                         }

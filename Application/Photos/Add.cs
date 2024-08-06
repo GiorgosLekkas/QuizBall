@@ -6,17 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Photos
-{
-    public class Add
-    {
-        public class Command : IRequest<Result<Photo>>
-        {
+namespace Application.Photos {
+    public class Add {
+        public class Command : IRequest<Result<Photo>> {
             public IFormFile File { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command, Result<Photo>>
-        {
+        public class Handler : IRequestHandler<Command, Result<Photo>> {
             private readonly DataContext context;
             private readonly IPhotoAccessor photoAccessor;
             private readonly IUserAccessor userAccessor;

@@ -95,10 +95,10 @@ export default observer(function QuestionPopUp() {
                                     />
                                 }
                                 {(question.category === 'Logo Quiz') &&
-                                    <Image size = "small" style = {{paddingBottom: '1em'}}><img src = {`${question.photo}`} alt = "logo"></img> </Image>
+                                    <Image size = "small" style = {{paddingBottom: '1em'}}><img src = {`${question.photo?.url}`} alt = "logo"></img> </Image>
                                 }
                                 {(question.category === 'Player id' || question.category === 'Manager id') &&
-                                    <Image size = "big" style = {{paddingBottom: '1em'}}><img src = {`${question.photo}`} alt = "logo"></img> </Image>
+                                    <Image size = "big" style = {{paddingBottom: '1em'}}><img src = {`${question.photo?.url}`} alt = "logo"></img> </Image>
                                 }
                                 <MyTextInput name = 'answer' placeholder = 'Answer'  />
                                 {(question?.category === 'Top5') &&
