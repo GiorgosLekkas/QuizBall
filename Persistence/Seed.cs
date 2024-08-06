@@ -522,7 +522,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Red Star",
                     Answer2 = "Monaco",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "monaco",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718055570/Questions/Logo%20Quiz/Easy/monaco.png"
                     },
@@ -541,7 +541,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Larisa",
                     Answer2 = "Sivaspor",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "larisa",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718055570/Questions/Logo%20Quiz/Easy/larisa.png"
                     },
@@ -689,7 +689,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Lorient",
                     Answer2 = "Lens",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "lorient",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056618/Questions/Logo%20Quiz/Medium/lorient.png"
                     },
@@ -708,7 +708,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Kalloni",
                     Answer2 = "Kalithea",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "kalithea",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056617/Questions/Logo%20Quiz/Medium/kalithea.png"
                     },
@@ -727,7 +727,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Ipswich",
                     Answer2 = "Twente",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "ipswoch",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056615/Questions/Logo%20Quiz/Medium/ipswich.png"
                     },
@@ -746,7 +746,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Getafe",
                     Answer2 = "Espanyol",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "getafe",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056615/Questions/Logo%20Quiz/Medium/getafe.png"
                     },
@@ -765,7 +765,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Odense",
                     Answer2 = "Darmstadt",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "darmstadt",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056614/Questions/Logo%20Quiz/Medium/darmstadt.png"
                     },
@@ -784,7 +784,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Frosinone",
                     Answer2 = "Hellas Verona",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "frosinone",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718056612/Questions/Logo%20Quiz/Medium/frosinone.png"
                     },
@@ -804,7 +804,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Olimpija Ljubljana",
                     Answer2 = "Bohemians",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "olimpija_ljubljana",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057277/Questions/Logo%20Quiz/Hard/olimpija_ljubljana.png"
                     },
@@ -823,7 +823,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Odense",
                     Answer2 = "Brighton",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "odense",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057272/Questions/Logo%20Quiz/Hard/odense.png"
                     },
@@ -842,7 +842,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Metalist",
                     Answer2 = "Maribor",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "metalist",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057271/Questions/Logo%20Quiz/Hard/metalist.png"
                     },
@@ -861,7 +861,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Maribor",
                     Answer2 = "Metalist",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "maribor",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057269/Questions/Logo%20Quiz/Hard/maribor.png"
                     },
@@ -880,7 +880,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "International",
                     Answer2 = "Independiente",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "international",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057267/Questions/Logo%20Quiz/Hard/international.png"
                     },
@@ -899,7 +899,7 @@ namespace Persistence {
                     Question = "Which team's logo is this?",
                     Answer1 = "Panathinaikos",
                     Answer2 = "Greuther Furth",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "greuther_furth",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1718057265/Questions/Logo%20Quiz/Hard/greuther_furth.png"
                     },
@@ -919,7 +919,7 @@ namespace Persistence {
                     Question = "Find the Manager",
                     Answer1 = "Parma",
                     Answer2 = "David Moyes",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "David_Moyes_bngdni",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/David_Moyes_bngdni.png"
                     },
@@ -938,7 +938,7 @@ namespace Persistence {
                     Question = "Find the Manager",
                     Answer1 = "Antonio Conte",
                     Answer2 = "David Moyes",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "Antonio_Conte_mug126",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/Antonio_Conte_mug126.png"
                     },
@@ -957,7 +957,7 @@ namespace Persistence {
                     Question = "Find the Manager",
                     Answer1 = "Andre Vilas Boas",
                     Answer2 = "David Moyes",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "A9_Vilas_Boas_fis96y",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548691/Questions/Manager%20Id/Andr%C3%A9_Vilas_Boas_fis96y.png"
                     },
@@ -973,13 +973,11 @@ namespace Persistence {
                     Author = account
                 },
 
-
-
                 new Question_Field {
                     Question = "Find the Player",
                     Answer1 = "Erik_Lamela",
                     Answer2 = "David Moyes",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "Erik_Lamela_nbcymc",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548631/Questions/Player%20Id/Erik_Lamela_nbcymc.png"
                     },
@@ -998,7 +996,7 @@ namespace Persistence {
                     Question = "Find the Palyer",
                     Answer1 = "Diego Costa",
                     Answer2 = "David Moyes",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "Diego_Costa_zpvwzy",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548631/Questions/Player%20Id/Diego_Costa_zpvwzy.png"
                     },
@@ -1017,7 +1015,7 @@ namespace Persistence {
                     Question = "Find the Palyer",
                     Answer1 = "David Luiz",
                     Answer2 = "David Moyes",
-                    Photo = new Photo_Question {
+                    Photo = new Photo {
                         Id = "David_Luiz_l8ohyw",
                         Url = "https://res.cloudinary.com/dlmdnbstg/image/upload/v1717548630/Questions/Player%20Id/David_Luiz_l8ohyw.png"
                     },

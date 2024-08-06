@@ -26,10 +26,10 @@ function App() {
   if(!commonStore.appLoaded) return <LoadingComponent content = 'Loading app...' />
 
   return (
-    <div className = "masthead_white">
+    <div className = {`masthead_white`}>
       <ScrollRestoration />
       <ModalContainer/>
-      <ToastContainer position='bottom-right' hideProgressBar theme = 'colored'/>
+      <ToastContainer position = 'bottom-right' hideProgressBar theme = 'colored'/>
       {location.pathname === '/' ? <HomePage/> :(
         <>
           <NavBar/>

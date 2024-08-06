@@ -227,7 +227,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Question = table.Column<string>(type: "TEXT", nullable: true),
-                    Photo = table.Column<string>(type: "TEXT", nullable: true),
+                    PhotoId = table.Column<string>(type: "TEXT", nullable: true),
                     Answer1 = table.Column<string>(type: "TEXT", nullable: true),
                     Answer2 = table.Column<string>(type: "TEXT", nullable: true),
                     CorrectAnswer1 = table.Column<string>(type: "TEXT", nullable: true),
@@ -250,6 +250,11 @@ namespace Persistence.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Questions_Photos_PhotoId",
+                        column: x => x.PhotoId,
+                        principalTable: "Photos",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -328,6 +333,11 @@ namespace Persistence.Migrations
                 name: "IX_Questions_AuthorId",
                 table: "Questions",
                 column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_PhotoId",
+                table: "Questions",
+                column: "PhotoId");
         }
 
         /// <inheritdoc />

@@ -53,13 +53,13 @@ const CoinFlip: React.FC = () => {
                     </Button>
                 )}
                 <div className = {`coin ${isFlipping ? 'flipping' : ''}`}>
-                    <div className="coin-inner">
+                    <div className = "coin-inner">
                         {result==='heads' && (
-                            <div className="coin-front">
+                            <div className = "coin-front">
                                 <Image style = {{width: '250px', height: '250px'}} src = "/assets/heads.png" alt = "heads" />
                             </div>
                         )} { result==='tails' && (
-                            <div className="coin-back">
+                            <div className = "coin-back">
                                 <Image style = {{width: '250px', height: '250px'}} src = "/assets/tails.png" alt = "tails" />
                             </div>
                         )}

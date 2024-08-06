@@ -18,10 +18,10 @@ body{
 
 .hero_context {
   background-color: #eaeaea !important;
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.8) !important;
-  display:inherit;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.8) !important;
+  display: inherit;
   align-items: center !important;
-  height: 150vh;
+  height: 350vh;
 }
 
 .react-calendar {
@@ -36,19 +36,55 @@ body{
   display:inherit;
   align-items: center !important;
   /*background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%);*/
-  background: url('assets/homepage.png') center center/cover no-repeat !important;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.9) !important;
+  background: url('assets/Homepage/image.png') center center/cover no-repeat !important;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85) !important;
   height: 100vh;
+  transition: background-image 2s linear!important;
 }
 
-/*.masthead_white {
-  display:inherit;
-  align-items: center !important;
-  /*background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%);
-  background: url('assets/homepage4.png') center center/cover no-repeat !important;
-  box-shadow: inset 0 0 0 2000px rgba(233, 233, 233, 0.9) !important;
-  height: 103vh;
-}*/
+.image-1 {
+  background: url('assets/Homepage/image.png') center center/cover no-repeat !important;
+}
+
+.image-2 {
+  background: url('assets/Homepage/image1.png') center center/cover no-repeat !important;
+}
+
+.image-3 {
+  background: url('assets/Homepage/image2.png') center center/cover no-repeat !important;
+}
+
+.image-4 {
+  background: url('assets/Homepage/image3.png') center center/cover no-repeat !important;
+}
+
+.image-5 {
+  background: url('assets/Homepage/image4.png') center center/cover no-repeat !important;
+}
+
+.image-6 {
+  background: url('assets/Homepage/image5.png') center center/cover no-repeat !important;
+}
+
+.image-7 {
+  background: url('assets/Homepage/image6.png') center center/cover no-repeat !important;
+}
+
+.image-8 {
+  background: url('assets/Homepage/image7.png') center center/cover no-repeat !important;
+}
+
+.image-9 {
+  background: url('assets/Homepage/image8.png') center center/cover no-repeat !important;
+}
+
+.image-10 {
+  background: url('assets/Homepage/image9.png') center center/cover no-repeat !important;
+}
+
+.image-11 {
+  background: url('assets/Homepage/image10.png') center center/cover no-repeat !important;
+}
 
 .masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {
@@ -63,6 +99,56 @@ body{
 .masthead h2 {
   font-size: 1.7em;
   font-weight: normal;
+}
+
+.instructions {
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 80%; /* Set to full width of the container */
+  width: 75%; /* Set the width to 90% of the container */
+}
+
+.instructions h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.instruction-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.instruction-step.image-right {
+  flex-direction: row-reverse;
+}
+
+.instruction-step.image-left {
+  flex-direction: row;
+}
+
+.instruction-step img {
+  width: 45%; /* Adjust width to make images fit well */
+  height: auto;
+  margin: 0 2.5%; /* Adjust margin for spacing */
+  border-radius: 8px;
+}
+
+.instruction-step .text {
+  width: 45%; /* Adjust width to make text fit well */
+  padding: 0 2.5%; /* Adjust padding for spacing */
+}
+
+.instruction-step h3 {
+  margin-bottom: 0.5rem;
+  color: #ffff;
+}
+
+.instruction-step p {
+
+  margin: 0;
+  color: #ffff;
 }
 
 /*end home page styles*/

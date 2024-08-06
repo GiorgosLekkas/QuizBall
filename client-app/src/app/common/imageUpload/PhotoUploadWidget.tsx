@@ -47,10 +47,8 @@ export default function PhotoUploadWidget({loading, uploadPhoto}: Props) {
                     files && files.length > 0 &&
                     <>
                         <div className="img-preview" style = {{minHeight: 200, overflow: 'hidden'}} />
-                        <Button.Group width = {2} >
-                            <Button onClick = {onCrop} positive icon = 'check' />
+                            <Button onClick = {onCrop} positive disabled = {loading} loading = {loading} icon = 'check' />
                             <Button disabled = {loading} onClick = {() => setFiles([])} icon = 'close' />
-                        </Button.Group>
                     </>
                 }
             </Grid.Column>

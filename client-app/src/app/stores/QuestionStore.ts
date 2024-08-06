@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Question, QuestionFormValues } from "../models/Question";
-//import {v4 as uuid} from 'uuid';
 import { store } from "./store";
 import { Profile } from "../models/Profile";
 
@@ -89,6 +88,7 @@ export default class QuestionStore {
     closeForm = () => {
         this.editMode = false;
         this.category = '';
+        this.selectedQuestion = undefined;
     }
 
     loadQuestions = async () => {
@@ -142,8 +142,7 @@ export default class QuestionStore {
         }   
     }
 
-    createQuestion = async (question: QuestionFormValues, photo: Blob) => {
-        console.log(photo);
+    createQuestion = async (question: QuestionFormValues, photo: any) => {
         store.accountStore.getUser();
         const user = store.accountStore!.user;
         question.confirmed = 'false'
@@ -157,7 +156,7 @@ export default class QuestionStore {
             question.correctAnswer4 = "-";
             question.correctAnswer5 = "-";
         }
-        /*try {
+        try {
             //question.id = uuid();
             question.authorName = user?.userName;
             await agent.Questions.create(question);
@@ -165,22 +164,18 @@ export default class QuestionStore {
             newQuestion.authorName = user!.userName;
             const profile = new Profile(user!);
             newQuestion.author = profile;
-            runInAction(() => {
-                this.selectedQuestion = newQuestion;
-                this.setActivity(newQuestion);
-            });
-        } catch (error) {
-            console.log(error);
-        }*/
+            if(photo)
+                try {
+                    const fileBlob = new Blob([photo?.[0]], { type: photo?.[0].type });
+                    const response = await agent.Questions.addPhoto(fileBlob, question);
+                    runInAction(() => {
+                        newQuestion.photo = response.data;
+                        newQuestion.photo!.url = response.data.url;
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
 
-        try {
-            //question.id = uuid();
-            question.authorName = user?.userName;
-            await agent.Questions.addPhoto(question ,photo);
-            const newQuestion = new Question(question);
-            newQuestion.authorName = user!.userName;
-            const profile = new Profile(user!);
-            newQuestion.author = profile;
             runInAction(() => {
                 this.selectedQuestion = newQuestion;
                 this.setActivity(newQuestion);
@@ -190,25 +185,8 @@ export default class QuestionStore {
         }
     }
 
-    updateQuestion = async (question: Question, photo: Blob) => {
-        store.accountStore.getUser();
-        const user = store.accountStore!.user;
-        try {
-            //question.id = uuid();
-            question.authorName = user?.userName;
-            await agent.Questions.addPhoto(question,photo);
-            const newQuestion = new Question(question);
-            newQuestion.authorName = user!.userName;
-            const profile = new Profile(user!);
-            newQuestion.author = profile;
-            runInAction(() => {
-                this.selectedQuestion = newQuestion;
-                this.setActivity(newQuestion);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-        /*this.loading = true;
+    updateQuestion = async (question: Question, photo: any) => {
+        this.loading = true;
         try {
             if(question.category === "Top5"){
                 question.answer1 = "-";
@@ -220,6 +198,26 @@ export default class QuestionStore {
                 question.correctAnswer5 = "-";
             }
             store.accountStore.getUser();
+            if(photo)
+                if(question.photo!=null) 
+                    try {
+                        const result = await agent.Questions.deleteQuestionPhoto(question.id);
+                        runInAction(() => {
+                            if(result && question) question.photo = undefined;
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+                try {
+                    const fileBlob = new Blob([photo?.[0]], { type: photo?.[0].type });
+                    const response = await agent.Questions.addPhoto(fileBlob, question);
+                    runInAction(() => {
+                        question.photo = response.data;
+                        question.photo!.url = response.data.url;
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
             await agent.Questions.update(question);
             runInAction(() => {
                 if (question.id) {
@@ -235,7 +233,7 @@ export default class QuestionStore {
                 this.setLoadingInitial(false);
             })
         }
-        this.closeForm();*/
+        this.closeForm();
     }
 
     confirmQuestion = async (id: string) => {
@@ -268,6 +266,17 @@ export default class QuestionStore {
     deleteQuestion = async (id: string) => {
         this.loading =  true;
         try {
+            const question = this.questionRegistry.get(id);
+            if(question?.photo)
+                if(question.photo!=null) 
+                    try {
+                        const result = await agent.Questions.deleteQuestionPhoto(question.id);
+                        runInAction(() => {
+                            if(result && question) question.photo = undefined;
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
             await agent.Questions.delete(id);
             runInAction(() => {
                 if(this.confirmed.has(id))
@@ -285,5 +294,4 @@ export default class QuestionStore {
             })
         }
     }
-
 }

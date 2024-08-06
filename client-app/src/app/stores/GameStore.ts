@@ -83,19 +83,16 @@ export default class GameStrore {
             if(this.double1 === 'false' && this.questionIsSelected === false) this.double1 = 'active';
         if(this.player2)
             if(this.double2 === 'false' && this.questionIsSelected === false) this.double2 = 'active';
-        if(this.player1) console.log("P1");
-        if(this.player2) console.log("P2");
-        console.log("x2");
     }
 
     hintFiftyFifty() {
-        if(this.player1)
-            if(this.fiftyfifty1 === 'false' && this.questionIsSelected === true) this.fiftyfifty1 = 'active';
-        if(this.player2)
-            if(this.fiftyfifty2 === 'false' && this.questionIsSelected === true) this.fiftyfifty2 = 'active';
-        if(this.player1) console.log("P1");
-        if(this.player2) console.log("P2");
-        console.log("50-50");
+        if(this.selectedQuestion?.category !== 'Top5'){
+            if(this.player1)
+                if(this.fiftyfifty1 === 'false' && this.questionIsSelected === true) this.fiftyfifty1 = 'active';
+            if(this.player2)
+                if(this.fiftyfifty2 === 'false' && this.questionIsSelected === true) this.fiftyfifty2 = 'active';
+            console.log(this.selectedQuestion?.category);
+        }
     }
 
     hintTelephone() {
@@ -103,9 +100,6 @@ export default class GameStrore {
             if(this.telephone1 === false && this.questionIsSelected === true) this.telephone1 = true;
         if(this.player2)
             if(this.telephone2 === false && this.questionIsSelected === true) this.telephone2 = true;
-        if(this.player1) console.log("P1");
-        if(this.player2) console.log("P2");
-        console.log("telephone");
     }
 
     answering(question: Question, q: AnswerQuestion) {
@@ -344,7 +338,8 @@ export default class GameStrore {
     }
 
     selectQuestion = (id: string) => {
-        this.selectedQuestion = this.allQuestions.get(id);
+        this.selectedQuestion = store.questionStore.questionRegistry.get(id);
+        console.log(this.selectedQuestion?.category);
     }
     
 }

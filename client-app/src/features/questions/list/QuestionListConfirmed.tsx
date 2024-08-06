@@ -62,8 +62,17 @@ export default observer(function QuestionListConfirmed() {
                                             </GridRow>
                                             {(q.photo) &&
                                                 <GridRow>
-                                                    <GridColumn><div></div> </GridColumn>
-                                                    <GridColumn><div><Image size = 'medium' src = {q.photo.url} /></div> </GridColumn>
+                                                    <GridColumn><div>Photo:</div> </GridColumn>
+                                                    <GridColumn>
+                                                        <div>
+                                                        <Image 
+                                                            src = {q.photo?.url}
+                                                            size = 'medium'
+                                                            as = {Link}
+                                                            onClick = {() => modalStore.openModal(<Image src = {q.photo?.url}/>)}
+                                                        />
+                                                        </div>
+                                                    </GridColumn>
                                                 </GridRow>
                                             }
                                         </>

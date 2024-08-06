@@ -52,6 +52,8 @@ export default observer(function QuestionForm({origin}:Props) {
 
     const [files, setFiles] = useState<any>([]);
 
+    const [clear, setPhotoClear] = useState<Boolean>(false);
+
     const [question, setQuestion] = useState<Question>({
         id: '',
         question: '',
@@ -71,7 +73,7 @@ export default observer(function QuestionForm({origin}:Props) {
 
     useEffect(() => {
         if(origin === 'edit'){
-            if (questionStore.selectedQuestion != undefined){
+            if(questionStore.selectedQuestion != undefined){
                 let id = questionStore.selectedQuestion!.id;
                 if(id && questionStore.editMode == true)
                     loadQuestion(id).then(question => setQuestion(question!))
@@ -80,7 +82,7 @@ export default observer(function QuestionForm({origin}:Props) {
     }, [loadQuestion]);
 
     useEffect(() => {
-        console.log(files);
+
         return () => {
             files.forEach((file: any) => URL.revokeObjectURL(file.preview));
         }
@@ -175,9 +177,15 @@ export default observer(function QuestionForm({origin}:Props) {
                                         <MyTextInput placeholder = 'Correct Answer 5' name = 'correctAnswer5'/>
                                     </>
                                 }
-                                {(questionStore.category === 'Logo Quiz'||questionStore.category === 'Guess The Score'||questionStore.category === 'Find Player By Photo'||questionStore.category === 'Manager id'||questionStore.category === 'Player id'||questionStore.category === 'Who Is Missing'||questionStore.category === 'Find The Stadium'||questionStore.category === 'Guess The Player') &&
+                                {(questionStore.category === 'Logo Quiz'||questionStore.category === 'Guess The Score'||questionStore.category === 'Find Player By Photo'||questionStore.category === 'Manager id'||questionStore.category === 'Player id'||questionStore.category === 'Who Is Missing'||questionStore.category === 'Find The Stadium'||questionStore.category === 'Guess The Player' ) &&
+                                    //|| (questionStore.selectedQuestion?.category === 'Logo Quiz'||questionStore.selectedQuestion?.category === 'Guess The Score'||questionStore.selectedQuestion?.category === 'Find Player By Photo'||questionStore.selectedQuestion?.category === 'Manager id'||questionStore.selectedQuestion?.category === 'Player id'||questionStore.selectedQuestion?.category === 'Who Is Missing'||questionStore.selectedQuestion?.category === 'Find The Stadium'||questionStore.selectedQuestion?.category === 'Guess The Player' ) &&
                                     <>
-                                        {files! && files.length === 0 ? (
+                                        {questionStore.selectedQuestion && clear == false ? (
+                                            <>
+                                                <Icon name = 'close' onClick = {() => setPhotoClear(true)} />
+                                                <Image size = 'medium' src = {clear == false ? questionStore.selectedQuestion.photo?.url : ''}/>
+                                            </>
+                                        ) : (files! && files.length === 0 ) ? (
                                             <PhotoWidgetDropzone setFiles = {setFiles} />
                                         ) : (
                                             <>
@@ -191,7 +199,7 @@ export default observer(function QuestionForm({origin}:Props) {
                         }
                         <MySelectInput options = {levelOptions} placeholder = 'Level' name = 'level'/>
                         <Button 
-                            disabled = {isSubmitting || !isValid || !dirty } 
+                            disabled = {isSubmitting || !isValid || !dirty && (files! && files.length === 0)} 
                             loading = {isSubmitting} 
                             floated = 'right'
                             positive type = 'submit'

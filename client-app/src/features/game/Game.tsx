@@ -70,7 +70,7 @@ export default observer( function Game() {
                         </GridColumn>
                     </GridRow>
                 </Grid>
-                <Button onClick={ () => endGame()} content = 'End Game' />
+                <Button onClick = { () => endGame()} content = 'End Game' />
             </Segment>
         </>
     );

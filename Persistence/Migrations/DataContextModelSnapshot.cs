@@ -256,7 +256,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Level")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("PhotoId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Question")
@@ -265,6 +265,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("PhotoId");
 
                     b.ToTable("Questions");
                 });
@@ -432,7 +434,13 @@ namespace Persistence.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Domain.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+
                     b.Navigation("Author");
+
+                    b.Navigation("Photo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

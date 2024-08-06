@@ -8,7 +8,7 @@ export interface Profile {
     lastName: string
     gender: string
     role: string
-    photo?: Photo
+    photo?: Photo | null
     questions?: Question[]
 }
 

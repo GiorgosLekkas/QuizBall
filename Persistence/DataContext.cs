@@ -10,7 +10,6 @@ namespace Persistence {
         public DbSet<QuestionGeography> Question_Geography { get; set; }
         public DbSet<Question_Field> Questions { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Photo_Question> Photos_Question { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
@@ -27,10 +26,21 @@ namespace Persistence {
                 .WithMany(a => a.Authors)
                 .HasForeignKey(aa => aa.QuestionId);*/
 
-            builder.Entity<Question_Field>()
+            /*builder.Entity<Question_Field>()
                 .HasOne(a => a.Author)
                 .WithMany(aa => aa.Questions)
+                .OnDelete(DeleteBehavior.Cascade);*/
+
+            builder.Entity<Question_Field>()
+                .HasOne(q => q.Author)
+                .WithMany(a => a.Questions)
+                .HasForeignKey(q => q.AuthorId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Account>()
+                .HasMany(a => a.Questions)
+                .WithOne(q => q.Author)
+                .HasForeignKey(q => q.AuthorId);
         }
     }
 }

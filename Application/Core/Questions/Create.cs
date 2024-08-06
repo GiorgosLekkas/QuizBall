@@ -21,6 +21,7 @@ namespace Application.Core.Questions {
                     x.UserName == userAccessor.GetUserName()
                 );
 
+
                 var author = new QuestionAuthor {
                     AccountId = user.Id,
                     Account = user,

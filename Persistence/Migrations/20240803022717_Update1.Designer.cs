@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240617224202_Update1")]
+    [Migration("20240803022717_Update1")]
     partial class Update1
     {
         /// <inheritdoc />
@@ -259,7 +259,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Level")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("PhotoId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Question")
@@ -268,6 +268,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("PhotoId");
 
                     b.ToTable("Questions");
                 });
@@ -435,7 +437,13 @@ namespace Persistence.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Domain.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId");
+
                     b.Navigation("Author");
+
+                    b.Navigation("Photo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

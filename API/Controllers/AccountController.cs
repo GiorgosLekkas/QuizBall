@@ -2,7 +2,6 @@ using System.Security.Claims;
 using API.DTOs;
 using API.Services;
 using Application.Core.Accounts;
-using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

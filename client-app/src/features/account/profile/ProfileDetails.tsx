@@ -24,7 +24,7 @@ export default observer(function ProfileContent({profile}: Props) {
     }
 
     function handleAccountUpdate(account: Account) {
-        modalStore.openModal(<EditForm account={account} origin="profile" />);
+        modalStore.openModal(<EditForm account = {account} origin = "profile" />);
     }
 
     return (
@@ -43,13 +43,14 @@ export default observer(function ProfileContent({profile}: Props) {
                         name = {user?.id}
                         loading = {loading && target === user?.id}
                         onClick = { (e) => handleAccountDelete(e, user?.id!)}
+                        disabled = {user?.role === 'Admin'}
                         floated = 'right'
                         color = 'red' 
                         icon = 'delete'
                     />
                     <Button
                         name = {user?.id}
-                        onClick = { () => handleAccountUpdate(user!) } 
+                        onClick = { () => handleAccountUpdate(user!) }
                         as = {Link} 
                         floated = 'right' 
                         color = 'teal'

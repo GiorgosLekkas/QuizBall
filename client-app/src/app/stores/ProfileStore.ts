@@ -9,6 +9,7 @@ export default class ProfileStore{
     questions: Question[] | undefined = undefined;
     loadingProfile = false;
     uploading = false;
+    deleting = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -38,6 +39,7 @@ export default class ProfileStore{
     }
 
     uploadPhoto = async (file: Blob) => {
+        console.log(file);
         this.uploading = true;
         try {
             if(this.profile?.photo)
@@ -59,6 +61,7 @@ export default class ProfileStore{
     }
 
     deletePhoto = async () => {
+        this.deleting = true;
         try {
             if(this.profile !== null && this.profile.photo !== undefined) {
                 const result = await agent.Profiles.deletePhoto(this.profile?.photo!.id);
@@ -66,10 +69,12 @@ export default class ProfileStore{
                     if(result) {
                         if(this.profile) {
                             this.profile.image = undefined;
+                            this.profile.photo = null;
                             if(store.accountStore.user)
                                 store.accountStore.user.image = '';
                         }
                     }
+                    this.deleting = false;
                 });
             }
         } catch (error) {
