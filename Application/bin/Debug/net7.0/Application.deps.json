@@ -405,7 +405,10 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.1"
         },
         "runtime": {
-          "Domain.dll": {}
+          "Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Persistence/1.0.0": {
@@ -414,7 +417,10 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.0"
         },
         "runtime": {
-          "Persistence.dll": {}
+          "Persistence.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

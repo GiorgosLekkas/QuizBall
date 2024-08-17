@@ -10,8 +10,9 @@ C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.Genera
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.AssemblyInfoInputs.cache
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.AssemblyInfo.cs
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.csproj.CoreCompileInputs.cache
-C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.csproj.CopyComplete
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.dll
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\refint\Application.dll
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.pdb
 C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\ref\Application.dll
+C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Application.sourcelink.json
+C:\Users\giorg\Projects\QuizBall\Application\obj\Debug\net7.0\Applicat.44B5EDA2.Up2Date
