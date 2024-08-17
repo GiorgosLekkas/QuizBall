@@ -11,7 +11,7 @@ export default observer(function CreateGame() {
     return (
         <Formik
             initialValues={{userName: "", error: null}}
-            onSubmit = {(values, {setErrors}) => accountStore.secondUser(values).catch(error => setErrors(accountStore.user?.userName === values.userName ? {error: "You can't play alone"} : {error: "This user doesn't exist"}))} 
+            onSubmit = {(values, {setErrors}) => accountStore.secondUser(values).catch(() => setErrors(accountStore.user?.userName === values.userName ? {error: "You can't play alone"} : {error: "This user doesn't exist"}))} 
         >
             {({handleSubmit, isSubmitting, dirty, errors}) => (
                 <Form className = 'ui form' onSubmit = {handleSubmit} autoComplete = 'off'>

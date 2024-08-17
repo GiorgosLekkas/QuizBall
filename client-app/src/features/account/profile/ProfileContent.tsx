@@ -12,7 +12,7 @@ interface Props {
 
 export default observer(function ProfileContent({profile}: Props) {
     const panes = [
-        {menuItem: 'About', render: () => <ProfileDetails profile = {profile} />},
+        {menuItem: 'About', render: () => <ProfileDetails/>},
         {menuItem: 'Photos', render: () => <ProfilePhotos profile = {profile} />},
         {menuItem: 'Questions', render: () => <ProfileQuestions />},
         {menuItem: 'LeaderBoard', render: () => <ProfileLeaderBoard/>},

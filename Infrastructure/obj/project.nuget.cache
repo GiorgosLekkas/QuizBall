@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gS2wlRBB7gc=",
+  "dgSpecHash": "Ic1CC2jLhac=",
   "success": true,
-  "projectFilePath": "c:\\Users\\giorg\\Projects\\QuizBall\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\giorg\\Projects\\QuizBall\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\giorg\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\giorg\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

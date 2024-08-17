@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Header, Image } from "semantic-ui-react";
+import { Button, Header } from "semantic-ui-react";
 
 import { observer } from "mobx-react-lite";
 

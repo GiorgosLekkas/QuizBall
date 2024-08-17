@@ -35,6 +35,7 @@ export default class Question_GeographyStore {
 
     questions_Geography() { //let n: number = Math.floor(Math.random() * keys.length);
         this.question_GeographyRegistry.forEach((value: Question_Geography, key: string) => {
+            key;
             if(value.level === "Easy")
                 this.easy.set(value.id, value);
             if(value.level === "Medium")

@@ -241,6 +241,7 @@ export default class GameStrore {
             this.medium.clear();
             this.hard.clear();
             store.questionStore.confirmed.forEach((value: Question, key: string) => {
+                key;
                 if(value.level === "Easy" && category === value.category) 
                     this.easy.set(value.id, value);
                 if(value.level === "Medium" && category === value.category)

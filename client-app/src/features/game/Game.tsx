@@ -25,6 +25,7 @@ export default observer( function Game() {
     useEffect(() => {
         var i = 0;
         buttons.forEach((value: boolean, key: string) => {
+            key;
             if(value===false)
                 i++;
         });

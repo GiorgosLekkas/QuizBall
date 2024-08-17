@@ -1,11 +1,10 @@
 import { observer } from "mobx-react-lite";
-import { Header, Tab, Grid, Button, Card, Image, Modal } from "semantic-ui-react";
+import { Header, Grid, Button, Card, Image } from "semantic-ui-react";
 import { useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { Profile } from "../../../app/models/Profile";
 import PhotoUploadWidget from "../../../app/common/imageUpload/PhotoUploadWidget";
 import { Link } from "react-router-dom";
-import OpenImage from "./OpenImage";
 
 interface Props {
     profile: Profile;
@@ -25,7 +24,7 @@ export default observer(function ProfilePhotos({profile}: Props){
     }
 
     return(
-        <Tab.Pane>
+        
             <Grid>
                 <Grid.Column width = {16}>
                     <Header floated = 'left' icon = 'image' content = 'Photos' />
@@ -70,6 +69,5 @@ export default observer(function ProfilePhotos({profile}: Props){
                     }
                 </Grid.Column>
             </Grid>
-        </Tab.Pane>
     )
 })

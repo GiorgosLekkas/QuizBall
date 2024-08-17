@@ -38,6 +38,7 @@ export default function MyTextInput(props: Props) {
                 options = {props.options}
                 value = {field.value || null}
                 onChange = {(e, d) => {
+                    e;
                     helpers.setValue(d.value)
                     if( d.value && categories.includes(d.value.toString())){
                         questionStore.setCategory(d.value.toString());

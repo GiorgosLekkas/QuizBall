@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Grid, Header, Tab, TableHeader, TableRow, TableHeaderCell, TableBody, TableCell, Table } from "semantic-ui-react";
+import { Grid, Header, TableHeader, TableRow, TableHeaderCell, TableBody, TableCell, Table } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function ProfileLeaderBoard() {
@@ -7,7 +7,6 @@ export default observer(function ProfileLeaderBoard() {
     const {accountStore} = useStore();
 
     return (
-        <Tab.Pane>
             <Grid>
                 <Grid.Column width = {16}>
                     <Header floated = 'left' icon = 'trophy' content = 'LeaderBoard' />
@@ -44,6 +43,5 @@ export default observer(function ProfileLeaderBoard() {
                     </Table>
                 </Grid.Column>
             </Grid>
-        </Tab.Pane>
     )
 })

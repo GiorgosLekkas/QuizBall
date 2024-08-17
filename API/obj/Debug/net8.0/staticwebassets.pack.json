@@ -1,0 +1,293 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Hints\\50-50.png",
+      "PackagePath": "staticwebassets\\assets\\Hints\\50-50.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Hints\\Telephone.png",
+      "PackagePath": "staticwebassets\\assets\\Hints\\Telephone.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Hints\\x2.png",
+      "PackagePath": "staticwebassets\\assets\\Hints\\x2.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image1.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image1.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image10.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image10.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image2.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image2.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image3.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image3.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image4.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image4.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image5.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image5.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image6.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image6.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image7.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image7.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image8.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image8.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Homepage\\image9.png",
+      "PackagePath": "staticwebassets\\assets\\Homepage\\image9.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Instruction1.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Instruction1.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Instruction2.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Instruction2.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Instruction3.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Instruction3.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Instruction4.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Instruction4.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Instruction5.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Instruction5.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Instruction6.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Instruction6.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Instructions\\Screenshot_32.png",
+      "PackagePath": "staticwebassets\\assets\\Instructions\\Screenshot_32.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Fans Question.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Fans Question.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Find Player By Photo.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Find Player By Photo.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Find The Stadium.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Find The Stadium.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Geography.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Geography.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Gossip.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Gossip.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Guess The Player.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Guess The Player.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Guess The Score.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Guess The Score.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Higher Lower.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Higher Lower.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Higher Lower11.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Higher Lower11.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Higher Lower111.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Higher Lower111.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\History.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\History.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Logo Quiz.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Logo Quiz.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Manager id.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Manager id.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Player id.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Player id.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Top5.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Top5.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\Questions_Logo\\Who Is Missing.png",
+      "PackagePath": "staticwebassets\\assets\\Questions_Logo\\Who Is Missing.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\brand-icons-Cu_C0hZ4.svg",
+      "PackagePath": "staticwebassets\\assets\\brand-icons-Cu_C0hZ4.svg"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\brand-icons-F3SPCeH1.woff",
+      "PackagePath": "staticwebassets\\assets\\brand-icons-F3SPCeH1.woff"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\brand-icons-XL9sxUpA.woff2",
+      "PackagePath": "staticwebassets\\assets\\brand-icons-XL9sxUpA.woff2"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\brand-icons-sqJ2Pg7a.eot",
+      "PackagePath": "staticwebassets\\assets\\brand-icons-sqJ2Pg7a.eot"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\brand-icons-ubhWoxly.ttf",
+      "PackagePath": "staticwebassets\\assets\\brand-icons-ubhWoxly.ttf"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\flags-DOLqOU7Y.png",
+      "PackagePath": "staticwebassets\\assets\\flags-DOLqOU7Y.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\heads.png",
+      "PackagePath": "staticwebassets\\assets\\heads.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\heads1.png",
+      "PackagePath": "staticwebassets\\assets\\heads1.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\homepage.png",
+      "PackagePath": "staticwebassets\\assets\\homepage.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\homepage1.png",
+      "PackagePath": "staticwebassets\\assets\\homepage1.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\homepage2.png",
+      "PackagePath": "staticwebassets\\assets\\homepage2.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\homepage3.png",
+      "PackagePath": "staticwebassets\\assets\\homepage3.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\homepage4.png",
+      "PackagePath": "staticwebassets\\assets\\homepage4.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\icons-BOCtAERH.woff",
+      "PackagePath": "staticwebassets\\assets\\icons-BOCtAERH.woff"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\icons-CHzK1VD9.eot",
+      "PackagePath": "staticwebassets\\assets\\icons-CHzK1VD9.eot"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\icons-D29ZQHHw.ttf",
+      "PackagePath": "staticwebassets\\assets\\icons-D29ZQHHw.ttf"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\icons-Du6TOHnR.woff2",
+      "PackagePath": "staticwebassets\\assets\\icons-Du6TOHnR.woff2"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\icons-RwhydX30.svg",
+      "PackagePath": "staticwebassets\\assets\\icons-RwhydX30.svg"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\index-CZqXrfLf.js",
+      "PackagePath": "staticwebassets\\assets\\index-CZqXrfLf.js"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\index-Cs8OA59A.css",
+      "PackagePath": "staticwebassets\\assets\\index-Cs8OA59A.css"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\logo.png",
+      "PackagePath": "staticwebassets\\assets\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\outline-icons-BfdLr8tr.svg",
+      "PackagePath": "staticwebassets\\assets\\outline-icons-BfdLr8tr.svg"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\outline-icons-DD8jm0uy.ttf",
+      "PackagePath": "staticwebassets\\assets\\outline-icons-DD8jm0uy.ttf"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\outline-icons-DInHoiqI.woff2",
+      "PackagePath": "staticwebassets\\assets\\outline-icons-DInHoiqI.woff2"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\outline-icons-LX8adJ4n.eot",
+      "PackagePath": "staticwebassets\\assets\\outline-icons-LX8adJ4n.eot"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\outline-icons-aQ88nltS.woff",
+      "PackagePath": "staticwebassets\\assets\\outline-icons-aQ88nltS.woff"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\tails.png",
+      "PackagePath": "staticwebassets\\assets\\tails.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\tails1.png",
+      "PackagePath": "staticwebassets\\assets\\tails1.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\assets\\user.png",
+      "PackagePath": "staticwebassets\\assets\\user.png"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\giorg\\Projects\\QuizBall\\API\\wwwroot\\vite.svg",
+      "PackagePath": "staticwebassets\\vite.svg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.API.props",
+      "PackagePath": "build\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.API.props",
+      "PackagePath": "buildMultiTargeting\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.API.props",
+      "PackagePath": "buildTransitive\\API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

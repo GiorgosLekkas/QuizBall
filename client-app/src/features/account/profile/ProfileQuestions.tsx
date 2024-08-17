@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { Grid, Header, Item, Tab, Image } from "semantic-ui-react";
+import { Grid, Header, Item, Image } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function ProfileQuestions() {
@@ -7,7 +7,6 @@ export default observer(function ProfileQuestions() {
     const {profileStore} = useStore();
 
     return (
-        <Tab.Pane>
             <Grid>
                 <Grid.Column width = {16}>
                     <Header floated = 'left' icon = 'question' content = 'Submited Questions' />
@@ -36,6 +35,5 @@ export default observer(function ProfileQuestions() {
                     ))}
                 </Grid.Column>
             </Grid>
-        </Tab.Pane>
     )
 })
