@@ -136,9 +136,11 @@ export default observer(function QuestionForm({origin}:Props) {
         }
         closeModal();
         closeForm();
+        setFiles('');
     }
 
     function handleFormCancel() {
+        setFiles('');
         closeForm();
         closeModal();
     }
@@ -177,20 +179,19 @@ export default observer(function QuestionForm({origin}:Props) {
                                         <MyTextInput placeholder = 'Correct Answer 5' name = 'correctAnswer5'/>
                                     </>
                                 }
-                                {(questionStore.category === 'Logo Quiz'||questionStore.category === 'Guess The Score'||questionStore.category === 'Find Player By Photo'||questionStore.category === 'Manager id'||questionStore.category === 'Player id'||questionStore.category === 'Who Is Missing'||questionStore.category === 'Find The Stadium'||questionStore.category === 'Guess The Player' ) &&
-                                    //|| (questionStore.selectedQuestion?.category === 'Logo Quiz'||questionStore.selectedQuestion?.category === 'Guess The Score'||questionStore.selectedQuestion?.category === 'Find Player By Photo'||questionStore.selectedQuestion?.category === 'Manager id'||questionStore.selectedQuestion?.category === 'Player id'||questionStore.selectedQuestion?.category === 'Who Is Missing'||questionStore.selectedQuestion?.category === 'Find The Stadium'||questionStore.selectedQuestion?.category === 'Guess The Player' ) &&
+                                {(questionStore.category === 'Logo Quiz'||questionStore.category === 'Guess The Score'||questionStore.category === 'Find Player By Photo'||questionStore.category === 'Manager id'||questionStore.category === 'Player id'||questionStore.category === 'Who Is Missing'||questionStore.category === 'Find The Stadium'||questionStore.category === 'Guess The Player') &&
                                     <>
-                                        {questionStore.selectedQuestion && clear == false ? (
+                                        {questionStore.selectedQuestion && clear == false && question.photo != null ? (
                                             <>
-                                                <Icon name = 'close' onClick = {() => setPhotoClear(true)} />
-                                                <Image size = 'medium' src = {clear == false ? questionStore.selectedQuestion.photo?.url : ''}/>
+                                                <Icon name = 'close' onClick = {() => setPhotoClear(true)} style = {{marginBottom: '1em'}} />
+                                                <Image size = 'medium' src = {clear == false ? questionStore.selectedQuestion.photo?.url : ''} style = {{marginBottom: '1em'}} />
                                             </>
                                         ) : (files! && files.length === 0 ) ? (
                                             <PhotoWidgetDropzone setFiles = {setFiles} />
                                         ) : (
                                             <>
-                                                <Icon name = 'close' onClick = {() => setFiles([])} />
-                                                <Image size = 'medium' src = {files[0].preview} />
+                                                <Icon name = 'close' onClick = {() => setFiles([])} style = {{marginBottom: '1em'}} />
+                                                <Image size = 'medium' src = {files[0].preview} style = {{marginBottom: '1em'}} />
                                             </>
                                         )}
                                     </>

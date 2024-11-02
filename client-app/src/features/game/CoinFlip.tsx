@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Header, Image, Segment } from 'semantic-ui-react';
 import { useStore } from '../../app/stores/store';
-import { useNavigate } from 'react-router-dom';
 
 type CoinSide = 'heads' | 'tails';
 
@@ -22,7 +21,6 @@ const CoinFlip: React.FC = () => {
     const [isFlipping, setIsFlipping] = useState<boolean>(false);
     const [gameStart, setStartGame] = useState<boolean>(false);
     const {gameStore} = useStore();
-    const navigate = useNavigate();
 
     const handleFlip = () => {
         setIsFlipping(true);
@@ -38,7 +36,6 @@ const CoinFlip: React.FC = () => {
             setStartGame(true);
             setTimeout(() => {
                 setStartGame(false);
-                navigate("/categories_selection");
             }, 1000);
         }
     };

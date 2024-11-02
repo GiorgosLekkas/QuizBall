@@ -1,7 +1,7 @@
 import { Grid } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from 'mobx-react-lite';
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import QuestionListConfirmed from "../list/QuestionListConfirmed";
 import QuestionListNotConfirmed from "../list/QuestionListNotConfirmed";
@@ -10,14 +10,9 @@ export default observer(function QuestionsDashboard(){
 
     const {questionStore} = useStore();
 
-    const {questionRegistry, loadQuestions} = questionStore;
+    //const {questionRegistry, loadQuestions} = questionStore;
 
-    useEffect(() => {
-        if(questionRegistry.size <= 1) {
-            loadQuestions();
-        }
-    }, [loadQuestions, questionRegistry.size])
-
+    
 
     if ( questionStore.loadingInitial) return <LoadingComponent content = 'Loading Questions...' />
 

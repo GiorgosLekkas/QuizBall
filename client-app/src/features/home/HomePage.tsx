@@ -11,7 +11,7 @@ export default observer(function HomePage() {
 
     const {accountStore, modalStore, gameStore: {secPlayer}} = useStore();
 
-    const imageClasses = ['image-1', 'image-2', 'image-3','image-4', 'image-5', 'image-6','image-7', 'image-8', 'image-9', 'image-10', 'image-11'];
+    const imageClasses = ['image', 'image1', 'image2', 'image3','image4', 'image5', 'image6','image7', 'image8', 'image9', 'image10'];
 
     const instructions = [
         { text: 'Click on "Create New Game" to start a new game and invite your friends to play along.', imgSrc: 'assets/Instructions/Instruction1.png' },
@@ -37,7 +37,23 @@ export default observer(function HomePage() {
             {accountStore.isLoggedIn &&
                 <NavBar />
             }
-            <Segment inverted textAlign = 'center' vertical className = {`masthead ${imageClasses[currentIndex]}`}> 
+            <Segment
+                inverted
+                textAlign = 'center'
+                vertical
+                className = 'masthead'
+                style = {{
+                    display: 'inherit',
+                    alignItems: 'center',
+                    boxShadow: 'inset 0 0 0 1000px rgba(0, 0, 0, 0.85)',
+                    height: '100vh',
+                    transition: 'background-image 2s linear',
+                    backgroundImage: `url('assets/Homepage/${imageClasses[currentIndex]}.png')`,
+                    backgroundPosition: 'center center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
                 <Container text style = {{marginTop: '300px'}} >
                     <Header as = 'h1' inverted >
                         QuizBall

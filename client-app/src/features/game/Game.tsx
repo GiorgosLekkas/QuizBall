@@ -29,7 +29,7 @@ export default observer( function Game() {
             if(value===false)
                 i++;
         });
-        if(i === 15) {
+        if(i === 24) {
             endGame();
         }
     }, [])
@@ -68,6 +68,19 @@ export default observer( function Game() {
                         </GridColumn>
                         <GridColumn>
                             <Question_Display category = {gameStore.categories[4]}/>
+                        </GridColumn>
+                        <GridColumn>
+                            <Question_Display category = {gameStore.categories[5]}/>
+                        </GridColumn>
+                    </GridRow>
+                </Grid>
+                <Grid columns='three' width = "5">
+                    <GridRow>
+                        <GridColumn>
+                            <Question_Display category = {gameStore.categories[6]}/>
+                        </GridColumn>
+                        <GridColumn>
+                            <Question_Display category = {gameStore.categories[7]}/>
                         </GridColumn>
                     </GridRow>
                 </Grid>

@@ -5,14 +5,15 @@ import MyTextInput from "../../app/common/form/MyTextInput";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useStore } from "../../app/stores/store";
-import LoadingComponent from "../../app/layout/LoadingComponent";
 import { AnswerQuestion, Question } from "../../app/models/Question";
 import Hints from "./Hints";
+import OpenImage from "../../app/common/OpenImage";
 
 export default observer(function QuestionPopUp() {
 
-    const {questionStore, gameStore, modalStore} = useStore();
-    const {closeForm, loadingInitial, loadQuestion } = questionStore;
+    const {questionStore, gameStore} = useStore();
+    const {closeForm, loadQuestion } = questionStore;
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const [loadingTop5, isLoading] = useState<boolean>(false);
 
@@ -55,7 +56,9 @@ export default observer(function QuestionPopUp() {
         }
     }
 
-    function handleFormCancel() {
+    function handleFormCancel(question: Question) {
+        questionAnser.answer = '---'
+        gameStore.answering(question, questionAnser);
         gameStore.changePlayer();
         gameStore.questionIsSelected = false;
         closeForm();
@@ -65,8 +68,13 @@ export default observer(function QuestionPopUp() {
         gameStore.stopTop5();
     }
 
-    if (loadingInitial)
-        return <LoadingComponent content = "Loading Question..." />
+    const handleOpenImage = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleClose = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <Formik enableReinitialize initialValues = {questionAnser} onSubmit = {values => handleFormSubmit(question, values)} > 
@@ -95,10 +103,43 @@ export default observer(function QuestionPopUp() {
                                     />
                                 }
                                 {(question.category === 'Logo Quiz') &&
-                                    <Image size = "small" style = {{paddingBottom: '1em'}} onClick = {() => modalStore.openModal(<Image src = {question.photo?.url}/>)} ><img src = {`${question.photo?.url}`} alt = "logo"></img> </Image>
+                                    <Image 
+                                        size = "small" 
+                                        style = {{paddingBottom: '1em'}} 
+                                        as = {Link}
+                                        onClick = {() => handleOpenImage()}
+                                    >
+                                        {isModalOpen && (
+                                            <OpenImage image = {question.photo?.url} onClose = {handleClose} />
+                                        )}
+                                        <img src = {`${question.photo?.url}`} alt = "logo"></img> 
+                                    </Image>
                                 }
-                                {(question.category === 'Player id' || question.category === 'Manager id') &&
-                                    <Image size = "big" style = {{paddingBottom: '1em'}} onClick = {() => modalStore.openModal(<Image src = {question.photo?.url}/>)} ><img src = {`${question.photo?.url}`} alt = "logo" ></img> </Image>
+                                {(question.category === 'Player id' || question.category === 'Manager id' || question.category === 'Find The Stadium' || question.category === 'Find Player By Photo' || question.category === 'Guess The Player' ) &&
+                                    <Image 
+                                        size = "big" 
+                                        style = {{paddingBottom: '1em'}} 
+                                        as = {Link}
+                                        onClick = {() => handleOpenImage()}
+                                    >
+                                        {isModalOpen && (
+                                            <OpenImage image = {question.photo?.url} onClose = {handleClose} />
+                                        )}
+                                        <img src = {`${question.photo?.url}`} alt = "logo"></img> 
+                                    </Image>
+                                }
+                                {(question.category === 'Who Is Missing') &&
+                                    <Image 
+                                        size = "large" 
+                                        style = {{paddingBottom: '1em'}} 
+                                        as = {Link}
+                                        onClick = {() => handleOpenImage()}
+                                    >
+                                        {isModalOpen && (
+                                            <OpenImage image = {question.photo?.url} onClose = {handleClose} />
+                                        )}
+                                        <img src = {`${question.photo?.url}`} alt = "logo"></img> 
+                                    </Image>
                                 }
                                 <MyTextInput name = 'answer' placeholder = 'Answer'  />
                                 {(question?.category === 'Top5') &&
@@ -147,7 +188,7 @@ export default observer(function QuestionPopUp() {
                                 content = 'Submit'
                                 className = "modal_buttons"
                             />
-                            <Button as = {Link}  to = '/game' onClick = {handleFormCancel} floated = 'right' type = 'submit' content = 'Cancel' className = "modal_buttons" />
+                            <Button as = {Link}  to = '/game' onClick = { () => handleFormCancel(question)} floated = 'right' type = 'submit' content = 'Cancel' className = "modal_buttons" />
                             {(gameStore.correctAnswersTop5 === 4) &&
                                 <Button onClick = {handleStop} floated = 'right' type = 'submit' content = 'Stop' className = "modal_buttons" />
                             }

@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Core.Accounts {
-    public class List
-    {
+    public class List {
         public class Query : IRequest<List<Account>> { }
 
         public class Handler : IRequestHandler<Query, List<Account>> {
@@ -16,7 +15,7 @@ namespace Application.Core.Accounts {
             }
 
             public async Task<List<Account>> Handle(Query request, CancellationToken token) {
-                return await context.Accounts.ToListAsync();
+                return await context.Accounts.Include(p => p.Photo).ToListAsync();
             }
         }
     }

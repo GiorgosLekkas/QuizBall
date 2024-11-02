@@ -11,7 +11,7 @@ export default class QuestionStore {
     confirmed = new Map<string, Question>();
     selectedQuestion: Question | undefined = undefined;
     tmp = new Map<string, Question>();
-    category: String = '';
+    category: string = '';
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -35,15 +35,6 @@ export default class QuestionStore {
             String(a.category).localeCompare(b.category))
     }
 
-    /*get groupedQuestions() {
-        return Object.entries(
-            this.questionsByCategory.reduce((questions, question) => {
-                questions[category] = questions[category] ? [...questions[category], question] : [question];
-                return questions;
-            }, {} as {[key: string]: Question[]})
-        )
-    }*/
-
     get questions() {
         return Array.from(this.questionRegistry.values());  
     }
@@ -64,7 +55,7 @@ export default class QuestionStore {
         return this.questionRegistry.get(id);
     }
 
-    setCategory(category: String) {
+    setCategory(category: string) {
         this.category = category;
     }
 
@@ -82,6 +73,7 @@ export default class QuestionStore {
 
     openForm = (id?:string) => {
         id ? this.selectQuestion(id) : this.cancelSelectedQuestion();
+        this.category = this.selectedQuestion!.category;
         this.editMode = true;
     }
 
@@ -157,7 +149,6 @@ export default class QuestionStore {
             question.correctAnswer5 = "-";
         }
         try {
-            //question.id = uuid();
             question.authorName = user?.userName;
             await agent.Questions.create(question);
             const newQuestion = new Question(question);
@@ -198,8 +189,8 @@ export default class QuestionStore {
                 question.correctAnswer5 = "-";
             }
             store.accountStore.getUser();
-            if(photo)
-                if(question.photo!=null) 
+            if(photo.length!=0){
+                if(question.photo!=null){
                     try {
                         const result = await agent.Questions.deleteQuestionPhoto(question.id);
                         runInAction(() => {
@@ -208,6 +199,7 @@ export default class QuestionStore {
                     } catch (error) {
                         console.log(error);
                     }
+                }
                 try {
                     const fileBlob = new Blob([photo?.[0]], { type: photo?.[0].type });
                     const response = await agent.Questions.addPhoto(fileBlob, question);
@@ -218,6 +210,7 @@ export default class QuestionStore {
                 } catch (error) {
                     console.log(error);
                 }
+            }
             await agent.Questions.update(question);
             runInAction(() => {
                 if (question.id) {
@@ -234,6 +227,17 @@ export default class QuestionStore {
             })
         }
         this.closeForm();
+    }
+
+    deletePhoto = async (question: Question) => {
+        try {
+            const result = await agent.Questions.deleteQuestionPhoto(question.id);
+            runInAction(() => {
+                if(result && question) question.photo = undefined;
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     confirmQuestion = async (id: string) => {

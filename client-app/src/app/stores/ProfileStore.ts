@@ -49,8 +49,9 @@ export default class ProfileStore{
             runInAction(() => {
                 if(this.profile) {
                     this.profile.photo = photo;
-                    store.accountStore.setImage(photo.url);
+                    store.accountStore.setImage(photo);
                     this.profile.image = photo.url;
+                    store.accountStore.loadAccounts();
                 }
                 this.uploading = false
             });
@@ -70,8 +71,11 @@ export default class ProfileStore{
                         if(this.profile) {
                             this.profile.image = undefined;
                             this.profile.photo = null;
-                            if(store.accountStore.user)
+                            if(store.accountStore.user) {
                                 store.accountStore.user.image = '';
+                                store.accountStore.user.photo = undefined;
+                                store.accountStore.loadAccounts();
+                            }
                         }
                     }
                     this.deleting = false;

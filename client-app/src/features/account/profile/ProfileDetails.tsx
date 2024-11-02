@@ -1,21 +1,22 @@
 import { observer } from "mobx-react-lite";
-import { Button, Grid, Header } from "semantic-ui-react";
+import { Button, Grid, Header, TabPane } from "semantic-ui-react";
 import { SyntheticEvent, useState } from "react";
 import { useStore } from "../../../app/stores/store";
 import { Account } from "../../../app/models/Account";
 import EditForm from "../form/EditForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default observer(function ProfileContent() {
 
     const [target, setTarget] = useState('');
 
     const {accountStore, modalStore } = useStore();
-    const {user, deleteAccount, loading} = accountStore;
+    const {user, loading} = accountStore;
+    const navigate = useNavigate();
 
-    function handleAccountDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
+    function handleAccountDelete(e: SyntheticEvent<HTMLButtonElement>) {
         setTarget(e.currentTarget.name);
-        deleteAccount(id);
+        navigate('/delete')
     }
 
     function handleAccountUpdate(account: Account) {
@@ -23,6 +24,7 @@ export default observer(function ProfileContent() {
     }
 
     return (
+        <TabPane>
             <Grid>
                 <Grid.Column width = {16}>
                     <Header floated = 'left' icon = 'user' content = 'Account Details' />
@@ -36,7 +38,7 @@ export default observer(function ProfileContent() {
                     <Button
                         name = {user?.id}
                         loading = {loading && target === user?.id}
-                        onClick = { (e) => handleAccountDelete(e, user?.id!)}
+                        onClick = { (e) => handleAccountDelete(e)}
                         disabled = {user?.role === 'Admin'}
                         floated = 'right'
                         color = 'red' 
@@ -52,5 +54,6 @@ export default observer(function ProfileContent() {
                     />
                 </Grid.Column>
             </Grid>
+        </TabPane>
     )
 })

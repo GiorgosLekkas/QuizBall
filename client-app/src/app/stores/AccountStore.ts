@@ -4,6 +4,7 @@ import agent from "../api/agent";
 import { store } from "./store";
 import { router } from "../router/Routes";
 import {v4 as uuid} from 'uuid';
+import { Photo } from "../models/Profile";
 
 export default class AccountStrore {
     user: Account | null = null;
@@ -11,6 +12,7 @@ export default class AccountStrore {
     selectedUsers: Account | undefined = undefined;
     accountRegistry = new Map<string, Account>();
     accountByUserName = new Map<string, Account>();
+    accountByScore: Account[] = [];
     result : boolean = false;
     editMode = false;
     loading = false;
@@ -28,12 +30,8 @@ export default class AccountStrore {
         return Array.from(this.accountRegistry.values());
     }
 
-    get AccountsByTotalPoints() {
-        return Array.from(this.accountRegistry.values())
-            .sort((a, b) => (b.totalPoints) - (a.totalPoints))
-            //.sort((a, b) => (b.plus_Minus) - (a.plus_Minus))
-            //.sort((a, b) => (b.winrate) - (a.winrate))
-            ;
+    SortAccountByScore() {
+        this.accountByScore = Array.from(this.accountRegistry.values()).sort((a, b) => (b.totalPoints) - (a.totalPoints));
     }
 
     setResult(){
@@ -72,8 +70,6 @@ export default class AccountStrore {
             this.user2!.winrate = Math.round((this.user2.won/this.user2.gamesPlayed)*100*100)/100;
         }
 
-
-
         if(this.user != null) this.updateAccount(this.user);
         if(this.user2 != null) this.updateAccount(this.user2);
     }
@@ -85,6 +81,7 @@ export default class AccountStrore {
                 accounts.forEach(account => {
                     this.accountRegistry.set(account.id!, account);
                     this.accountByUserName.set(account.userName!, account);
+                    this.SortAccountByScore();
                 })
             })
             this.setLoadingInitial(false);
@@ -162,15 +159,15 @@ export default class AccountStrore {
     updateAccount = async (account: Account) => {
         this.loading = true;
         try {
+            console.log(account.photo);
             await agent.Accounts.update(account);
             if(store.profileStore.profile?.userName === account.userName)
                 store.profileStore.loadProfile(account.userName);
             runInAction(() => {
                 if (account.id) {
                     this.accountRegistry.set(account.id, account);
-                    //let updatedAccount = {...this.getAccount(account.id), ...account}
-                    //this.accountRegistry.set(account.id, updatedAccount as Account);
-                    //this.selectedAccount = updatedAccount as Account;
+                    this.accountByUserName.set(account.userName, account);
+                    this.SortAccountByScore();
                     if(this.user?.id === account.id)
                         this.user = account;
                 }
@@ -181,7 +178,6 @@ export default class AccountStrore {
                 this.setLoadingInitial(false);
             })
         }
-        //this.closeForm();
         this.loading = false;
     }
 
@@ -216,6 +212,7 @@ export default class AccountStrore {
     getUser = async () => {
         try {
             const user = await agent.Accounts.current();
+            user.image = user.photo?.url;
             runInAction(() => this.user = user);
         } catch (error) {
             console.log(error)
@@ -230,9 +227,11 @@ export default class AccountStrore {
         this.loadingInitial = state;
     }
 
-    setImage = (image: string) => {
-        if(this.user)
-            this.user.image = image;
+    setImage = (photo: Photo) => {
+        if(this.user) {
+            this.user.photo = photo;
+            this.user.image = photo.url;
+        }
     }
 
 }

@@ -1,3 +1,5 @@
+import { Photo } from "./Profile"
+
 export interface IAccount {
   id?: string
   email?: string
@@ -17,6 +19,7 @@ export interface IAccount {
   totalPoints: number
   role?: string
   token?: string
+  photo?: Photo
   image?: string
 }
 
@@ -40,6 +43,7 @@ export interface AccountFormValues {
   winrate?: number
   plus_Minus?: number
   totalPoints?: number
+  photo?: Photo
 }
 
 export class Account implements IAccount{
@@ -61,6 +65,8 @@ export class Account implements IAccount{
       this.plus_Minus = init.plus_Minus!
       this.winrate = init.winrate!
       this.totalPoints = init.totalPoints!
+      this.image = init.image!
+      this.photo = init.photo!
   }
 
   id: string
@@ -82,6 +88,7 @@ export class Account implements IAccount{
   winrate: number
   plus_Minus: number
   totalPoints: number
+  photo?: Photo
 }
 
 export class AccountFormValues {
@@ -102,6 +109,8 @@ export class AccountFormValues {
   plus_Minus?: number = 0
   totalPoints?: number = 0
   role?: string = ''
+  image?: string = ''
+  photo?: Photo
 
   constructor(user?: AccountFormValues){
       if(user) {
@@ -122,30 +131,8 @@ export class AccountFormValues {
         this.totalPoints = user.totalPoints;
         this.gender = user.gender;
         this.role = user.role;
+        this.image = user.image!
+        this.photo = user.photo!
       }
   }
 }
-
-/*export interface Account {
-  id: string
-  email: string
-  password: string
-  userName: string
-  firstName: string
-  lastName: string
-  gender: string
-  role: string
-  token: string
-}
-
-export interface AccountFormValues {
-  id: string
-  email: string
-  password: string
-  userName: string
-  firstName: string
-  lastName: string
-  gender: string
-  role: string
-  token: string
-}*/

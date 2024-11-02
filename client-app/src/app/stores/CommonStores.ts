@@ -33,12 +33,4 @@ export  default class CommonStore{
         this.error = error;
     }
 
-    /*getUser = async () => {
-        try {
-            const user = await agent.Accounts.current();
-        } catch (error) {
-            
-        }
-    }*/
-
 }

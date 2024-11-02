@@ -37,11 +37,11 @@ export default function SelectCategoriess() {
         event.preventDefault();
 
         runInAction(() => {
-            gameStore.categories = Object.entries(checkboxes).filter(([isChecked]) => isChecked).map(([name]) => name);
+            gameStore.categories = Object.entries(checkboxes).filter(([_, isChecked]) => isChecked).map(([name]) => name);
             console.log(gameStore.categories);
         });
 
-        if(gameStore.categories.length === 5){
+        if(gameStore.categories.length === 8){
             setStartGame(true);
             setTimeout(() => {
                 setStartGame(false);
@@ -56,7 +56,8 @@ export default function SelectCategoriess() {
     return (
         <>
             <Segment style = {{marginTop: '7em'}} >
-                <Header as = 'h1' content = 'Select Categories' color = 'black' textAlign = 'center' style = {{paddingBottom: '10px'}} />
+                <Header as = 'h1' content = 'Select Categories' color = 'black' textAlign = 'center' style = {{paddingBottom: '5px'}} />
+                <Header as = 'h4' content = '(Select 8 categories to compete against your opponent)' color = 'black' textAlign = 'center' style = {{paddingBottom: '10px'}} />
                 <Form onSubmit = {handleSubmit} style = {{paddingLeft: '40px'}} >
                     <Grid columns='three' width = "5">
                         <GridRow>
@@ -310,7 +311,7 @@ export default function SelectCategoriess() {
                         </GridRow>
                     </Grid>
                     <Button loading = {gameStart} disabled = {gameStart} content = 'Submit' style = {{marginTop: '30px'}} color = 'green' />
-                    <Label className = "error_mes" style = {{marginBottom: 10}} basic color = 'red' content = {error ? "Wrong number of categories, you should select N categories!" : ""} /> 
+                    <Label className = "error_mes" style = {{marginBottom: 10}} basic color = 'red' content = {error ? "Wrong number of categories, you should select 8 categories!" : ""} /> 
                 </Form>
             </Segment>
         </>

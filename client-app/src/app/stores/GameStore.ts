@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { AnswerQuestion, Question } from "../models/Question";
 import { store } from "./store";
 import { router } from "../router/Routes";
+import leven from "leven";
 
 export default class GameStrore {
 
@@ -34,13 +35,14 @@ export default class GameStrore {
     questionIsSelected: boolean = false;
     correctAnswersTop5: number = 0;
     wrongAnswersTop5: number = 0;
+    last_points = 0;
 
     constructor() {
         makeAutoObservable(this)
     }
 
     get isSet() {
-        if(this.categories.length === 5)
+        if(this.categories.length === 8)
             return true;
         return false;
     }
@@ -61,19 +63,16 @@ export default class GameStrore {
     }
 
     easyButton(str: string) {
-        //this.changePlayer(
         this.buttons.set(str, false);
         this.questionIsSelected = true;
     }
 
     mediumButton(str: string) {
-        //this.changePlayer();
         this.buttons.set(str, false);
         this.questionIsSelected = true;
     }
 
     hardButton(str: string) {
-        //this.changePlayer();
         this.buttons.set(str, false);
         this.questionIsSelected = true;
     }
@@ -86,7 +85,7 @@ export default class GameStrore {
     }
 
     hintFiftyFifty() {
-        if(this.selectedQuestion?.category !== 'Top5'){
+        if(this.selectedQuestion?.category !== 'Top5' && this.selectedQuestion?.category !== 'Higher Lower' && this.selectedQuestion?.category !== 'Guess The Score'){
             if(this.player1)
                 if(this.fiftyfifty1 === 'false' && this.questionIsSelected === true) this.fiftyfifty1 = 'active';
             if(this.player2)
@@ -107,20 +106,26 @@ export default class GameStrore {
             this.lastQuestion = question;
         });
         var score = 0;
+        if(q.answer === '---' || q.answer === '' || q.answer === ' ' || q.answer === '  ' || q.answer === '   ' ){
+            router.navigate('/wrong');
+            this.changePlayer();
+            this.questionIsSelected = false;
+            return;
+        }
         if(question.category === 'Top5') {
-            if(question.correctAnswer1.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+            if(this.isCorrectAnswer(question.correctAnswer1,q.answer) && this.top5_answers.includes(q.answer.toUpperCase())===false){
                 this.top5_answers[0] = question.correctAnswer1;
                 this.correctAnswersTop5++;
-            } else if(question.correctAnswer2.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+            } else if(this.isCorrectAnswer(question.correctAnswer2,q.answer) && this.top5_answers.includes(q.answer.toUpperCase())===false){
                 this.top5_answers[1] = question.correctAnswer2;
                 this.correctAnswersTop5++;
-            } else if(question.correctAnswer3.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+            } else if(this.isCorrectAnswer(question.correctAnswer3,q.answer) && this.top5_answers.includes(q.answer.toUpperCase())===false){
                 this.top5_answers[2] = question.correctAnswer3;
                 this.correctAnswersTop5++;
-            } else if(question.correctAnswer4.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+            } else if(this.isCorrectAnswer(question.correctAnswer4,q.answer) && this.top5_answers.includes(q.answer.toUpperCase())===false){
                 this.top5_answers[3] = question.correctAnswer4;
                 this.correctAnswersTop5++;
-            } else if(question.correctAnswer5.toUpperCase() === q.answer.toUpperCase() && this.top5_answers.includes(q.answer.toUpperCase())===false){
+            } else if(this.isCorrectAnswer(question.correctAnswer5,q.answer) && this.top5_answers.includes(q.answer.toUpperCase())===false){
                 this.top5_answers[4] = question.correctAnswer5;
                 this.correctAnswersTop5++;
             } else{
@@ -136,30 +141,141 @@ export default class GameStrore {
             }
             if(this.correctAnswersTop5 === 5){
                 if(this.player2) {
-                    if(this.double2 === 'active') this.score2 += 6;
-                    else this.score2 += 3;
+                    if(this.double2 === 'active'){
+                        this.score2 += 6;
+                        this.last_points = 6;
+                    } else { 
+                        this.score2 += 3;
+                        this.last_points = 3;
+                    }
                 }else if(this.player1) {
-                    if(this.double1 === 'active') this.score1 += 6;
-                    else this.score1 += 3;
+                    if(this.double1 === 'active') {
+                        this.score1 += 6;
+                        this.last_points = 6;
+                    } else {
+                        this.score1 += 3;
+                        this.last_points = 3;
+                    }
                 }
                 this.changePlayer();
                 this.questionIsSelected = false;
                 this.clearTop5();
                 router.navigate('/correct');
             }
+        } else if(question.category === 'Guess The Score') {
+            var correct_asn = 0;
+            var correct = question.correctAnswer1.split(",");
+            var answer = q.answer.split(",");
+            if(q.answer.includes(",")){
+                answer.forEach(ans => {
+                    for (let i = 0; i < correct.length; i++) {
+                        if(this.isCorrectAnswer(correct[i],ans)){
+                            correct_asn++;
+                            correct[i] = '+++++';
+                        }
+                    }
+                });
+                if(question.correctAnswer1.split(",").length === correct_asn){
+                    if(this.player2) {
+                        if(this.double2 === 'active') {
+                            this.score2 += 6;
+                            this.last_points = 6;
+                        } else {
+                            this.score2 += 3;
+                            this.last_points = 3;
+                        }
+                    }else if(this.player1) {
+                        if(this.double1 === 'active') {
+                            this.score1 += 6;
+                            this.last_points = 6;
+                        } else {
+                            this.score1 += 3;
+                            this.last_points = 3;
+                        }
+                    }
+                    this.changePlayer();
+                    this.questionIsSelected = false;
+                    this.clearTop5();
+                    router.navigate('/correct');
+                } else if(correct_asn === 0){
+                    router.navigate('/wrong');
+                    this.changePlayer();
+                    this.questionIsSelected = false;
+                } else {
+                    if(this.player2) {
+                        if(this.double2 === 'active') {
+                            this.score2 += 2;
+                            this.last_points = 2;
+                        } else {
+                            this.score2 += 1;
+                            this.last_points = 1;
+                        }
+                    }else if(this.player1) {
+                        if(this.double1 === 'active'){ 
+                            this.score1 += 2;
+                            this.last_points = 2;
+                        } else {
+                            this.score1 += 1;
+                            this.last_points = 1;
+                        }
+                    }
+                    this.changePlayer();
+                    this.questionIsSelected = false;
+                    this.clearTop5();
+                    router.navigate('/correct');
+                }
+            } else if(q.answer.includes(',') === false) {
+                if(correct[0] === q.answer){
+                    if(this.player2) {
+                        if(this.double2 === 'active') {
+                            this.score2 += 2;
+                            this.last_points = 2;
+                        } else {
+                            this.score2 += 1;
+                            this.last_points = 1;
+                        }
+                    }else if(this.player1) {
+                        if(this.double1 === 'active'){ 
+                            this.score1 += 2;
+                            this.last_points = 2;
+                        } else {
+                            this.score1 += 1;
+                            this.last_points = 1;
+                        }
+                    }
+                    this.changePlayer();
+                    this.questionIsSelected = false;
+                    this.clearTop5();
+                    router.navigate('/correct');
+                }
+            }
         } else {
-            if(question.correctAnswer1.toUpperCase() === q.answer.toUpperCase()){
+            if(this.isCorrectAnswer(question.correctAnswer1,q.answer)){
                 if(question.level === 'Easy') score = 1;
                 if(question.level === 'Medium') score = 2;
                 if(question.level === 'Hard') score = 3;
                 if(this.player2) {
-                    if(this.double2 === 'active') this.score2 += score*2;
-                    else if(this.fiftyfifty2 === 'active') this.score2 += 1;
-                    else this.score2 += score;
+                    if(this.double2 === 'active'){
+                        this.score2 += score*2;
+                        this.last_points = score*2;
+                    } else if(this.fiftyfifty2 === 'active'){
+                        this.score2 += 1;
+                        this.last_points = 1;
+                    } else {
+                        this.score2 += score;
+                        this.last_points = score;
+                    }
                 }else if(this.player1) {
-                    if(this.double1 === 'active') this.score1 += score*2;
-                    else if(this.fiftyfifty1 === 'active') this.score1 += 1;
-                    else this.score1 += score;
+                    if(this.double1 === 'active'){ 
+                        this.score1 += score*2;
+                        this.last_points = score*2;
+                    } else if(this.fiftyfifty1 === 'active') {
+                        this.score1 += 1;
+                        this.last_points = 1;
+                    } else {
+                        this.score1 += score;
+                        this.last_points = score;
+                    }
                 }
                 router.navigate('/correct');
             } else {
@@ -168,6 +284,29 @@ export default class GameStrore {
             this.changePlayer();
             this.questionIsSelected = false;
         }
+    }
+
+    isCorrectAnswer(correctAnswer: string, userAnswer: string) {
+        userAnswer = userAnswer.toLowerCase().trim();
+        correctAnswer = correctAnswer.toLowerCase().trim();
+
+        if (userAnswer === correctAnswer)
+            return true;
+
+        if (correctAnswer.includes(userAnswer)) 
+            return true;
+
+        const correctWords = correctAnswer.split(" ");
+        const userWords = userAnswer.split(" ");
+        const matches = correctWords.filter(word => userWords.includes(word));
+
+        if (matches.length === userWords.length)
+            return true;
+
+        const distance = leven(userAnswer, correctAnswer);
+        const threshold = 2;
+
+        return distance <= threshold;
     }
 
     changePlayer(){
@@ -190,6 +329,7 @@ export default class GameStrore {
             this.player2 = true;
         }
         this.coinflip = true;
+        router.navigate("/coinflipmod");
     }
 
     stopTop5() {
@@ -264,7 +404,7 @@ export default class GameStrore {
                     if(q) this.allQuestions.set(category + ' easy_' + (i+1), q);
                     this.buttons.set(category + ' Easy_' + (i+1), true);
                 }
-            } else if(category === 'Player id' || category === 'Manager id'){
+            } else if(category === 'Player id' || category === 'Find The Stadium' || category === 'Manager id' || category === 'Find Player By Photo' || category === 'Gossip' || category === 'Guess The Player'){
                 for (var i = 0; i < 3; i++) {
                     let mkeys: string[] = new Array;
                     mkeys = Array.from(this.medium.keys());
@@ -277,7 +417,7 @@ export default class GameStrore {
                     if(q) this.allQuestions.set(category + ' medium_' + (i+1), q);
                     this.buttons.set(category + ' Medium_' + (i+1), true);
                 }
-            } else if(category === 'Top5'){
+            } else if(category === 'Top5' || category === 'Guess The Score'){
                 for (var i = 0; i < 3; i++) {
                     let hkeys: string[] = new Array;
                     hkeys = Array.from(this.hard.keys());
@@ -318,11 +458,11 @@ export default class GameStrore {
                 hkeys = Array.from(this.hard.keys());
                 let nh: number = Math.floor(Math.random() * hkeys.length);
                 this.questionHard = this.hard.get(hkeys[nh]);
-    
+
                 if(this.questionEasy) this.allQuestions.set(category + ' easy',this.questionEasy);
                 if(this.questionMedium) this.allQuestions.set(category + ' medium',this.questionMedium);
                 if(this.questionHard) this.allQuestions.set(category + ' hard',this.questionHard);
-    
+
                 this.buttons.set(category + ' Easy', true);
                 this.buttons.set(category + ' Medium', true);
                 this.buttons.set(category + ' Hard', true);
@@ -331,7 +471,7 @@ export default class GameStrore {
     }
 
     get allQuestionsGame() {
-        return Array.from(this.allQuestions.values());  
+        return Array.from(this.allQuestions.values());
     }
 
     openForm = (id?:string) => {

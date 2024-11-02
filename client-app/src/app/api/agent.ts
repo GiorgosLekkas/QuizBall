@@ -3,8 +3,6 @@ import { Account, AccountFormValues } from '../models/Account';
 import { store } from '../stores/store';
 import { router } from '../router/Routes';
 import { toast } from 'react-toastify';
-import { Question_Geography } from '../models/Question_Geography';
-import { Question_History } from '../models/Question_History';
 import { Question} from '../models/Question';
 import { Photo, Profile } from '../models/Profile';
 
@@ -70,22 +68,6 @@ const requests = {
     del: <T>(url: string) => axios.delete<T>(url).then(responseBody)
 }
 
-const QuestionHistory = {
-    list: () => requests.get<Question_History[]>(`/HistoryQuestion`),
-    details: (id: string) => requests.get<Question_History>(`/HistoryQuestions/${id}`),
-    create: (Question_History: Question_History) => requests.post<void>(`/HistoryQuestion`, Question_History),
-    update: (Question_History: Question_History) => requests.put<void>(`/HistoryQuestion/${Question_History.id}`, Question_History),
-    delete: (id: string) => requests.del<void>(`/HistoryQuestion/${id}`)
-}
-
-const QuestionGeography = {
-    list: () => requests.get<Question_Geography[]>(`/Question_Geography`),
-    details: (id: string) => requests.get<Question_Geography>(`/Question_Geography/${id}`),
-    create: (Question_Geography: Question_Geography) => requests.post<void>(`/Question_Geography`, Question_Geography),
-    update: (Question_Geography: Question_Geography) => requests.put<void>(`/Question_Geography/${Question_Geography.id}`, Question_Geography),
-    delete: (id: string) => requests.del<void>(`/Question_Geography/${id}`)
-}
-
 const Accounts = {
     current: () => requests.get<Account>(`/account`),
     list: () => requests.get<Account[]>('/account/all'),
@@ -125,9 +107,7 @@ const Profiles = {
 }
 
 const agent = {
-    QuestionHistory,
     Accounts,
-    QuestionGeography,
     Questions,
     Profiles
 }

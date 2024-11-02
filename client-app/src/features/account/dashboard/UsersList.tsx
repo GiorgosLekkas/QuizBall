@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Header, Item, Segment } from "semantic-ui-react";
+import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Header, Item, Segment, Image } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import { observer } from "mobx-react-lite";
 import { SyntheticEvent, useState } from "react";
@@ -19,8 +19,6 @@ export default observer(function UsersList () {
     }
 
     function handleAccountUpdate(account: Account) {
-        //questionHistoryStore.selectQuestion_History(id);
-        //openForm();
         modalStore.openModal(<EditForm account={account} origin = "users" />);
     }
 
@@ -32,7 +30,10 @@ export default observer(function UsersList () {
                     (account.userName !== accountStore.user?.userName) && 
                         <Card width = '15' key={account.id}>
                             <CardContent>
-                                <CardHeader>{account.userName}</CardHeader>
+                                <CardHeader>
+                                    <Image avatar spaced='right' src = {account?.photo?.url || '/assets/user.png'} />
+                                    {account.userName}
+                                </CardHeader>
                                 <CardMeta>
                                     <div>{account.role}</div>
                                 </CardMeta>

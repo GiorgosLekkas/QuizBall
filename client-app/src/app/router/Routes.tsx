@@ -23,11 +23,13 @@ import RequireCoinFlip from "./RequireCoinFlip";
 import CategorySelectionOnGoing from "../../features/errors/CategorySelectionOnGoing";
 import CreateGame from "../../features/game/CreateGame";
 import RequireSecondUser from "./RequireSecondUser";
-import Leaderboard from "../../features/game/Leaderboard";
 import Winner from "../../features/game/Winner";
 import SecoundUserSelection from "../../features/errors/SecoundUserSelection";
 import CorrectAnswer from "../../features/game/CorrectAnswer";
 import WrongAnswer from "../../features/game/WrongAnswer";
+import LeaderboardDashboard from "../../features/game/LeaderboardDashboard";
+import DeleteAccount from "../common/DeleteAccount";
+import CoinflipModal from "../common/CoinflipModal";
 
 
 export const routes: RouteObject[] = [{
@@ -43,8 +45,9 @@ export const routes: RouteObject[] = [{
             {element: <RequireAuth />, children: [
                 {path: 'questionpopup', element: <QuestionPopUp />},
                 {path: 'profile/:userName', element: <ProfilePage />},
-                {path: 'leaderboard', element: <Leaderboard />},
+                {path: 'leaderboard', element: <LeaderboardDashboard />},
                 {path: 'winner', element: <Winner />},
+                {path: 'delete', element: <DeleteAccount />},
             ]},
             {element: <RequireSecondUser />, children: [
                 {path: 'coinflip', element: <CoinFlip />},
@@ -56,6 +59,7 @@ export const routes: RouteObject[] = [{
                 {path: 'qpopup/:id', element: <QuestionPopUp key = 'manage' />}
             ]},
             {element: <RequireCoinFlip />, children: [
+                {path: 'coinflipmod', element: <CoinflipModal />},
                 {path: 'categories_selection', element: <SelectCategories />},
             ]},
             {path: '', element: <HomePage />},

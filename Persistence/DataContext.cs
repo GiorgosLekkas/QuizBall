@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -5,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Persistence {
     public class DataContext : IdentityDbContext<Account> {
         public DataContext(DbContextOptions options) : base(options) { }
-        public DbSet<HistoryQuestion> History_Question { get; set; }
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<QuestionGeography> Question_Geography { get; set; }
         public DbSet<Question_Field> Questions { get; set; }
         public DbSet<Photo> Photos { get; set; }
 
@@ -35,12 +34,13 @@ namespace Persistence {
                 .HasOne(q => q.Author)
                 .WithMany(a => a.Questions)
                 .HasForeignKey(q => q.AuthorId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Account>()
                 .HasMany(a => a.Questions)
                 .WithOne(q => q.Author)
                 .HasForeignKey(q => q.AuthorId);
+
         }
     }
 }

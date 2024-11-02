@@ -17,7 +17,7 @@ export default observer(function NavBar() {
         if(questionRegistry.size <= 1) {
             loadQuestions();
         }
-    }, [loadQuestions, questionRegistry.size])
+    }, [loadQuestions, questionRegistry.size, user?.photo, user?.gamesPlayed])
 
     useEffect(() => {
         if(accountRegistry.size <= 1) 
@@ -50,7 +50,7 @@ export default observer(function NavBar() {
                     content = "Submit Question"
                 />
                 <Menu.Item position = 'right'>
-                    <Image avatar spaced='right' src = {user?.image || '/assets/user.png'} />
+                    <Image avatar spaced='right' src = {user?.photo?.url || '/assets/user.png'} />
                     <Dropdown pointing = 'top left' text = {user?.userName} >
                         <Dropdown.Menu>
                             <Dropdown.Item as = {Link} to = {`/profile/${user?.userName}`} text='My Profile' icon='user' />

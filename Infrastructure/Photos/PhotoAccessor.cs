@@ -19,9 +19,9 @@ namespace Infrastructure.Photos {
         public async Task<PhotoUploadResult> AddPhoto(IFormFile file){
             if (file.Length > 0){
                 await using var stream = file.OpenReadStream();
-                var uploadParams = new ImageUploadParams{
+                var uploadParams = new ImageUploadParams {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                    //Transformation = new Transformation().Crop("fill")
                 };
                 var uploadResult = await cloudinary.UploadAsync(uploadParams);
 

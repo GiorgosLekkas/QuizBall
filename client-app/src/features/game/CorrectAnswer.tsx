@@ -19,14 +19,16 @@ export default observer( function CorrectAnswer() {
                 </ModalHeader>
                 <ModalContent>
                     <ModalDescription>
-                        {(gameStore.lastQuestion?.level === 'Easy') &&
-                            "Congratulations! You won 1 point"
+                        <p>Congratulations! You won {gameStore.last_points} point</p>
+                        {(gameStore.lastQuestion) && (gameStore.lastQuestion.category != 'Top5') &&
+                            "The answer is " + gameStore.lastQuestion.correctAnswer1 
                         }
-                        {(gameStore.lastQuestion?.level === 'Medium') &&
-                            "Congratulations! You won 2 points"
-                        }
-                        {(gameStore.lastQuestion?.level === 'Hard') &&
-                            "Congratulations! You won 3 points"
+                        {(gameStore.lastQuestion) && (gameStore.lastQuestion.category === 'Top5') &&
+                            "The answers are " + gameStore.lastQuestion.correctAnswer1 + ", "
+                            + gameStore.lastQuestion.correctAnswer2 + ", "
+                            + gameStore.lastQuestion.correctAnswer3 + ", "
+                            + gameStore.lastQuestion.correctAnswer4 + ", "
+                            + gameStore.lastQuestion.correctAnswer5
                         }
                     </ModalDescription>
                 </ModalContent>

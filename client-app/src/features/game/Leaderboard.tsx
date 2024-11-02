@@ -1,16 +1,16 @@
-import { Header, Segment, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
+import { Header, Segment, Image, Table, TableHeader, TableRow, TableHeaderCell, TableBody, TableCell } from "semantic-ui-react";
+import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/stores/store";
 
-export default function Leaderboard(){
+export default observer(function Leaderboard () {
 
     const {accountStore } = useStore();
-    const {AccountsByTotalPoints} = accountStore;
-
+    const {accountByScore} = accountStore;
     var i = 1;
 
     return (
-        <Segment style = {{marginTop: '7em'}}>
-            <Header content = 'Leaderboard' as = "h1" /> 
+        <Segment style = {{marginTop: '7em'}} >
+            <Header as = 'h1'>Leaderboard</Header>
             <Table unstackable>
                 <TableHeader>
                     <TableRow>
@@ -29,10 +29,13 @@ export default function Leaderboard(){
                 </TableHeader>
 
                 <TableBody>
-                    {AccountsByTotalPoints.map(account => (
+                    {accountByScore.map(account => (
                         <TableRow>
                             <TableCell textAlign = "center">{i++}</TableCell>
-                            <TableCell textAlign = "center">{account.userName}</TableCell>
+                            <TableCell textAlign = "center">
+                                <Image avatar spaced='right' src = {account?.photo?.url || '/assets/user.png'} />
+                                {account.userName}
+                            </TableCell>
                             <TableCell textAlign = "center">{account.gamesPlayed}</TableCell>
                             <TableCell textAlign = "center">{account.won}</TableCell>
                             <TableCell textAlign = "center">{account.drawn}</TableCell>
@@ -47,5 +50,5 @@ export default function Leaderboard(){
                 </TableBody>
             </Table>
         </Segment>
-    );
-}
+    )
+})

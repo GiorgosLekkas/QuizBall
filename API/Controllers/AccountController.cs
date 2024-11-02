@@ -57,14 +57,7 @@ namespace API.Controllers {
                 LastName = registerDto.LastName,
                 Email = registerDto.Email,
                 Role = registerDto.Role,
-                Gender = registerDto.Gender,
-                /*GamesPlayed = registerDto.GamesPlayed,
-                Won = registerDto.Won,
-                Drawn = registerDto.Drawn,
-                Lost = registerDto.Lost,
-                Plus = registerDto.Plus,
-                Minus = registerDto.Minus,
-                Plus_Minus = registerDto.Plus - registerDto.Minus,*/
+                Gender = registerDto.Gender
             };
 
             var result = await userManager.CreateAsync(user, registerDto.Password);
@@ -78,12 +71,12 @@ namespace API.Controllers {
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserDto>> GetCurrentUser() {
+        public async Task<ActionResult<Account>> GetCurrentUser() {
             var user = await userManager.Users
                 .Include(p => p.Photo)
                 .FirstOrDefaultAsync(x => x.Email == User.FindFirstValue(ClaimTypes.Email));
 
-            return CreateUserObject(user);
+            return user;
         }
 
         [Authorize]
@@ -95,26 +88,8 @@ namespace API.Controllers {
         [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> EditAccount(string id, Account account) {
-            var user = await userManager.FindByIdAsync(id);
-            user.Email = account.Email;
-            user.UserName = account.UserName;
-            user.FirstName = user.FirstName;
-            user.LastName = account.LastName;
-            user.Gender = account.Gender;
-            user.Role = account.Role;
-            user.GamesPlayed = account.GamesPlayed;
-            user.Won = account.Won;
-            user.Drawn = account.Drawn;
-            user.Lost = account.Lost;
-            user.Plus = account.Plus;
-            user.Minus = account.Minus;
-            user.Plus_Minus = account.Plus_Minus;
-            user.Winrate = account.Winrate;
-            user.TotalPoints = account.TotalPoints;
-            var result = await userManager.UpdateAsync(user);
-            if(result.Succeeded)
-                return Ok();
-            return BadRequest(result.Errors);
+            await Mediator.Send(new Edit.Command{Updated_Account = account, Id = id});
+            return Ok();
         }
 
         [Authorize]

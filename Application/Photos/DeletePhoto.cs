@@ -32,7 +32,7 @@ namespace Application.Photos{
                 var result = await photoAccessor.DeletePhoto(photo.Id);
 
                 if (result == null) return Result<Unit>.Failure("Problem deleting photo 1");
-                
+
                 question.Photo = null;
                 context.Remove(photo);
 

@@ -32,59 +32,58 @@ body{
 
 /*home page styles*/
 
-.masthead {
+/*.masthead {
   display:inherit;
   align-items: center !important;
-  /*background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%);*/
-  background: url('assets/Homepage/image.png') center center/cover no-repeat !important;
+  /*background-image: linear-gradient( 135deg, #2ADCC6 0%, #1d9ea0 33%, #105f7a  66%);
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85) !important;
   height: 100vh;
   transition: background-image 2s linear!important;
-}
+}*/
 
-.image-1 {
-  background: url('assets/Homepage/image.png') center center/cover no-repeat !important;
+/*.image-1 {
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264857/HomePage/image_wndf35.jpg') center center/cover no-repeat !important;
 }
 
 .image-2 {
-  background: url('assets/Homepage/image1.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264861/HomePage/image1_zdpaeh.jpg') center center/cover no-repeat !important;
 }
 
 .image-3 {
-  background: url('assets/Homepage/image2.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264867/HomePage/image2_o2uixp.jpg') center center/cover no-repeat !important;
 }
 
 .image-4 {
-  background: url('assets/Homepage/image3.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264870/HomePage/image3_tbztsc.jpg') center center/cover no-repeat !important;
 }
 
 .image-5 {
-  background: url('assets/Homepage/image4.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264874/HomePage/image4_i0wgyl.jpg') center center/cover no-repeat !important;
 }
 
 .image-6 {
-  background: url('assets/Homepage/image5.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264876/HomePage/image5_wk8igl.jpg') center center/cover no-repeat !important;
 }
 
 .image-7 {
-  background: url('assets/Homepage/image6.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264879/HomePage/image6_fnzalf.jpg') center center/cover no-repeat !important;
 }
 
 .image-8 {
-  background: url('assets/Homepage/image7.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264882/HomePage/image7_btogdd.jpg') center center/cover no-repeat !important;
 }
 
 .image-9 {
-  background: url('assets/Homepage/image8.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264885/HomePage/image8_dh5trj.jpg') center center/cover no-repeat !important;
 }
 
 .image-10 {
-  background: url('assets/Homepage/image9.png') center center/cover no-repeat !important;
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724264888/HomePage/image9_zvgnj9.jpg') center center/cover no-repeat !important;
 }
 
 .image-11 {
-  background: url('assets/Homepage/image10.png') center center/cover no-repeat !important;
-}
+  background: url('https://res.cloudinary.com/dlmdnbstg/image/upload/v1724265003/HomePage/image10_ylymcq.jpg') center center/cover no-repeat !important;
+}*/
 
 .masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {

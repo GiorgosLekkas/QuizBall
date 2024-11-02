@@ -75,9 +75,8 @@ export default observer(function QuestionListNotConfirmed() {
                                                                 <Image 
                                                                     src = {q.photo?.url}
                                                                     size = 'medium'
-                                                                    as = {Link}
-                                                                    onClick = {() => modalStore.openModal(<Image src = {q.photo?.url}/>)}
-                                                                />
+                                                                    as = {Link}                                                    
+                                                                />  
                                                             </div>
                                                         </GridColumn>
                                                     </GridRow>

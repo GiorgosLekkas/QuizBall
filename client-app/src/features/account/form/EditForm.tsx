@@ -55,7 +55,8 @@ export default observer(function Question_HistoryForm({account, origin}:Props) {
         totalPoints: account.totalPoints,
         gender: account.gender,
         role: account.role,
-        token: account.token
+        token: account.token,
+        photo: account.photo
     });
 
     const validationSchema = Yup.object({
