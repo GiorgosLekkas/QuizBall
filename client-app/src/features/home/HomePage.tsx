@@ -17,7 +17,7 @@ export default observer(function HomePage() {
         { text: 'Click on "Create New Game" to start a new game and invite your friends to play along.', imgSrc: 'assets/Instructions/Instruction1.png' },
         { text: `Before the game starts, a coin flip will decide who plays first. If it's heads, the logged-in user starts. If it's tails, the invited user starts.`, imgSrc: 'assets/Instructions/Instruction2.png' },
         { text: 'Select the categories you want to answer questions from. You can choose from a variety of categories to make the game more interesting and challenging.', imgSrc: 'assets/Instructions/Instruction3.png' },
-        { text: 'Once the game starts, answer the trivia questions as quickly and accurately as possible. You will have a limited amount of time for each question.', imgSrc: 'assets/Instructions/Instruction4.png' },
+        { text: 'Once the game starts, answer the trivia questions as accurately as possible.', imgSrc: 'assets/Instructions/Instruction4.png' },
         { text: 'Earn points based on the difficulty. Answering correctly an easy question you get 1 point, a medium 2 points and a hard 3 points', imgSrc: 'assets/Instructions/Instruction5.png' },
         { text: 'At the end of the game, the player with the most points wins and gets 3 points. If there is a draw both of them get 1 point.', imgSrc: 'assets/Instructions/Instruction6.png' },
       ];

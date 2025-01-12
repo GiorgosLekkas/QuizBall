@@ -60,6 +60,7 @@ export default class GameStrore {
         this.double2 = 'false';
         this.telephone1 = false;
         this.telephone2 = false;
+        this.buttons.clear();
     }
 
     easyButton(str: string) {
@@ -247,6 +248,10 @@ export default class GameStrore {
                     this.questionIsSelected = false;
                     this.clearTop5();
                     router.navigate('/correct');
+                } else {
+                    router.navigate('/wrong');
+                    this.changePlayer();
+                    this.questionIsSelected = false;
                 }
             }
         } else {
